@@ -1,6 +1,14 @@
-# Dockerized CakePHP development environment
+# Collection Tracker
 
-A dockerized development environment for a CakePHP application. It comes with a webserver, a database and a database manager tool as well.
+![Build Status](https://github.com/danielTiringer/Collection-Tracker/actions/workflows/ci.yml/badge.svg)
+
+I wanted to have a small site with a database where I could save the collections I manage, with pictures and item details.
+
+## Learnings
+
+- Trying out **CakePHP** for the first time
+- Making most containers run on **Alpine**
+- First glance at **Github Actions**
 
 ## Usage
 
@@ -47,3 +55,4 @@ Containers created and their ports (if used) are as follows:
 ### Resources
 
 - [CakePHP documentation](https://book.cakephp.org/4/en/quickstart.html)
+- [Using Alpine Linux for PHP8 Dockerfile](https://blog.sylo.space/guide-to-install-nginx-php-mariadb-phpmyadmin-in-docker/)
