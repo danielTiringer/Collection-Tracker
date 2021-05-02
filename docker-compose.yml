@@ -21,6 +21,21 @@ services:
     networks:
       - collection-tracker
 
+  cake:
+    build:
+      context: ./docker/cli
+      dockerfile: Dockerfile
+      args:
+        PHP_CLI_VERSION: ${PHP_CLI_VERSION}
+    container_name: collection-tracker-cake
+    env_file:
+      - .env
+    volumes:
+      - ./php:/var/www/html
+    entrypoint: bin/cake
+    networks:
+      - collection-tracker
+
   nginx:
     image: nginx:stable-alpine
     container_name: collection-tracker-nginx
