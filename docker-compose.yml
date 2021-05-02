@@ -40,14 +40,16 @@ services:
     container_name: collection-tracker-database
     ports:
       - '3306:3306'
+    env_file:
+      - .env
     environment:
       PUID: 1000
       PGID: 1000
       TZ: Europe/Budapest
-      MYSQL_DATABASE: database
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
-      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     volumes:
       - collection-data:/var/lib/mysql
     networks:
