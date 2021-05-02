@@ -1,6 +1,6 @@
 # Collection Tracker
 
-![Build Status](https://github.com/danielTiringer/Collection-Tracker/actions/workflows/ci.yml/badge.svg)
+[![Build Status](https://github.com/danielTiringer/Collection-Tracker/actions/workflows/ci.yml/badge.svg)](https://github.com/danielTiringer/Collection-Tracker/actions)
 
 I wanted to have a small site with a database where I could save the collections I manage, with pictures and item details.
 
