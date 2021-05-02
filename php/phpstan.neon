@@ -2,9 +2,6 @@ parameters:
     level: 7
     checkMissingIterableValueType: false
     treatPhpDocTypesAsCertain: false
-    ignoreErrors:
-        - '#Access to an undefined property [a-zA-Z0-9\\_]+::\$Authentication#'
-        - '#Access to an undefined property [a-zA-Z0-9\\_]+::\$Users#'
     paths:
         - src
     excludes_analyse:

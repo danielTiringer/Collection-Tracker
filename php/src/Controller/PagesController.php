@@ -28,6 +28,7 @@ use Cake\View\Exception\MissingTemplateException;
  * This controller will render views from templates/Pages/
  *
  * @link https://book.cakephp.org/4/en/controllers/pages-controller.html
+ * @property \Authentication\Controller\Component\AuthenticationComponent $Authentication
  */
 class PagesController extends AppController
 {
