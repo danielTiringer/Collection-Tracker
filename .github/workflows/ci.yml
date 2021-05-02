@@ -1,4 +1,4 @@
-name: CakePHP App CI
+name: Build Status
 
 on:
   push:
