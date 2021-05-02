@@ -1,6 +1,6 @@
-# Simple dockerized CakePHP development environment
+# Dockerized CakePHP development environment
 
-A simple dockerized development environment for a CakePHP application. It comes with a webserver, a database and a database manager tool as well.
+A dockerized development environment for a CakePHP application. It comes with a webserver, a database and a database manager tool as well.
 
 ## Usage
 
@@ -39,6 +39,10 @@ Containers created and their ports (if used) are as follows:
 - **nginx** - `:8080`
 - **mariadb** - `:3306`
 - **phpmyadmin** - `:8884`
+
+### Troubleshooting
+
+- Cake comes with a github actions CI workflow installed. If that is to be used, move the `php/.github` folder to the document root, add [default working directories](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_iddefaultsrun) to each job, and rename / remove all **php 7.2** references, as some of the installed dependencies are not compatible with it.
 
 ### Resources
 
