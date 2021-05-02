@@ -12,6 +12,9 @@ on:
 jobs:
   testsuite:
     runs-on: ubuntu-18.04
+    defaults:
+      run:
+        working-directory: ./php
     strategy:
       fail-fast: false
       matrix:
@@ -46,6 +49,9 @@ jobs:
   coding-standard:
     name: Coding Standard
     runs-on: ubuntu-18.04
+    defaults:
+      run:
+        working-directory: ./php
 
     steps:
     - uses: actions/checkout@v1
@@ -68,6 +74,9 @@ jobs:
   static-analysis:
     name: Static Analysis
     runs-on: ubuntu-18.04
+    defaults:
+      run:
+        working-directory: ./php
 
     steps:
     - uses: actions/checkout@v1
