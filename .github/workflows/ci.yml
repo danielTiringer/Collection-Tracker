@@ -10,52 +10,52 @@ on:
       - '*'
 
 jobs:
-  testsuite:
-    runs-on: ubuntu-18.04
-    defaults:
-      run:
-        working-directory: ./php
-    strategy:
-      fail-fast: false
-      matrix:
-        php-version: ['7.4', '8.0']
-        db-type: [mysql, mariadb]
-    name: PHP ${{ matrix.php-version }}
+  # testsuite:
+  #   runs-on: ubuntu-18.04
+  #   defaults:
+  #     run:
+  #       working-directory: ./php
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       php-version: ['7.4', '8.0']
+  #       db-type: [mysql, mariadb]
+  #   name: PHP ${{ matrix.php-version }}
 
-    steps:
-    - name: Setup MySQL latest
-      if: matrix.db-type == 'mysql'
-      run: docker run --rm --name=mysqld -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=cakephp -p 3306:3306 -d mysql --default-authentication-plugin=mysql_native_password --disable-log-bin
+  #   steps:
+  #   - name: Setup MySQL latest
+  #     if: matrix.db-type == 'mysql'
+  #     run: docker run --rm --name=mysqld -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=cakephp -p 3306:3306 -d mysql --default-authentication-plugin=mysql_native_password --disable-log-bin
 
-    - uses: getong/mariadb-action@v1.1
-      if: matrix.db-type == 'mariadb'
-      with:
-        mysql database: 'cakephp'
-        mysql root password: 'root'
+  #   - uses: getong/mariadb-action@v1.1
+  #     if: matrix.db-type == 'mariadb'
+  #     with:
+  #       mysql database: 'cakephp'
+  #       mysql root password: 'root'
 
-    - uses: actions/checkout@v2
+  #   - uses: actions/checkout@v2
 
-    - name: Setup PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: ${{ matrix.php-version }}
-        extensions: mbstring, intl, pdo_sqlite, pdo_mysql
-        coverage: none
+  #   - name: Setup PHP
+  #     uses: shivammathur/setup-php@v2
+  #     with:
+  #       php-version: ${{ matrix.php-version }}
+  #       extensions: mbstring, intl, pdo_sqlite, pdo_mysql
+  #       coverage: none
 
-    - name: composer install
-      run: |
-        if [[ ${{ matrix.db-type }} == 'mysql' ]]; then export DB_URL='mysql://root:root@127.0.0.1/cakephp'; fi
-        if [[ ${{ matrix.db-type }} == 'mariadb' ]]; then export DB_URL='mysql://root:root@127.0.0.1/cakephp'; fi
-        if [[ ${{ matrix.php-version }} == '8.0' ]]; then
-          composer install --ignore-platform-reqs
-        else
-          composer install
-        fi
-        composer run-script post-install-cmd --no-interaction
+  #   - name: composer install
+  #     run: |
+  #       if [[ ${{ matrix.db-type }} == 'mysql' ]]; then export DB_URL='mysql://root:root@127.0.0.1/cakephp'; fi
+  #       if [[ ${{ matrix.db-type }} == 'mariadb' ]]; then export DB_URL='mysql://root:root@127.0.0.1/cakephp'; fi
+  #       if [[ ${{ matrix.php-version }} == '8.0' ]]; then
+  #         composer install --ignore-platform-reqs
+  #       else
+  #         composer install
+  #       fi
+  #       composer run-script post-install-cmd --no-interaction
 
-    - name: Run PHPUnit
-      run: |
-          vendor/bin/phpunit
+  #   - name: Run PHPUnit
+  #     run: |
+  #         vendor/bin/phpunit
 
   coding-standard:
     name: Coding Standard
