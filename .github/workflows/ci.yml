@@ -62,7 +62,7 @@ jobs:
     runs-on: ubuntu-18.04
     defaults:
       run:
-        working-directory: ./php
+        working-directory: ./src
 
     steps:
     - uses: actions/checkout@v1
@@ -87,7 +87,7 @@ jobs:
     runs-on: ubuntu-18.04
     defaults:
       run:
-        working-directory: ./php
+        working-directory: ./src
 
     steps:
     - uses: actions/checkout@v1
