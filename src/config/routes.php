@@ -73,6 +73,24 @@ $routes->scope('/', function (RouteBuilder $builder) {
     $builder->fallbacks();
 });
 
+$routes->connect(
+    '/login',
+    ['controller' => 'Users', 'action' => 'login'],
+    ['_name' => 'login']
+);
+
+$routes->connect(
+    '/logout',
+    ['controller' => 'Users', 'action' => 'logout'],
+    ['_name' => 'logout']
+);
+
+$routes->connect(
+    '/register',
+    ['controller' => 'Users', 'action' => 'add'],
+    ['_name' => 'register']
+);
+
 /*
  * If you need a different set of middleware or none at all,
  * open new scope and define routes there.
