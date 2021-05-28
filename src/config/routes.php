@@ -91,6 +91,12 @@ $routes->connect(
     ['_name' => 'register']
 );
 
+$routes->connect(
+    '/profile/{id}',
+    ['controller' => 'Users', 'action' => 'edit']
+)
+->setPass(['id']);
+
 /*
  * If you need a different set of middleware or none at all,
  * open new scope and define routes there.
