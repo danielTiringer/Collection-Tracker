@@ -26,18 +26,6 @@ class UsersController extends AppController
     }
 
     /**
-     * Index method
-     *
-     * @return \Cake\Http\Response|null|void Renders view
-     */
-    public function index()
-    {
-        $users = $this->paginate($this->Users);
-
-        $this->set(compact('users'));
-    }
-
-    /**
      * View method
      *
      * @param string|null $id User id.
