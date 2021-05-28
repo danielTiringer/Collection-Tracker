@@ -15,11 +15,14 @@
         <div class="users form content">
             <?= $this->Form->create($user) ?>
             <fieldset>
-                <legend><?= __('Add User') ?></legend>
+                <legend><?= __('Register') ?></legend>
                 <?php
                     echo $this->Form->control('name');
                     echo $this->Form->control('email');
                     echo $this->Form->control('password');
+                    echo $this->Form->control('password_confirm', [
+                        'type' => 'password',
+                    ]);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>
