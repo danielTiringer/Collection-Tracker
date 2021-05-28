@@ -46,7 +46,7 @@ $cakeDescription = 'Collection Tracker';
                 <a href="<?= $this->Url->build('/register') ?>">Register</a>
             <?php else: ?>
                 <a href="<?= $this->Url->build('/logout') ?>">Logout</a>
-                <a href="<?= $this->Url->build('/profile') ?>">Profile</a>
+                <a href="<?= $this->Url->build('/profile') ?>">Profile (<?= $this->Identity->get('name') ?>)</a>
             <?php endif; ?>
         </div>
     </nav>
