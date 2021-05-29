@@ -14,6 +14,9 @@
                     echo $this->Form->control('name');
                     echo $this->Form->control('description');
                     echo $this->Form->control('goal');
+                    echo $this->Form->control('image_file', [
+                        'type' => 'file',
+                    ]);
                 ?>
             </fieldset>
             <div class="flex-space-between">

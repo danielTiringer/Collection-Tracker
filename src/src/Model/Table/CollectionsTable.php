@@ -77,7 +77,20 @@ class CollectionsTable extends Table
             ->notEmptyString('description');
 
         $validator
-            ->scalar('goal');
+            ->allowEmptyString('goal', null);
+
+        $validator
+            ->allowEmptyFile('image', null)
+            ->add('image', [
+                'mimeType' => [
+                    'rule' => ['mimeType', ['image/jpg', 'image/png', 'image/jpeg']],
+                    'message' => 'Only jpg, jpeg and png files can be uploaded.',
+                ],
+                'filesize' => [
+                    'rule' => ['filesize', '<=', '10MB'],
+                    'message' => 'Image file size must be less than 10MB.',
+                ],
+            ]);
 
         return $validator;
     }

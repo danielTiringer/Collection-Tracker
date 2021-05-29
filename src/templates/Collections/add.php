@@ -7,13 +7,16 @@
 <div class="row">
     <div class="column-responsive column-100">
         <div class="collections form content">
-            <?= $this->Form->create($collection) ?>
+            <?= $this->Form->create($collection, ['type' => 'file']) ?>
             <fieldset>
                 <legend><?= __('Add Collection') ?></legend>
                 <?php
                     echo $this->Form->control('name');
                     echo $this->Form->control('description');
                     echo $this->Form->control('goal');
+                    echo $this->Form->control('image_file', [
+                        'type' => 'file',
+                    ]);
                 ?>
             </fieldset>
             <div class="flex-space-between">

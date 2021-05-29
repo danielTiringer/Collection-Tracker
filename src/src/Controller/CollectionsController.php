@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Cake\I18n\Time;
+
 /**
  * Collections Controller
  *
@@ -11,6 +13,8 @@ namespace App\Controller;
  */
 class CollectionsController extends AppController
 {
+    private const IMG_DIR = WWW_ROOT . 'img' . DS . 'collection-img' . DS;
+
     /**
      * Index method
      *
@@ -52,9 +56,26 @@ class CollectionsController extends AppController
         $collection = $this->Collections->newEmptyEntity();
         if ($this->request->is('post')) {
             $data = $this->request->getData();
+
             $userId = $this->request->getAttribute('identity')->getIdentifier();
-            $data['users_id'] = $userId;
+            $collection->users_id = $userId;
+
+            $imageName = $data['image_file']->getClientFileName();
+
+            if ($imageName) {
+                $currentDateTime = (new Time('now'))->format('YmdHis');
+                $targetFileName = $currentDateTime . '_' . $imageName;
+                $targetPath = self::IMG_DIR . $targetFileName;
+
+                $this->createFolderIfNotExists();
+
+                $data['image_file']->moveTo($targetPath);
+
+                $collection->image = $targetFileName;
+            }
+
             $collection = $this->Collections->patchEntity($collection, $data);
+
             if ($this->Collections->save($collection)) {
                 $this->Flash->success(__('The collection has been saved.'));
 
@@ -109,5 +130,12 @@ class CollectionsController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    private function createFolderIfNotExists()
+    {
+        if (!is_dir(self::IMG_DIR)) {
+            mkdir(self::IMG_DIR, 0777);
+        }
     }
 }
