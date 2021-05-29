@@ -40,7 +40,7 @@ class UsersController extends AppController
                 if ($this->Users->save($user)) {
                     $this->Flash->success(__('The user has been saved.'));
 
-                    return $this->redirect('/login');
+                    return $this->redirect(['controller' => 'Users', 'action' => 'login']);
                 }
                 $this->Flash->error(__('The user could not be saved. Please, try again.'));
             } else {
@@ -69,7 +69,7 @@ class UsersController extends AppController
                 if ($this->Users->save($user)) {
                     $this->Flash->success(__('The user has been saved.'));
 
-                    return $this->redirect(['action' => 'index']);
+                    return $this->redirect('/');
                 }
                 $this->Flash->error(__('The user could not be saved. Please, try again.'));
             } else {
@@ -91,12 +91,14 @@ class UsersController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);
         if ($this->Users->delete($user)) {
-            $this->Flash->success(__('The user has been deleted.'));
+            $this->Flash->success(__('Your account has been deleted.'));
         } else {
             $this->Flash->error(__('The user could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect('/login');
+        $this->Authentication->logout();
+
+        return $this->redirect(['controller' => 'Users', 'action' => 'login']);
     }
 
     /**
