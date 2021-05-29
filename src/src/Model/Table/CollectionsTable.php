@@ -76,6 +76,9 @@ class CollectionsTable extends Table
             ->requirePresence('description', 'create')
             ->notEmptyString('description');
 
+        $validator
+            ->scalar('goal');
+
         return $validator;
     }
 
