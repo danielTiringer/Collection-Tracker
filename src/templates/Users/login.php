@@ -5,10 +5,12 @@
         <?= $this->Form->control('email') ?>
         <?= $this->Form->control('password') ?>
     </fieldset>
-    <?= $this->Form->button(__('Login')); ?>
-    <?= $this->Form->end() ?>
-    <?= $this->Html->link("Register", [
-        'action' => 'add',
-        'class' => 'button'
-    ]) ?>
+    <div class="flex-space-between">
+        <?= $this->Form->button(__('Login')); ?>
+        <?= $this->Form->end() ?>
+        <?= $this->Html->link("Don't have an account yet?", [
+            'action' => 'add',
+            'class' => 'button'
+        ]) ?>
+    </div>
 </div>

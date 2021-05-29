@@ -19,8 +19,14 @@
                     ]);
                 ?>
             </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
-            <?= $this->Form->end() ?>
+            <div class="flex-space-between">
+                <?= $this->Form->button(__('Submit')) ?>
+                <?= $this->Form->end() ?>
+                <?= $this->Html->link("Got an account already?", [
+                    'action' => 'login',
+                    'class' => 'button'
+                ]) ?>
+            </div>
         </div>
     </div>
 </div>
