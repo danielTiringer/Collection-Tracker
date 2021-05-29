@@ -11,7 +11,6 @@
         <table>
             <thead>
                 <tr>
-                    <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('name') ?></th>
                     <th><?= $this->Paginator->sort('goal') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
@@ -20,7 +19,6 @@
             <tbody>
                 <?php foreach ($collections as $collection): ?>
                 <tr>
-                    <td><?= $this->Number->format($collection->id) ?></td>
                     <td><?= h($collection->name) ?></td>
                     <?php if ($collection->goal): ?>
                         <td><?= h($collection->goal) ?></td>
