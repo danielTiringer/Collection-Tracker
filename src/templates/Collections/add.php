@@ -22,8 +22,8 @@
                 <?= $this->Html->link(
                     __('Back'),
                     ['action' => 'index'],
-                    ['class' => 'side-nav-item'])
-                ?>
+                    ['class' => 'side-nav-item']
+                ) ?>
             </div>
         </div>
     </div>
