@@ -51,7 +51,10 @@ class CollectionsController extends AppController
     {
         $collection = $this->Collections->newEmptyEntity();
         if ($this->request->is('post')) {
-            $collection = $this->Collections->patchEntity($collection, $this->request->getData());
+            $data = $this->request->getData();
+            $userId = $this->request->getAttribute('identity')->getIdentifier();
+            $data['users_id'] = $userId;
+            $collection = $this->Collections->patchEntity($collection, $data);
             if ($this->Collections->save($collection)) {
                 $this->Flash->success(__('The collection has been saved.'));
 
