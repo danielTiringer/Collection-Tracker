@@ -5,13 +5,7 @@
  */
 ?>
 <div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('List Collections'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
-    <div class="column-responsive column-80">
+    <div class="column-responsive column-100">
         <div class="collections form content">
             <?= $this->Form->create($collection) ?>
             <fieldset>
@@ -19,11 +13,18 @@
                 <?php
                     echo $this->Form->control('name');
                     echo $this->Form->control('description');
-                    echo $this->Form->control('users_id', ['options' => $users]);
+                    echo $this->Form->control('goal');
                 ?>
             </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
-            <?= $this->Form->end() ?>
+            <div class="flex-space-between">
+                <?= $this->Form->button(__('Submit')) ?>
+                <?= $this->Form->end() ?>
+                <?= $this->Html->link(
+                    __('Back'),
+                    ['action' => 'index'],
+                    ['class' => 'side-nav-item'])
+                ?>
+            </div>
         </div>
     </div>
 </div>
