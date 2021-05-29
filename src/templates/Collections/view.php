@@ -28,19 +28,21 @@
             <div class="flex-space-between">
                 <?= $this->Html->link(
                     __('Edit Collection'),
-                    ['action' => 'edit', $collection->id]
+                    ['action' => 'edit', $collection->id],
+                    ['class' => 'button']
                 ) ?>
                 <?= $this->Form->postLink(
                     __('Delete Collection'),
                     ['action' => 'delete', $collection->id],
                     [
                         'confirm' => __('Are you sure you want to delete this collection?'),
+                        'class' => 'button',
                     ]
                 ) ?>
                 <?= $this->Html->link(
                     __('Back'),
                     ['action' => 'index'],
-                    ['class' => 'side-nav-item']
+                    ['class' => 'button']
                 ) ?>
             </div>
         </div>

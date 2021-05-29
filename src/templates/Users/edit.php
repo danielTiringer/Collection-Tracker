@@ -21,16 +21,19 @@
                     ]);
                 ?>
             </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
-            <?= $this->Form->end() ?>
+
+            <div class="flex-space-between">
+                <?= $this->Form->button(__('Submit')) ?>
+                <?= $this->Form->end() ?>
+                <?= $this->Form->postLink(
+                    __('Delete'),
+                    ['action' => 'delete', $user->id],
+                    [
+                        'confirm' => __('Are you sure you want to delete your account?'),
+                        'class' => 'button',
+                    ]
+                ) ?>
+            </div>
         </div>
-        <?= $this->Form->postLink(
-            __('Delete'),
-            ['action' => 'delete', $user->id],
-            [
-                'confirm' => __('Are you sure you want to delete your account?'),
-                'class' => 'button margin-20',
-            ]
-        ) ?>
     </div>
 </div>

@@ -22,7 +22,7 @@
                 <?= $this->Html->link(
                     __('Back'),
                     ['action' => 'index'],
-                    ['class' => 'side-nav-item']
+                    ['class' => 'button']
                 ) ?>
             </div>
         </div>
