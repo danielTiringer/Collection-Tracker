@@ -14,6 +14,10 @@
                     echo $this->Form->control('name');
                     echo $this->Form->control('description');
                     echo $this->Form->control('goal');
+                    echo $this->Html->image(
+                        '/img/collection-img/' . $collection->image,
+                        ['class' => 'height-200']
+                    );
                     echo $this->Form->control('image_file', [
                         'type' => 'file',
                     ]);

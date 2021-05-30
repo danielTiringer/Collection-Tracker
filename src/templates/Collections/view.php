@@ -17,6 +17,15 @@
                     <th><?= __('Goal') ?></th>
                     <td><?= h($collection->goal) ?></td>
                 </tr>
+                <tr>
+                    <th>Image</th>
+                    <td>
+                        <?= $this->Html->image(
+                            '/img/collection-img/' . $collection->image,
+                            ['class' => 'height-400']
+                        ) ?>
+                    </td>
+                </tr>
             </table>
             <div class="text">
                 <strong><?= __('Description') ?></strong>

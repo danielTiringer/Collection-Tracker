@@ -6,3 +6,11 @@
     display: flex;
     justify-content: space-between;
 }
+
+.height-200 {
+    height: 200px;
+}
+
+.height-400 {
+    height: 400px;
+}
