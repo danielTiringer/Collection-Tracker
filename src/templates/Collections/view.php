@@ -22,7 +22,7 @@
                     <td>
                         <?= $this->Html->image(
                             '/img/collection-img/' . $collection->image,
-                            ['class' => 'height-400']
+                            ['class' => 'height-400', 'alt' => 'No image uploaded.']
                         ) ?>
                     </td>
                 </tr>
