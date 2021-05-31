@@ -132,6 +132,11 @@ class CollectionsController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
+    /**
+     * Creates for folder for collections images
+     *
+     * @return void
+     */
     private function createFolderIfNotExists()
     {
         if (!is_dir(self::IMG_DIR)) {
