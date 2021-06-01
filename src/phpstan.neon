@@ -6,3 +6,5 @@ parameters:
         - src
     excludes_analyse:
         - src/Console/Installer.php
+    ignoreErrors:
+        - '#Undefined constant "App\\Controller\\WWW_ROOT"#'
