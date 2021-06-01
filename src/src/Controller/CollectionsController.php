@@ -13,6 +13,7 @@ use Cake\I18n\Time;
  */
 class CollectionsController extends AppController
 {
+    /** @phpstan-ignore-next-line */
     private const IMG_DIR = WWW_ROOT . 'img' . DS . 'collection-img' . DS;
 
     /**

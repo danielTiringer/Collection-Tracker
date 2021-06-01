@@ -6,7 +6,3 @@ parameters:
         - src
     excludes_analyse:
         - src/Console/Installer.php
-    ignoreErrors:
-        -
-            message: '#Undefined constant \"[a-zA-Z\\]+WWW_ROOT\"#'
-            path: src/*
