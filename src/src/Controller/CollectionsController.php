@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Cake\Filesystem\File;
 use Cake\I18n\Time;
 
 /**
@@ -100,7 +101,29 @@ class CollectionsController extends AppController
             'contain' => [],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $collection = $this->Collections->patchEntity($collection, $this->request->getData());
+            $data = $this->request->getData();
+
+            $imageName = $data['image_file']->getClientFileName();
+
+            if ($imageName) {
+                $currentDateTime = (new Time('now'))->format('YmdHis');
+                $targetFileName = $currentDateTime . '_' . $imageName;
+                $targetPath = self::IMG_DIR . $targetFileName;
+
+                $this->createFolderIfNotExists();
+
+                $data['image_file']->moveTo($targetPath);
+
+                $previousImage = $collection->image;
+
+                $collection->image = $targetFileName;
+
+                if (!$this->deleteImage($previousImage)) {
+                    $this->Flash->error(__('The previous image could not be deleted. Please, try again.'));
+                }
+            }
+
+            $collection = $this->Collections->patchEntity($collection, $data);
             if ($this->Collections->save($collection)) {
                 $this->Flash->success(__('The collection has been saved.'));
 
@@ -142,5 +165,17 @@ class CollectionsController extends AppController
         if (!is_dir(self::IMG_DIR)) {
             mkdir(self::IMG_DIR, 0777);
         }
+    }
+
+    /**
+     * Removes an image
+     *
+     * @param string $image
+     * @return bool
+     */
+    private function deleteImage(string $image): bool
+    {
+        $file = new File(self::IMG_DIR . $image);
+        return $file->delete();
     }
 }
