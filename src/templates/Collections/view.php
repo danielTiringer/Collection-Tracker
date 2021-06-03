@@ -8,32 +8,19 @@
     <div class="column-responsive column-100">
         <div class="collections view content">
             <h3><?= h($collection->name) ?></h3>
-            <table>
-                <tr>
-                    <th><?= __('Name') ?></th>
-                    <td><?= h($collection->name) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Goal') ?></th>
-                    <td><?= h($collection->goal) ?></td>
-                </tr>
-                <tr>
-                    <th>Image</th>
-                    <td>
-                        <?= $this->Html->image(
-                            '/img/collection-img/' . $collection->image,
-                            ['class' => 'height-400', 'alt' => 'No image uploaded.']
-                        ) ?>
-                    </td>
-                </tr>
-            </table>
-            <div class="text">
-                <strong><?= __('Description') ?></strong>
-                <blockquote>
-                    <?= $this->Text->autoParagraph(h($collection->description)); ?>
-                </blockquote>
+            <div class="row">
+                <div class="column-responsive column-50">
+                    <?= $this->Html->image(
+                        '/img/collection-img/' . $collection->image,
+                        ['class' => 'height-400', 'alt' => 'No image uploaded.']
+                    ) ?>
+                </div>
+                <div class="column-responsive column-50">
+                    <p><?= __('Name') ?>: <?= h($collection->name) ?></p>
+                    <p><?= __('Goal') ?>: <?= h($collection->goal) ?></p>
+                    <p><?= __('Description') ?>: <?= $this->Text->autoParagraph(h($collection->description)); ?></p>
+                </div>
             </div>
-
             <div class="flex-space-between">
                 <?= $this->Html->link(
                     __('Edit Collection'),
