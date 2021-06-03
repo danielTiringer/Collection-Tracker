@@ -7,7 +7,7 @@
 <div class="row">
     <div class="column-responsive column-100">
         <div class="collections form content">
-            <?= $this->Form->create($collection) ?>
+            <?= $this->Form->create($collection, ['type' => 'file']) ?>
             <fieldset>
                 <legend><?= __('Edit Collection') ?></legend>
                 <?php
