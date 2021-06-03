@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use Cake\I18n\Time;
-
 /**
  * Collections Controller
  *
@@ -15,6 +13,9 @@ class CollectionsController extends AppController
 {
     private const IMG_DIR = WWW_ROOT . 'img' . DS . 'collection-img' . DS;
 
+    /*
+     * Initializes the controller and loads custom components
+     */
     public function initialize(): void
     {
         parent::initialize();
@@ -69,8 +70,7 @@ class CollectionsController extends AppController
             $imageName = $data['image_file']->getClientFileName();
 
             if ($imageName) {
-                $currentDateTime = (new Time('now'))->format('YmdHis');
-                $targetFileName = $currentDateTime . '_' . $imageName;
+                $targetFileName = $this->FileHandler->addTimeStampToFileName($imageName);
                 $targetPath = self::IMG_DIR . $targetFileName;
 
                 $this->FileHandler->createFolderIfNotExists(self::IMG_DIR);
@@ -111,8 +111,7 @@ class CollectionsController extends AppController
             $imageName = $data['image_file']->getClientFileName();
 
             if ($imageName) {
-                $currentDateTime = (new Time('now'))->format('YmdHis');
-                $targetFileName = $currentDateTime . '_' . $imageName;
+                $targetFileName = $this->FileHandler->addTimeStampToFileName($imageName);
                 $targetPath = self::IMG_DIR . $targetFileName;
 
                 $this->FileHandler->createFolderIfNotExists(self::IMG_DIR);
@@ -125,6 +124,8 @@ class CollectionsController extends AppController
 
                 if (!$this->FileHandler->deleteFile(self::IMG_DIR . $previousImage)) {
                     $this->Flash->error(__('The previous image could not be deleted. Please, try again.'));
+
+                    return $this->redirect(['action' => 'index']);
                 }
             }
 
