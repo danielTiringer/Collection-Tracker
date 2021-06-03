@@ -13,7 +13,7 @@ class CollectionsController extends AppController
 {
     private const IMG_DIR = WWW_ROOT . 'img' . DS . 'collection-img' . DS;
 
-    /*
+    /**
      * Initializes the controller and loads custom components
      */
     public function initialize(): void
