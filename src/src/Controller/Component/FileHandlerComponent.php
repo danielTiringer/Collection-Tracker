@@ -5,7 +5,6 @@ namespace App\Controller\Component;
 
 use Cake\Controller\Component;
 use Cake\Filesystem\File;
-use Cake\Filesystem\Filesystem;
 use Cake\I18n\Time;
 
 class FileHandlerComponent extends Component
@@ -31,10 +30,8 @@ class FileHandlerComponent extends Component
      */
     public function createFolderIfNotExists(string $path)
     {
-        $fileSystem = new Filesystem();
-        $filePath = $fileSystem->find($path);
-        if (!$filePath) {
-            $fileSystem->mkdir($path, 0777);
+        if (!is_dir($path)) {
+            mkdir($path, 0777);
         }
     }
 
