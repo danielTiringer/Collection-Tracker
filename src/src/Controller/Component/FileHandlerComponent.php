@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace App\Controller\Component;
 
 use Cake\Controller\Component;
-use Cake\Filesystem\File;
 use Cake\I18n\Time;
 
 class FileHandlerComponent extends Component
@@ -43,8 +42,6 @@ class FileHandlerComponent extends Component
      */
     public function deleteFile(string $fileToRemove): bool
     {
-        $file = new File($fileToRemove);
-
-        return $file->delete();
+        return unlink($fileToRemove);
     }
 }
