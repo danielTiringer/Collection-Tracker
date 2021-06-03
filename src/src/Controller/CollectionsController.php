@@ -15,6 +15,8 @@ class CollectionsController extends AppController
 
     /**
      * Initializes the controller and loads custom components
+     *
+     * @return void
      */
     public function initialize(): void
     {
