@@ -124,7 +124,7 @@ class CollectionsController extends AppController
 
                 $collection->image = $targetFileName;
 
-                if (!$this->FileHandler->deleteFile(self::IMG_DIR . $previousImage)) {
+                if ($previousImage && !$this->FileHandler->deleteFile(self::IMG_DIR . $previousImage)) {
                     $this->Flash->error(__('The previous image could not be deleted. Please, try again.'));
 
                     return $this->redirect(['action' => 'index']);
