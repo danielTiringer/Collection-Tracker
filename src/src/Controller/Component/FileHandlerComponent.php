@@ -32,7 +32,8 @@ class FileHandlerComponent extends Component
     public function createFolderIfNotExists(string $path)
     {
         $fileSystem = new Filesystem();
-        if (!$fileSystem->find($path)) {
+        $filePath = $fileSystem->find($path);
+        if (!$filePath) {
             $fileSystem->mkdir($path, 0777);
         }
     }
