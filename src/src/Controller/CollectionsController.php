@@ -73,7 +73,7 @@ class CollectionsController extends AppController
                 $targetFileName = $currentDateTime . '_' . $imageName;
                 $targetPath = self::IMG_DIR . $targetFileName;
 
-                $this->createFolderIfNotExists();
+                $this->FileHandler->createFolderIfNotExists(self::IMG_DIR);
 
                 $data['image_file']->moveTo($targetPath);
 
@@ -115,7 +115,7 @@ class CollectionsController extends AppController
                 $targetFileName = $currentDateTime . '_' . $imageName;
                 $targetPath = self::IMG_DIR . $targetFileName;
 
-                $this->createFolderIfNotExists();
+                $this->FileHandler->createFolderIfNotExists(self::IMG_DIR);
 
                 $data['image_file']->moveTo($targetPath);
 
@@ -158,17 +158,5 @@ class CollectionsController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
-    }
-
-    /**
-     * Creates for folder for collections images
-     *
-     * @return void
-     */
-    private function createFolderIfNotExists()
-    {
-        if (!is_dir(self::IMG_DIR)) {
-            mkdir(self::IMG_DIR, 0777);
-        }
     }
 }
