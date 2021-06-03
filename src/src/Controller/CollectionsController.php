@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use Cake\Filesystem\File;
 use Cake\I18n\Time;
 
 /**
@@ -15,6 +14,12 @@ use Cake\I18n\Time;
 class CollectionsController extends AppController
 {
     private const IMG_DIR = WWW_ROOT . 'img' . DS . 'collection-img' . DS;
+
+    public function initialize(): void
+    {
+        parent::initialize();
+        $this->loadComponent('FileHandler');
+    }
 
     /**
      * Index method
@@ -118,7 +123,7 @@ class CollectionsController extends AppController
 
                 $collection->image = $targetFileName;
 
-                if (!$this->deleteImage($previousImage)) {
+                if (!$this->FileHandler->deleteFile(self::IMG_DIR . $previousImage)) {
                     $this->Flash->error(__('The previous image could not be deleted. Please, try again.'));
                 }
             }
@@ -165,17 +170,5 @@ class CollectionsController extends AppController
         if (!is_dir(self::IMG_DIR)) {
             mkdir(self::IMG_DIR, 0777);
         }
-    }
-
-    /**
-     * Removes an image
-     *
-     * @param string $image
-     * @return bool
-     */
-    private function deleteImage(string $image): bool
-    {
-        $file = new File(self::IMG_DIR . $image);
-        return $file->delete();
     }
 }
