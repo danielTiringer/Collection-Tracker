@@ -44,22 +44,25 @@ use Cake\Routing\RouteBuilder;
 /** @var \Cake\Routing\RouteBuilder $routes */
 $routes->setRouteClass(DashedRoute::class);
 
-$routes->scope('/', function (RouteBuilder $builder) {
-    $builder->connect('/', ['controller' => 'Collections', 'action' => 'index']);
-    /*
-     * Connect catchall routes for all controllers.
-     *
-     * The `fallbacks` method is a shortcut for
-     *
-     * ```
-     * $builder->connect('/:controller', ['action' => 'index']);
-     * $builder->connect('/:controller/:action/*', []);
-     * ```
-     *
-     * You can remove these routes once you've connected the
-     * routes you want in your application.
-     */
-    $builder->fallbacks();
+
+$routes->connect('/', ['controller' => 'Collections', 'action' => 'index']);
+
+$routes->scope('/', function (RouteBuilder $routes) {
+    $routes->fallbacks();
+});
+
+$routes->scope('/collections', function (RouteBuilder $routes) {
+    $routes->connect('/{id}/elements', [
+        'controller' => 'Elements',
+        'action' => 'add',
+    ])
+        ->setPass(['id'])
+        ->setPatterns(['id' => '[0-9]+']);
+
+    // $routes->resources('Collections', function (RouteBuilder $routes) {
+    //     $routes->resources('Elements', ['prefix' => 'Collections']);
+    // });
+
 });
 
 $routes->connect(
