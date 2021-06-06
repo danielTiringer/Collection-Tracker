@@ -45,24 +45,41 @@ use Cake\Routing\RouteBuilder;
 $routes->setRouteClass(DashedRoute::class);
 
 
-$routes->connect('/', ['controller' => 'Collections', 'action' => 'index']);
-
 $routes->scope('/', function (RouteBuilder $routes) {
-    $routes->fallbacks();
-});
+    $routes->connect('/', [
+        'controller' => 'Collections',
+        'action' => 'index',
+    ]);
 
-$routes->scope('/collections', function (RouteBuilder $routes) {
-    $routes->connect('/{id}/elements', [
+    $routes->connect('/{id}/view', [
+        'controller' => 'Collections',
+        'action' => 'view',
+    ])
+        ->setPass(['id'])
+        ->setPatterns(['id' => '[0-9]+']);
+
+    $routes->connect('/{id}/edit', [
+        'controller' => 'Collections',
+        'action' => 'edit',
+    ])
+        ->setPass(['id'])
+        ->setPatterns(['id' => '[0-9]+']);
+
+    $routes->connect('/{id}/delete', [
+        'controller' => 'Collections',
+        'action' => 'delete',
+    ])
+        ->setPass(['id'])
+        ->setPatterns(['id' => '[0-9]+']);
+
+    $routes->connect('/{id}/elements/add', [
         'controller' => 'Elements',
         'action' => 'add',
     ])
         ->setPass(['id'])
         ->setPatterns(['id' => '[0-9]+']);
 
-    // $routes->resources('Collections', function (RouteBuilder $routes) {
-    //     $routes->resources('Elements', ['prefix' => 'Collections']);
-    // });
-
+    $routes->connect('/:controller/:action/*', []);
 });
 
 $routes->connect(
