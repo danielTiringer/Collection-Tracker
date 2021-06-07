@@ -59,6 +59,9 @@
             ) ?>
 
 
+            <div class="column-responsive column-50">
+                <p>Placeholder for elements</p>
+            </div>
 
         </div>
     </div>
