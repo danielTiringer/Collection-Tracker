@@ -44,3 +44,22 @@
         </div>
     </div>
 </div>
+
+<div class="row margin-top-20">
+    <div class="column-responsive column-100">
+        <div class="collections view content">
+            <?= $this->Html->link(
+                __('Add to collection'),
+                [
+                    'controller' => 'Elements',
+                    'action' => 'add',
+                    'id' => $collection->id,
+                ],
+                ['class' => 'button']
+            ) ?>
+
+
+
+        </div>
+    </div>
+</div>

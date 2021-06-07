@@ -2,6 +2,10 @@
     margin: 20px;
 }
 
+.margin-top-20 {
+    margin-top: 20px;
+}
+
 .flex-space-between {
     display: flex;
     justify-content: space-between;
