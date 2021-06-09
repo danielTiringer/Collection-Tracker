@@ -47,7 +47,7 @@ class ElementsController extends AppController
      *
      * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add($collectionId)
     {
         $element = $this->Elements->newEmptyEntity();
         if ($this->request->is('post')) {
@@ -59,8 +59,8 @@ class ElementsController extends AppController
             }
             $this->Flash->error(__('The element could not be saved. Please, try again.'));
         }
-        $collections = $this->Elements->Collections->find('list', ['limit' => 200]);
-        $this->set(compact('element', 'collections'));
+        $collection = $this->Elements->Collections->get($collectionId);
+        $this->set(compact('element', 'collection'));
     }
 
     /**

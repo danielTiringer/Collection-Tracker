@@ -13,7 +13,7 @@
                 <?php
                     echo $this->Form->control('name');
                     echo $this->Form->control('description');
-                    echo $this->Form->hidden('collection_id', ['value' => 2]);
+                    echo $this->Form->hidden('collection_id', ['value' => $collection->id]);
                     echo $this->Form->control('source');
                     /* echo $this->Form->control('metadata'); */
                 ?>
