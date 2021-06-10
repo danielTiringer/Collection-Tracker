@@ -11,6 +11,7 @@ use Cake\Validation\Validator;
  * Collections Model
  *
  * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
+ * @property \App\Model\Table\ElementsTable&\Cake\ORM\Association\HasMany $Elements
  * @method \App\Model\Entity\Collection newEmptyEntity()
  * @method \App\Model\Entity\Collection newEntity(array $data, array $options = [])
  * @method \App\Model\Entity\Collection[] newEntities(array $data, array $options = [])
@@ -48,6 +49,8 @@ class CollectionsTable extends Table
             'foreignKey' => 'users_id',
             'joinType' => 'INNER',
         ]);
+
+        $this->hasMany('Elements');
     }
 
     /**
