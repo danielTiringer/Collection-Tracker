@@ -59,9 +59,11 @@
             ) ?>
 
 
-            <div class="column-responsive column-50">
-                <p>Placeholder for elements</p>
-            </div>
+            <?php foreach($collection->elements as $element): ?>
+                <div class="column-responsive column-50">
+                    <p><?= $element->name ?></p>
+                </div>
+            <?php endforeach; ?>
 
         </div>
     </div>
