@@ -49,7 +49,7 @@ class CollectionsController extends AppController
     public function view($id = null)
     {
         $collection = $this->Collections->get($id, [
-            'contain' => ['Users'],
+            'contain' => ['Users', 'Elements'],
         ]);
 
         $this->set(compact('collection'));
