@@ -45,6 +45,7 @@ class ElementsController extends AppController
     /**
      * Add method
      *
+     * @param int $collectionId The ID of the collection the element belongs to
      * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
     public function add($collectionId)
