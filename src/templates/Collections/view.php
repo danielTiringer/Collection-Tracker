@@ -23,6 +23,15 @@
             </div>
             <div class="flex-space-between">
                 <?= $this->Html->link(
+                    __('Add to collection'),
+                    [
+                        'controller' => 'Elements',
+                        'action' => 'add',
+                        'id' => $collection->id,
+                    ],
+                    ['class' => 'button']
+                ) ?>
+                <?= $this->Html->link(
                     __('Edit Collection'),
                     ['action' => 'edit', $collection->id],
                     ['class' => 'button']
@@ -47,20 +56,9 @@
 
 <div class="row margin-top-20">
     <div class="column-responsive column-100">
-        <div class="collections view content">
-            <?= $this->Html->link(
-                __('Add to collection'),
-                [
-                    'controller' => 'Elements',
-                    'action' => 'add',
-                    'id' => $collection->id,
-                ],
-                ['class' => 'button']
-            ) ?>
-
-
+        <div class="collections view">
             <?php foreach($collection->elements as $element): ?>
-                <div class="column-responsive column-50">
+                <div class="column-responsive column-50 content">
                     <p><?= $element->name ?></p>
                 </div>
             <?php endforeach; ?>
