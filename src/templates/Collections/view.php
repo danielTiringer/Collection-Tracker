@@ -21,7 +21,7 @@
                     <p><?= __('Description') ?>: <?= $this->Text->autoParagraph(h($collection->description)); ?></p>
                 </div>
             </div>
-            <div class="flex-space-between">
+            <div class="row flex-space-between">
                 <?= $this->Html->link(
                     __('Add to collection'),
                     [
