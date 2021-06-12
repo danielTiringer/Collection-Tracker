@@ -59,7 +59,9 @@
         <div class="collections view row">
             <?php foreach($collection->elements as $element): ?>
                 <div class="content column-responsive column-45 margin-x-10">
-                    <p><?= $element->name ?></p>
+                    <p><strong>Name: </strong><?= $element->name ?></p>
+                    <p><strong>Description: </strong><?= $element->description ?></p>
+                    <p><strong>Source: </strong><?= $element->source ?></p>
                 </div>
             <?php endforeach; ?>
 
