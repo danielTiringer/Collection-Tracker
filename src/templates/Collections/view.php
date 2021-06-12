@@ -56,9 +56,9 @@
 
 <div class="row margin-top-20">
     <div class="column-responsive column-100">
-        <div class="collections view">
+        <div class="collections view row">
             <?php foreach($collection->elements as $element): ?>
-                <div class="column-responsive column-50 content">
+                <div class="content column-responsive column-45 margin-x-10">
                     <p><?= $element->name ?></p>
                 </div>
             <?php endforeach; ?>
