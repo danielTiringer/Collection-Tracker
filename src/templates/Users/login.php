@@ -1,24 +1,32 @@
-<?= $this->Flash->render() ?>
-<div class="form-group d-flex justify-content-center">
-    <?= $this->Form->create() ?>
-    <fieldset>
-        <legend><?= __('Login') ?></legend>
-        <?= $this->Form->control('email', [
-            'class' => 'form-control',
-        ]) ?>
-        <?= $this->Form->control('password', [
-            'class' => 'form-control',
-        ]) ?>
-    </fieldset>
-    <div class="mt-2 d-flex justify-content-between">
-        <?= $this->Form->button(__('Login'), [
-            'class' => 'btn btn-outline-danger',
-        ]); ?>
-        <?= $this->Form->end() ?>
-        <?= $this->Html->link(
-            "Don't have an account yet?",
-            'register',
-            ['class' => 'text-danger']
-        ) ?>
-    </div>
-</div>
+<?php
+/**
+ * @var \App\View\AppView $this
+ */
+
+$this->extend('../Common/form');
+$this->assign('title', __('Login'));
+
+$this->start('form-creation');
+    echo $this->Form->create();
+$this->end();
+
+$this->start('form-fields');
+    echo $this->Form->control('email', [
+        'class' => 'form-control',
+    ]);
+    echo $this->Form->control('password', [
+        'class' => 'form-control',
+    ]);
+$this->end();
+
+$this->start('form-end');
+    echo $this->Form->button(__('Login'), [
+        'class' => 'btn btn-outline-danger',
+    ]);
+    echo $this->Form->end();
+    echo $this->Html->link(
+        "Don't have an account yet?",
+        'register',
+        ['class' => 'btn btn-outline-danger']
+    );
+$this->end();
