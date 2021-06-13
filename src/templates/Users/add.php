@@ -4,29 +4,37 @@
  * @var \App\Model\Entity\User $user
  */
 ?>
-<div class="row">
-    <div class="column-responsive column-100">
-        <div class="users form content">
+<div class="form-group d-flex justify-content-center">
+    <div class="">
             <?= $this->Form->create($user) ?>
             <fieldset>
                 <legend><?= __('Register') ?></legend>
                 <?php
-                    echo $this->Form->control('name');
-                    echo $this->Form->control('email');
-                    echo $this->Form->control('password');
+                    echo $this->Form->control('name', [
+                        'class' => 'form-control',
+                    ]);
+                    echo $this->Form->control('email', [
+                        'class' => 'form-control',
+                    ]);
+                    echo $this->Form->control('password', [
+                        'class' => 'form-control',
+                    ]);
                     echo $this->Form->control('password_confirm', [
+                        'class' => 'form-control',
                         'type' => 'password',
                     ]);
                 ?>
             </fieldset>
-            <div class="flex-space-between">
-                <?= $this->Form->button(__('Submit')) ?>
-                <?= $this->Form->end() ?>
-                <?= $this->Html->link("Got an account already?", [
-                    'action' => 'login',
-                    'class' => 'button'
+            <div class="mt-2">
+                <?= $this->Form->button(__('Submit'), [
+                    'class' => 'btn btn-outline-danger',
                 ]) ?>
+                <?= $this->Form->end() ?>
+                <?= $this->Html->link(
+                    "Got an account already?",
+                    'login',
+                    ['class' => 'text-danger']
+                ) ?>
             </div>
-        </div>
     </div>
 </div>
