@@ -1,3 +1,4 @@
+<?= $this->Flash->render() ?>
 <div class="form-group d-flex justify-content-center">
     <?= $this->fetch('form-creation') ?>
     <fieldset>
