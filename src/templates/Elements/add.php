@@ -3,23 +3,36 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Element $element
  */
-?>
-<div class="row">
-    <div class="column-responsive column-100">
-        <div class="elements form content">
-            <?= $this->Form->create($element) ?>
-            <fieldset>
-                <legend><?= __('Add Element') ?></legend>
-                <?php
-                    echo $this->Form->control('name');
-                    echo $this->Form->control('description');
-                    echo $this->Form->hidden('collection_id', ['value' => $collection->id]);
-                    echo $this->Form->control('source');
-                    /* echo $this->Form->control('metadata'); */
-                ?>
-            </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
-            <?= $this->Form->end() ?>
-        </div>
-    </div>
-</div>
+
+$this->extend('../Common/form');
+$this->assign('title', __('Add Element'));
+
+$this->start('form-creation');
+    echo $this->Form->create($element);
+$this->end();
+
+$this->start('form-fields');
+    echo $this->Form->control('name', [
+        'class' => 'form-control',
+    ]);
+    echo $this->Form->control('description', [
+        'class' => 'form-control',
+    ]);
+    echo $this->Form->hidden('collection_id', ['value' => $collection->id]);
+    echo $this->Form->control('source', [
+        'class' => 'form-control',
+    ]);
+    /* echo $this->Form->control('metadata'); */
+$this->end();
+
+$this->start('form-end');
+    echo $this->Form->button(__('Submit'), [
+        'class' => 'btn btn-outline-danger',
+    ]);
+    echo $this->Form->end();
+    echo $this->Html->link(
+        __('Back'),
+        ['action' => 'view', $collection->id],
+        ['class' => 'btn btn-outline-danger']
+    );
+$this->end();
