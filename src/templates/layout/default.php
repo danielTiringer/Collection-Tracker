@@ -41,24 +41,24 @@ $cakeDescription = 'Collection Tracker';
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
 </head>
-<body>
-    <nav class="top-nav">
-        <div class="top-nav-title">
-            <a href="<?= $this->Url->build('/') ?>"><span>Collection</span> Tracker</a>
-        </div>
-        <div class="top-nav-links">
+<body class="bg-light">
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand text-danger" href="<?= $this->Url->build('/') ?>">
+            <span>Collection</span> Tracker
+        </a>
+        <div class="nav justify-content-end">
             <?php if (!$this->Identity->isLoggedIn()): ?>
-                <a href="<?= $this->Url->build('/login') ?>">Login</a>
-                <a href="<?= $this->Url->build('/register') ?>">Register</a>
+                <a class="btn btn-outline-danger mx-2" href="<?= $this->Url->build('/login') ?>">Login</a>
+                <a class="btn btn-outline-danger mx-2" href="<?= $this->Url->build('/register') ?>">Register</a>
             <?php else: ?>
-                <a href="<?= $this->Url->build('/logout') ?>">Logout</a>
-                <a href="<?= $this->Url->build('/profile/' . $this->Identity->get('id')) ?>">
+                <a class="btn btn-outline-danger mx-2" href="<?= $this->Url->build('/logout') ?>">Logout</a>
+                <a class="btn btn-outline-danger mx-2" href="<?= $this->Url->build('/profile/' . $this->Identity->get('id')) ?>">
                     Profile (<?= $this->Identity->get('name') ?>)
                 </a>
             <?php endif; ?>
         </div>
     </nav>
-    <main class="main">
+    <main class="mt-4">
         <div class="container">
             <?= $this->Flash->render() ?>
             <?= $this->fetch('content') ?>
