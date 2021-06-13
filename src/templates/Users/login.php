@@ -10,7 +10,7 @@
             'class' => 'form-control',
         ]) ?>
     </fieldset>
-    <div class="mt-2">
+    <div class="mt-2 d-flex justify-content-between">
         <?= $this->Form->button(__('Login'), [
             'class' => 'btn btn-outline-danger',
         ]); ?>
