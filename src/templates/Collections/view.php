@@ -53,12 +53,14 @@
     </div>
 </div>
 
-<div class="row">
+<div class="d-flex flex-wrap">
     <?php foreach($collection->elements as $element): ?>
-        <div class="content col-lg-12 col-md-6 mx-2">
-            <p><strong>Name: </strong><?= $element->name ?></p>
-            <p><strong>Description: </strong><?= $element->description ?></p>
-            <p><strong>Source: </strong><?= $element->source ?></p>
+        <div class="card">
+            <div class="card-body">
+                <p class="card-text"><strong>Name: </strong><?= $element->name ?></p>
+                <p class="card-text"><strong>Description: </strong><?= $element->description ?></p>
+                <p class="card-text"><strong>Source: </strong><?= $element->source ?></p>
+            </div>
         </div>
     <?php endforeach; ?>
 </div>
