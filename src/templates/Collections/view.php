@@ -53,9 +53,9 @@
     </div>
 </div>
 
-<div class="d-flex flex-wrap">
+<div class="row justify-content-around">
     <?php foreach($collection->elements as $element): ?>
-        <div class="card">
+        <div class="card mt-2 col-md-5 col-sm-10">
             <div class="card-body">
                 <p class="card-text"><strong>Name: </strong><?= $element->name ?></p>
                 <p class="card-text"><strong>Description: </strong><?= $element->description ?></p>
