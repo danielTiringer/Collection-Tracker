@@ -58,7 +58,10 @@
         <div class="card mt-2 col-md-5 col-sm-10">
             <div class="card-body">
                 <a
-                    href="<?= $this->Url->buildFromPath('Elements::view', [$element->id]) ?>"
+                    href="<?= $this->Url->buildFromPath('Elements::view', [
+                        'element' => $element->id,
+                        'collection' => $collection->id,
+                    ]) ?>"
                     class="stretched-link"
                 ></a>
                 <p class="card-text"><strong>Name: </strong><?= $element->name ?></p>

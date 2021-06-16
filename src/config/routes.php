@@ -79,6 +79,13 @@ $routes->scope('/', function (RouteBuilder $routes) {
         ->setPass(['id'])
         ->setPatterns(['id' => '[0-9]+']);
 
+    $routes->connect('/{collection}/elements/{element}', [
+        'controller' => 'Elements',
+        'action' => 'view',
+    ])
+        ->setPass(['collection', 'element'])
+        ->setPatterns(['element' => '[0-9]+', 'collection' => '[0-9]+']);
+
     $routes->connect('/:controller/:action/*', []);
 });
 
