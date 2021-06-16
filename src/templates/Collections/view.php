@@ -57,6 +57,10 @@
     <?php foreach($collection->elements as $element): ?>
         <div class="card mt-2 col-md-5 col-sm-10">
             <div class="card-body">
+                <a
+                    href="<?= $this->Url->buildFromPath('Elements::view', [$element->id]) ?>"
+                    class="stretched-link"
+                ></a>
                 <p class="card-text"><strong>Name: </strong><?= $element->name ?></p>
                 <p class="card-text"><strong>Description: </strong><?= $element->description ?></p>
                 <p class="card-text"><strong>Source: </strong><?= $element->source ?></p>
