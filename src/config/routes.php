@@ -84,7 +84,20 @@ $routes->scope('/', function (RouteBuilder $routes) {
         'action' => 'view',
     ])
         ->setPass(['collection', 'element'])
-        ->setPatterns(['element' => '[0-9]+', 'collection' => '[0-9]+']);
+        ->setPatterns([
+            'element' => '[0-9]+',
+            'collection' => '[0-9]+',
+        ]);
+
+    $routes->connect('/{collection}/elements/{element}/delete', [
+        'controller' => 'Elements',
+        'action' => 'delete',
+    ])
+        ->setPass(['collection', 'element'])
+        ->setPatterns([
+            'element' => '[0-9]+',
+            'collection' => '[0-9]+',
+        ]);
 
     $routes->connect('/:controller/:action/*', []);
 });
