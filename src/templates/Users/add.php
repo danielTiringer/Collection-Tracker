@@ -30,12 +30,12 @@ $this->end();
 
 $this->start('form-end');
     echo $this->Form->button(__('Submit'), [
-        'class' => 'btn btn-outline-danger',
+        'class' => 'btn btn-outline-danger mx-2',
     ]);
     echo $this->Form->end();
     echo $this->Html->link(
         "Got an account already?",
         'login',
-        ['class' => 'btn btn-outline-danger']
+        ['class' => 'btn btn-outline-danger mx-2']
     );
 $this->end();

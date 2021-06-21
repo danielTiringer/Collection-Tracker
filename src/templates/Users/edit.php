@@ -30,7 +30,7 @@ $this->end();
 
 $this->start('form-end');
     echo $this->Form->button(__('Submit'), [
-        'class' => 'btn btn-outline-danger',
+        'class' => 'btn btn-outline-danger mx-2',
     ]);
     echo $this->Form->end();
     echo $this->Form->postLink(
@@ -38,7 +38,7 @@ $this->start('form-end');
         ['action' => 'delete', $user->id],
         [
             'confirm' => __('Are you sure you want to delete your account?'),
-            'class' => 'btn btn-outline-danger',
+            'class' => 'btn btn-outline-danger mx-2',
         ]
     );
 $this->end();
