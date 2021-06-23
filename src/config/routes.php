@@ -44,7 +44,6 @@ use Cake\Routing\RouteBuilder;
 /** @var RouteBuilder $routes */
 $routes->setRouteClass(DashedRoute::class);
 
-
 $routes->scope('/', function (RouteBuilder $routes) {
     $routes->connect('/', [
         'controller' => 'Collections',

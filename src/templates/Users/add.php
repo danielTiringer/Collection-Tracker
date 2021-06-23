@@ -4,7 +4,6 @@
  * @var \App\Model\Entity\User $user
  */
 
-
 $this->extend('../Common/form');
 $this->assign('title', __('Register'));
 
