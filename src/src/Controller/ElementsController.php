@@ -104,7 +104,7 @@ class ElementsController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $element = $this->Elements->get($id);
-        $collection = $element->collection->id;
+        $collectionId = $element->collection->id;
         if ($this->Elements->delete($element)) {
             $this->Flash->success(__('The element has been deleted.'));
         } else {
@@ -114,7 +114,7 @@ class ElementsController extends AppController
         return $this->redirect([
             'controller' => 'Collection',
             'action' => 'view',
-            $collection->id,
+            $collectionId,
         ]);
     }
 }
