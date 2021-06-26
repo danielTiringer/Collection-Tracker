@@ -29,7 +29,8 @@
             [
                 'controller' => 'Elements',
                 'action' => 'delete',
-                $element->id,
+                'elementId' => $element->id,
+                'collectionId' => $element->collection->id,
             ],
             [
                 'confirm' => __('Are you sure you want to delete this element?'),
