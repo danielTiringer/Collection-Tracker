@@ -19,9 +19,18 @@
         </div>
     </div>
     <div class="mt-2 d-flex justify-content-between">
+        <?= $this->Html->link(
+            __('Edit Element'),
+            ['action' => 'edit', $element->id],
+            ['class' => 'btn btn-outline-danger']
+        ) ?>
         <?= $this->Form->postLink(
             __('Delete Element'),
-            ['action' => 'delete', $element->id],
+            [
+                'controller' => 'Elements',
+                'action' => 'delete',
+                $element->id,
+            ],
             [
                 'confirm' => __('Are you sure you want to delete this element?'),
                 'class' => 'btn btn-outline-danger',

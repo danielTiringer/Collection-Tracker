@@ -72,31 +72,31 @@ $routes->scope('/', function (RouteBuilder $routes) {
         ->setPass(['id'])
         ->setPatterns(['id' => '[0-9]+']);
 
-    $routes->connect('/{id}/elements/add', [
+    $routes->connect('/{collectionId}/elements/add', [
         'controller' => 'Elements',
         'action' => 'add',
     ])
-        ->setPass(['id'])
-        ->setPatterns(['id' => '[0-9]+']);
+        ->setPass(['collectionId'])
+        ->setPatterns(['collectionId' => '[0-9]+']);
 
-    $routes->connect('/{collection}/elements/{element}', [
+    $routes->connect('/{collectionId}/elements/{elementId}', [
         'controller' => 'Elements',
         'action' => 'view',
     ])
-        ->setPass(['collection', 'element'])
+        ->setPass(['collectionId', 'elementId'])
         ->setPatterns([
-            'element' => '[0-9]+',
-            'collection' => '[0-9]+',
+            'collectionId' => '[0-9]+',
+            'elementId' => '[0-9]+',
         ]);
 
-    $routes->connect('/{collection}/elements/{element}/delete', [
+    $routes->connect('/{collectionId}/elements/{elementId}/delete', [
         'controller' => 'Elements',
         'action' => 'delete',
     ])
-        ->setPass(['collection', 'element'])
+        ->setPass(['collectionId', 'elementId'])
         ->setPatterns([
-            'element' => '[0-9]+',
-            'collection' => '[0-9]+',
+            'collectionId' => '[0-9]+',
+            'elementId' => '[0-9]+',
         ]);
 
     $routes->connect('/:controller/:action/*', []);
