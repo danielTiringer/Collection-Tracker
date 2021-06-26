@@ -15,7 +15,11 @@
         </div>
         <div class="col-md-6 col-sm-12">
             <p><?= __('Name') ?>: <?= h($collection->name) ?></p>
-            <p><?= __('Goal') ?>: <?= h($collection->goal) ?></p>
+            <?php if (count($collection->elements) == 0): ?>
+                <p><?= __('Goal') ?>: <?= h($collection->goal) ?></p>
+            <?php else: ?>
+                <p><?= __('Progress') ?>: <?= count($collection->elements) ?> / <?= h($collection->goal) ?></p>
+            <?php endif; ?>
             <p>
                 <?= __('Description') ?>:
                 <?= $this->Text->autoParagraph(h($collection->description)) ?>
