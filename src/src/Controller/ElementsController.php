@@ -30,7 +30,7 @@ class ElementsController extends AppController
      * View method
      *
      * @param int $collectionId Collection id
-     * @param int $elementId Element id.
+     * @param int $elementId Element id
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
@@ -72,11 +72,12 @@ class ElementsController extends AppController
     /**
      * Edit method
      *
-     * @param string|null $id Element id.
+     * @param int $collectionId Collection id
+     * @param int $elementId Element id
      * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function edit($id = null)
+    public function edit($collectionId, $elementId)
     {
         $element = $this->Elements->get($id, [
             'contain' => [],
@@ -97,15 +98,15 @@ class ElementsController extends AppController
     /**
      * Delete method
      *
-     * @param string|null $id Element id.
+     * @param int $collectionId Collection id
+     * @param int $elementId Element id
      * @return \Cake\Http\Response|null|void Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete($id = null)
+    public function delete($collectionId, $elementId)
     {
         $this->request->allowMethod(['post', 'delete']);
-        $element = $this->Elements->get($id);
-        $collectionId = $element->collection->id;
+        $element = $this->Elements->get($elementId);
         if ($this->Elements->delete($element)) {
             $this->Flash->success(__('The element has been deleted.'));
         } else {
@@ -113,7 +114,7 @@ class ElementsController extends AppController
         }
 
         return $this->redirect([
-            'controller' => 'Collection',
+            'controller' => 'Collections',
             'action' => 'view',
             $collectionId,
         ]);
