@@ -38,7 +38,10 @@ $this->start('form-end');
     echo $this->Form->end();
     echo $this->Html->link(
         __('Back'),
-        ['action' => 'index'],
+        [
+            'action' => 'view',
+            $collection->id,
+        ],
         ['class' => 'btn btn-outline-danger']
     );
 $this->end();
