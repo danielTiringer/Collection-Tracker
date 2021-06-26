@@ -29,13 +29,14 @@ class ElementsController extends AppController
     /**
      * View method
      *
-     * @param string|null $id Element id.
+     * @param int $collectionId Collection id
+     * @param int $elementId Element id.
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
+    public function view($collectionId, $elementId)
     {
-        $element = $this->Elements->get($id, [
+        $element = $this->Elements->get($elementId, [
             'contain' => ['Collections'],
         ]);
 
