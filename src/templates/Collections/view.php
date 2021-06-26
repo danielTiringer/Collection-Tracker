@@ -28,7 +28,7 @@
             [
                 'controller' => 'Elements',
                 'action' => 'add',
-                'id' => $collection->id,
+                'collectionId' => $collection->id,
             ],
             ['class' => 'btn btn-outline-danger']
         ) ?>
