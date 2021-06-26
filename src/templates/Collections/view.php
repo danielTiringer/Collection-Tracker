@@ -63,8 +63,8 @@
             <div class="card-body">
                 <a
                     href="<?= $this->Url->buildFromPath('Elements::view', [
-                        'element' => $element->id,
-                        'collection' => $collection->id,
+                        'elementId' => $element->id,
+                        'collectionId' => $collection->id,
                     ]) ?>"
                     class="stretched-link"
                 ></a>
