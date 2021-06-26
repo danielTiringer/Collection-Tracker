@@ -113,6 +113,14 @@ class CollectionsController extends AppController
             $imageName = $data['image_file']->getClientFileName();
 
             if ($imageName) {
+                $previousImage = $collection->image;
+
+                if ($previousImage && !$this->FileHandler->deleteFile(self::IMG_DIR . $previousImage)) {
+                    $this->Flash->error(__('The previous image could not be deleted. Please, try again.'));
+
+                    return $this->redirect(['action' => 'index']);
+                }
+
                 $targetFileName = $this->FileHandler->addTimeStampToFileName($imageName);
                 $targetPath = self::IMG_DIR . $targetFileName;
 
@@ -120,15 +128,8 @@ class CollectionsController extends AppController
 
                 $data['image_file']->moveTo($targetPath);
 
-                $previousImage = $collection->image;
-
                 $collection->image = $targetFileName;
 
-                if ($previousImage && !$this->FileHandler->deleteFile(self::IMG_DIR . $previousImage)) {
-                    $this->Flash->error(__('The previous image could not be deleted. Please, try again.'));
-
-                    return $this->redirect(['action' => 'index']);
-                }
             }
 
             $collection = $this->Collections->patchEntity($collection, $data);
