@@ -3,18 +3,20 @@ version: '3.7'
 services:
   php:
     build:
-      context: ./docker/php
-      dockerfile: Dockerfile.dev
+      context: ./src/docker
+      dockerfile: Dockerfile
       args:
         PHP_VERSION: ${PHP_VERSION}
+      target: dev
     container_name: collection-tracker-application
+    environment:
+      - WEB_DOCUMENT_ROOT=/var/www/html/webroot
     env_file:
       - .env
     volumes:
       - ./src:/var/www/html
-      - ./docker/php/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
     ports:
-      - '9000:9000'
+      - '4000:80'
     depends_on:
       - database
     links:
@@ -22,41 +24,9 @@ services:
     networks:
       - collection-tracker
 
-  cake:
-    build:
-      context: ./docker/cli
-      dockerfile: Dockerfile
-      args:
-        PHP_CLI_VERSION: ${PHP_CLI_VERSION}
-    container_name: collection-tracker-cake
-    env_file:
-      - .env
-    volumes:
-      - ./src:/var/www/html
-    entrypoint: bin/cake
-    networks:
-      - collection-tracker
-
-  nginx:
-    image: nginx:stable-alpine
-    container_name: collection-tracker-nginx
-    ports:
-      - '8080:80'
-    volumes:
-      - ./src:/var/www/html
-      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
-      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
-    depends_on:
-      - php
-      - database
-    networks:
-      - collection-tracker
-
   database:
     image: mysql:8
     container_name: collection-tracker-database
-    ports:
-      - '3306:3306'
     env_file:
       - .env
     environment:
@@ -78,7 +48,7 @@ services:
     environment:
       PMA_HOST: database
     ports:
-      - '8884:80'
+      - '4010:80'
     links:
       - database
     networks:
