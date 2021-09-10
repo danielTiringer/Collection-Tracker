@@ -36,6 +36,7 @@ $cakeDescription = 'Collection Tracker';
     >
 
     <?= $this->Html->css(['app']) ?>
+    <?= $this->Html->script(['app', 'sweetalert']) ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
