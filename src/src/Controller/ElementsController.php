@@ -79,7 +79,7 @@ class ElementsController extends AppController
      */
     public function edit($collectionId, $elementId)
     {
-        $element = $this->Elements->get($id, [
+        $element = $this->Elements->get($elementId, [
             'contain' => [],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
