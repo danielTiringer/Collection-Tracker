@@ -129,7 +129,6 @@ class CollectionsController extends AppController
                 $data['image_file']->moveTo($targetPath);
 
                 $collection->image = $targetFileName;
-
             }
 
             $collection = $this->Collections->patchEntity($collection, $data);
