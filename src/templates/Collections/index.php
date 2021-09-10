@@ -36,9 +36,9 @@
             </td>
             <?php if ($collection->goal): ?>
                 <td><?= h($collection->goal) ?></td>
-            <? else: ?>
+            <?php else: ?>
                 <td><?= __('Not defined') ?></td>
-            <? endif; ?>
+            <?php endif; ?>
             <td>
                 <?= $this->Html->link(
                     __('View'),
