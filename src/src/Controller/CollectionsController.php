@@ -154,7 +154,10 @@ class CollectionsController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $collection = $this->Collections->get($id);
-        if ($this->Collections->delete($collection)) {
+        if (
+            $this->FileHandler->deleteFile(self::IMG_DIR . $collection->image)
+            && $this->Collections->delete($collection)
+        ) {
             $this->Flash->success(__('The collection has been deleted.'));
         } else {
             $this->Flash->error(__('The collection could not be deleted. Please, try again.'));
