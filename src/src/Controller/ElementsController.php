@@ -87,12 +87,16 @@ class ElementsController extends AppController
             if ($this->Elements->save($element)) {
                 $this->Flash->success(__('The element has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect([
+                    'controller' => 'Collections',
+                    'action' => 'view',
+                    $collectionId,
+                ]);
             }
             $this->Flash->error(__('The element could not be saved. Please, try again.'));
         }
-        $collections = $this->Elements->Collections->find('list', ['limit' => 200]);
-        $this->set(compact('element', 'collections'));
+        $collection = $this->Elements->Collections->get($collectionId);
+        $this->set(compact('element', 'collection'));
     }
 
     /**
