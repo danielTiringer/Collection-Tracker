@@ -29,19 +29,22 @@
             ],
             ['class' => 'btn btn-outline-danger']
         ) ?>
-        <?= $this->Form->postLink(
-            __('Delete Element'),
+        <?= $this->Form->create(
+            $element,
             [
-                'controller' => 'Elements',
-                'action' => 'delete',
-                'collectionId' => $element->collection->id,
-                'elementId' => $element->id,
-            ],
-            [
-                'confirm' => __('Are you sure you want to delete this element?'),
-                'class' => 'btn btn-outline-danger',
+                'type' => 'delete',
+                'url' => [
+                    'action' => 'delete',
+                    'collectionId' => $element->collection->id,
+                    'elementId' => $element->id,
+                ],
             ]
         ) ?>
+        <?= $this->Form->button(
+            __('Delete Element'),
+            ['class' => 'btn btn-outline-danger deletion']
+        ) ?>
+        <?= $this->Form->end(); ?>
         <?= $this->Html->link(
             __('Back'),
             [
