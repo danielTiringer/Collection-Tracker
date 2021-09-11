@@ -40,6 +40,7 @@
                 <td><?= __('Not defined') ?></td>
             <?php endif; ?>
             <td>
+                <div class="d-flex justify-content-between width-200">
                 <?= $this->Html->link(
                     __('View'),
                     ['action' => 'view', $collection->id],
@@ -50,14 +51,19 @@
                     ['action' => 'edit', $collection->id],
                     ['class' => 'btn btn-outline-danger']
                 ) ?>
-                <?= $this->Form->postLink(
-                    __('Delete'),
-                    ['action' => 'delete', $collection->id],
+                <?= $this->Form->create(
+                    $collection,
                     [
-                        'confirm' => __('Are you sure you want to delete this collection?'),
-                        'class' => 'btn btn-outline-danger',
+                        'type' => 'delete',
+                        'url' => ['action' => 'delete', $collection->id],
                     ]
                 ) ?>
+                <?= $this->Form->button(
+                    __('Delete'),
+                    ['class' => 'btn btn-outline-danger deletion']
+                ) ?>
+                <?= $this->Form->end(); ?>
+                </div>
             </td>
         </tr>
         <?php endforeach; ?>
