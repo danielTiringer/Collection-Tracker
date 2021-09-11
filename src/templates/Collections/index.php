@@ -15,15 +15,15 @@
 <table class="table mt-2">
     <thead class="thead-dark">
         <tr>
-            <th><?= __('Name') ?></th>
-            <th><?= __('Goal') ?></th>
-            <th><?= __('Actions') ?></th>
+            <th class="col-6"><?= __('Name') ?></th>
+            <th class="col-3"><?= __('Goal') ?></th>
+            <th class="col-3"><?= __('Actions') ?></th>
         </tr>
     </thead>
     <tbody>
         <?php foreach ($collections as $collection): ?>
         <tr>
-            <td>
+            <td class="col-6">
                 <?php if ($collection->image): ?>
                     <?= $this->Html->image(
                         '/img/collection-img/' . $collection->image,
@@ -37,14 +37,14 @@
                     ['action' => 'view', $collection->id],
                     ['class' => 'text-danger']
                 ) ?>
-            </td>
+            </td class="col-3">
             <?php if ($collection->goal): ?>
                 <td><?= h($collection->goal) ?></td>
             <?php else: ?>
                 <td><?= __('Not defined') ?></td>
             <?php endif; ?>
-            <td>
-                <div class="d-flex justify-content-between width-100">
+            <td class="col-3">
+                <div class="d-flex justify-content-between">
                 <?= $this->Html->link(
                     __('View'),
                     ['action' => 'view', $collection->id],
