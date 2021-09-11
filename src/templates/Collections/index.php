@@ -24,10 +24,14 @@
         <?php foreach ($collections as $collection): ?>
         <tr>
             <td>
-                <?= $this->Html->image(
-                    '/img/collection-img/' . $collection->image,
-                    ['class' => 'height-40', 'alt' => 'No image uploaded.']
-                ) ?>
+                <?php if ($collection->image): ?>
+                    <?= $this->Html->image(
+                        '/img/collection-img/' . $collection->image,
+                        ['class' => 'height-40', 'alt' => '']
+                    ) ?>
+                <?php else: ?>
+                    <i class="bi bi-image"></i>
+                <?php endif; ?>
                 <?= $this->Html->link(
                     $collection->name,
                     ['action' => 'view', $collection->id],
