@@ -42,6 +42,10 @@ class FileHandlerComponent extends Component
      */
     public function deleteFile(string $fileToRemove): bool
     {
+        if (!is_file($fileToRemove)) {
+            return true;
+        }
+
         return unlink($fileToRemove);
     }
 }
