@@ -44,7 +44,7 @@
                 <td><?= __('Not defined') ?></td>
             <?php endif; ?>
             <td>
-                <div class="d-flex justify-content-between width-200">
+                <div class="d-flex justify-content-between width-100">
                 <?= $this->Html->link(
                     __('View'),
                     ['action' => 'view', $collection->id],
