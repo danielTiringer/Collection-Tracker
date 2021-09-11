@@ -12,4 +12,11 @@ if (!isset($params['escape']) || $params['escape'] !== false) {
     $message = h($message);
 }
 ?>
-<div class="<?= h($class) ?>" onclick="this.classList.add('hidden');"><?= $message ?></div>
+<script>
+    swal({
+        text: '<?= $message ?>',
+        icon: 'info',
+        confirm: true,
+        timer: 3000,
+    });
+</script>
