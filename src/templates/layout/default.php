@@ -36,7 +36,7 @@ $cakeDescription = 'Collection Tracker';
     >
 
     <?= $this->Html->css(['app']) ?>
-    <?= $this->Html->script(['app', 'sweetalert']) ?>
+    <?= $this->Html->script(['sweetalert']) ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
@@ -67,6 +67,7 @@ $cakeDescription = 'Collection Tracker';
     </main>
     <footer>
     </footer>
+    <?= $this->Html->script(['app']) ?>
     <script
         src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
