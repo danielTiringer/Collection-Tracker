@@ -180,6 +180,12 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
         return $service;
     }
 
+    /**
+     * Returns an authorization service provider instance
+     *
+     * @param \Psr\Http\Message\ServerRequestInterface $request Request
+     * @return \Authentication\AuthenticationServiceInterface
+     */
     public function getAuthorizationService(ServerRequestInterface $request): AuthorizationServiceInterface
     {
         $resolver = new OrmResolver();
