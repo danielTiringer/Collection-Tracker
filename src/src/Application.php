@@ -184,7 +184,7 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
      * Returns an authorization service provider instance
      *
      * @param \Psr\Http\Message\ServerRequestInterface $request Request
-     * @return \Authentication\AuthenticationServiceInterface
+     * @return \Authorization\AuthorizationServiceInterface
      */
     public function getAuthorizationService(ServerRequestInterface $request): AuthorizationServiceInterface
     {
