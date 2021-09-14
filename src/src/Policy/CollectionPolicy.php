@@ -53,6 +53,6 @@ class CollectionPolicy
      */
     protected function isAuthor(IdentityInterface $user, Collection $collection): bool
     {
-        return $collection->users_id === $user->id;
+        return $collection->users_id === $user->getIdentifier();
     }
 }
