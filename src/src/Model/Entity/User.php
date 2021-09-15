@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Model\Entity;
 
+use Authentication\IdentityInterface as AuthenticationIdentity;
 use Authentication\PasswordHasher\DefaultPasswordHasher;
 use Cake\ORM\Entity;
 
@@ -16,8 +17,18 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
  */
-class User extends Entity
+class User extends Entity implements AuthenticationIdentity
 {
+    /**
+     * Authentication\IdentityInterface method
+     *
+     * @return int
+     */
+    public function getIdentifier()
+    {
+        return $this->id;
+    }
+
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
      *
