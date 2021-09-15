@@ -124,6 +124,9 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
             // https://book.cakephp.org/authorization/2/en/index.html
             ->add(new AuthorizationMiddleware($this, [
                 'requireAuthorizationCheck' => false,
+                'identityDecorator' => function ($auth, $user) {
+                    return $user->setAuthorization($auth);
+                },
             ]));
 
         return $middlewareQueue;
