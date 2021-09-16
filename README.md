@@ -57,7 +57,7 @@ docker-compose run --rm php bin/cake migrations migrate
 Containers created and their ports (if used) are as follows:
 
 - **php** - `:4000`
-- **mysql** - `:3306`
+- **mysql**
 - **phpmyadmin** - `:4010`
 
 ### Troubleshooting
