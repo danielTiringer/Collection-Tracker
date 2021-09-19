@@ -15,7 +15,7 @@ class CollectionPolicy
      *
      * @param \App\Model\Entity\User $user the user in question
      * @param \App\Model\Entity\Collection $collection the collection model
-     * @return ResultInterface
+     * @return \Authorization\Policy\ResultInterface
      */
     public function canAdd(User $user, Collection $collection): ResultInterface
     {
@@ -27,7 +27,7 @@ class CollectionPolicy
      *
      * @param \App\Model\Entity\User $user the user in question
      * @param \App\Model\Entity\Collection $collection the collection model
-     * @return ResultInterface
+     * @return \Authorization\Policy\ResultInterface
      */
     public function canView(User $user, Collection $collection): ResultInterface
     {
@@ -39,7 +39,7 @@ class CollectionPolicy
      *
      * @param \App\Model\Entity\User $user the user in question
      * @param \App\Model\Entity\Collection $collection the collection model
-     * @return ResultInterface
+     * @return \Authorization\Policy\ResultInterface
      */
     public function canEdit(User $user, Collection $collection): ResultInterface
     {
@@ -51,7 +51,7 @@ class CollectionPolicy
      *
      * @param \App\Model\Entity\User $user the user in question
      * @param \App\Model\Entity\Collection $collection the collection model
-     * @return ResultInterface
+     * @return \Authorization\Policy\ResultInterface
      */
     public function canDelete(User $user, Collection $collection): ResultInterface
     {
@@ -63,7 +63,7 @@ class CollectionPolicy
      *
      * @param \App\Model\Entity\User $user the user in question
      * @param \App\Model\Entity\Collection $collection the collection model
-     * @return ResultInterface
+     * @return \Authorization\Policy\ResultInterface
      */
     protected function isAuthor(User $user, Collection $collection): ResultInterface
     {
