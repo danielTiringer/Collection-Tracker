@@ -8,7 +8,7 @@ $this->extend('../Common/form');
 $this->assign('title', __('Edit Element'));
 
 $this->start('form-creation');
-    echo $this->Form->create($element);
+    echo $this->Form->create($element, ['type' => 'file']);
 $this->end();
 
 $this->start('form-fields');
@@ -20,6 +20,14 @@ $this->start('form-fields');
     ]);
     echo $this->Form->hidden('collection_id', ['value' => $collection->id]);
     echo $this->Form->control('source', [
+        'class' => 'form-control',
+    ]);
+    echo $this->Html->image(
+        '/img/element-img/' . $element->image,
+        ['class' => 'height-200 mt-2']
+    );
+    echo $this->Form->control('image', [
+        'type' => 'file',
         'class' => 'form-control',
     ]);
     /* echo $this->Form->control('metadata'); */

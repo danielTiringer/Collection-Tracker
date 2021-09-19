@@ -99,8 +99,17 @@ class ElementsController extends AppController
         $this->Authorization->authorize($element);
 
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $element = $this->Elements->patchEntity($element, $this->request->getData());
-            if ($this->Elements->save($element)) {
+            $data = $this->request->getData();
+
+            $saveOptions = [];
+
+            if (!is_null($data['image'])) {
+                $saveOptions['previousImageName'] = $element->image;
+            }
+
+            $element = $this->Elements->patchEntity($element, $data);
+
+            if ($this->Elements->save($element, $saveOptions)) {
                 $this->Flash->success(__('The element has been saved.'));
 
                 return $this->redirect([

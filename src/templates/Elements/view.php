@@ -8,6 +8,10 @@
     <h3><?= h($element->name) ?></h3>
     <div class="row">
         <div class="col-md-6 col-sm-12">
+            <?= $this->Html->image(
+                '/img/element-img/' . $element->image,
+                ['class' => 'height-fill width-fill', 'alt' => 'No image uploaded.']
+            ) ?>
         </div>
         <div class="col-md-6 col-sm-12">
             <p><?= __('Name') ?>: <?= h($element->name) ?></p>
