@@ -23,6 +23,18 @@ class CollectionPolicy
     }
 
     /**
+     * Checks if the user can view a collection
+     *
+     * @param \App\Model\Entity\User $user the user in question
+     * @param \App\Model\Entity\Collection $collection the collection model
+     * @return ResultInterface
+     */
+    public function canView(User $user, Collection $collection): ResultInterface
+    {
+        return $this->isAuthor($user, $collection);
+    }
+
+    /**
      * Checks if the user can add a collection
      *
      * @param \App\Model\Entity\User $user the user in question
