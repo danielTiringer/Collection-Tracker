@@ -99,9 +99,15 @@ class CollectionsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $data = $this->request->getData();
 
+            $saveOptions = [];
+
+            if (!is_null($data['image']->getClientFilename())) {
+                $saveOptions['previousImageName'] = $collection->image;
+            }
+
             $collection = $this->Collections->patchEntity($collection, $data);
 
-            if ($this->Collections->save($collection)) {
+            if ($this->Collections->save($collection, $saveOptions)) {
                 $this->Flash->success(__('The collection has been saved.'));
 
                 return $this->redirect(['action' => 'index']);

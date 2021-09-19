@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace App\Model\Table;
 
+use ArrayObject;
+use Cake\Datasource\EntityInterface;
+use Cake\Event\Event;
 use Cake\I18n\Time;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
@@ -132,5 +135,22 @@ class CollectionsTable extends Table
         $rules->add($rules->existsIn(['users_id'], 'Users'), ['errorField' => 'users_id']);
 
         return $rules;
+    }
+
+    /**
+     * Lifecycle callback after saving an entity
+     *
+     * @param \Cake\Event\Event $event The event
+     * @param \Cake\Datasource\EntityInterface $entity The entity
+     * @param \ArrayObject $options Custom options
+     * @return void
+     */
+    public function afterSave(Event $event, EntityInterface $entity, ArrayObject $options): void
+    {
+        $previousImage = WWW_ROOT . 'img' . DS . 'collection-img' . DS . $options['previousImageName'];
+
+        if (is_file($previousImage)) {
+            unlink($previousImage);
+        }
     }
 }
