@@ -63,6 +63,9 @@ class CollectionsController extends AppController
     public function add()
     {
         $collection = $this->Collections->newEmptyEntity();
+
+        $this->Authorization->authorize($collection);
+
         if ($this->request->is('post')) {
             $data = $this->request->getData();
 
@@ -107,6 +110,9 @@ class CollectionsController extends AppController
         $collection = $this->Collections->get($id, [
             'contain' => [],
         ]);
+
+        $this->Authorization->authorize($collection);
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $data = $this->request->getData();
 
@@ -153,7 +159,11 @@ class CollectionsController extends AppController
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
+
         $collection = $this->Collections->get($id);
+
+        $this->Authorization->authorize($collection);
+
         if (
             $this->FileHandler->deleteFile(self::IMG_DIR . $collection->image)
             && $this->Collections->delete($collection)
