@@ -147,10 +147,12 @@ class CollectionsTable extends Table
      */
     public function afterSave(Event $event, EntityInterface $entity, ArrayObject $options): void
     {
-        $previousImage = WWW_ROOT . 'img' . DS . 'collection-img' . DS . $options['previousImageName'];
+        if (isset($options['previousImageName'])) {
+            $previousImage = WWW_ROOT . 'img' . DS . 'collection-img' . DS . $options['previousImageName'];
 
-        if (is_file($previousImage)) {
-            unlink($previousImage);
+            if (is_file($previousImage)) {
+                unlink($previousImage);
+            }
         }
     }
 }
