@@ -5,6 +5,8 @@ namespace App\Policy;
 
 use App\Model\Entity\Collection;
 use App\Model\Entity\User;
+use Authorization\Policy\Result;
+use Authorization\Policy\ResultInterface;
 
 class CollectionPolicy
 {
@@ -13,11 +15,11 @@ class CollectionPolicy
      *
      * @param \App\Model\Entity\User $user the user in question
      * @param \App\Model\Entity\Collection $collection the collection model
-     * @return bool
+     * @return ResultInterface
      */
-    public function canAdd(User $user, Collection $collection): bool
+    public function canAdd(User $user, Collection $collection): ResultInterface
     {
-        return true;
+        return new Result(true);
     }
 
     /**
@@ -25,9 +27,9 @@ class CollectionPolicy
      *
      * @param \App\Model\Entity\User $user the user in question
      * @param \App\Model\Entity\Collection $collection the collection model
-     * @return bool
+     * @return ResultInterface
      */
-    public function canEdit(User $user, Collection $collection): bool
+    public function canEdit(User $user, Collection $collection): ResultInterface
     {
         return $this->isAuthor($user, $collection);
     }
@@ -37,9 +39,9 @@ class CollectionPolicy
      *
      * @param \App\Model\Entity\User $user the user in question
      * @param \App\Model\Entity\Collection $collection the collection model
-     * @return bool
+     * @return ResultInterface
      */
-    public function canDelete(User $user, Collection $collection): bool
+    public function canDelete(User $user, Collection $collection): ResultInterface
     {
         return $this->isAuthor($user, $collection);
     }
@@ -49,10 +51,16 @@ class CollectionPolicy
      *
      * @param \App\Model\Entity\User $user the user in question
      * @param \App\Model\Entity\Collection $collection the collection model
-     * @return bool
+     * @return ResultInterface
      */
-    protected function isAuthor(User $user, Collection $collection): bool
+    protected function isAuthor(User $user, Collection $collection): ResultInterface
     {
-        return $collection->users_id == $user->getIdentifier();
+        $isAuthor = $collection->users_id == $user->getIdentifier();
+
+        if (!$isAuthor) {
+            return new Result(false, 'not-author');
+        }
+
+        return new Result(true);
     }
 }
