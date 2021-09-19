@@ -41,14 +41,18 @@
             ['action' => 'edit', $collection->id],
             ['class' => 'btn btn-outline-danger']
         ) ?>
-        <?= $this->Form->postLink(
-            __('Delete Collection'),
-            ['action' => 'delete', $collection->id],
+        <?= $this->Form->create(
+            $collection,
             [
-                'confirm' => __('Are you sure you want to delete this collection?'),
-                'class' => 'btn btn-outline-danger',
+                'type' => 'delete',
+                'url' => ['action' => 'delete', $collection->id],
             ]
         ) ?>
+        <?= $this->Form->button(
+            __('Delete'),
+            ['class' => 'btn btn-outline-danger deletion']
+        ) ?>
+        <?= $this->Form->end(); ?>
         <?= $this->Html->link(
             __('Back'),
             ['action' => 'index'],
