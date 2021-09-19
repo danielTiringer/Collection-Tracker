@@ -157,10 +157,10 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
         // Define where users should be redirected to when they are not authenticated
         $service->setConfig([
             'unauthenticatedRedirect' => Router::url([
-                    'prefix' => false,
-                    'plugin' => null,
-                    'controller' => 'Users',
-                    'action' => 'login',
+                'prefix' => false,
+                'plugin' => null,
+                'controller' => 'Users',
+                'action' => 'login',
             ]),
             'queryParam' => 'redirect',
         ]);
