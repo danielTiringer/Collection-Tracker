@@ -8,3 +8,9 @@ parameters:
     excludes_analyse:
         - src/Console/Installer.php
         - src/Controller/CollectionsController.php
+    ignoreErrors:
+        -
+            message: '#Constant WWW_ROOT not found.#'
+            path: src/
+includes:
+    - vendor/cakedc/cakephp-phpstan/extension.neon
