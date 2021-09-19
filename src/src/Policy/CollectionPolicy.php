@@ -58,7 +58,7 @@ class CollectionPolicy
         $isAuthor = $collection->users_id == $user->getIdentifier();
 
         if (!$isAuthor) {
-            return new Result(false, 'not-author');
+            return new Result(false, __('Only its author can manipulate this collection.'));
         }
 
         return new Result(true);
