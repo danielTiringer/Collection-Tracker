@@ -78,6 +78,8 @@ class ElementsTable extends Table
      */
     public function validationDefault(Validator $validator): Validator
     {
+        $validator->setProvider('upload', DefaultValidation::class);
+
         $validator
             ->integer('id')
             ->allowEmptyString('id', null, 'create');
