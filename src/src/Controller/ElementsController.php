@@ -12,6 +12,16 @@ namespace App\Controller;
 class ElementsController extends AppController
 {
     /**
+     * Initializes the controller and loads custom components
+     *
+     * @return void
+     */
+    public function initialize(): void
+    {
+        parent::initialize();
+    }
+
+    /**
      * Index method
      *
      * @return \Cake\Http\Response|null|void Renders view
