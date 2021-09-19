@@ -52,6 +52,9 @@ class ElementsController extends AppController
     public function add($collectionId)
     {
         $element = $this->Elements->newEmptyEntity();
+
+        $this->Authorization->authorize($element);
+
         if ($this->request->is('post')) {
             $element = $this->Elements->patchEntity($element, $this->request->getData());
             if ($this->Elements->save($element)) {
@@ -80,8 +83,11 @@ class ElementsController extends AppController
     public function edit($collectionId, $elementId)
     {
         $element = $this->Elements->get($elementId, [
-            'contain' => [],
+            'contain' => ['Collections'],
         ]);
+
+        $this->Authorization->authorize($element);
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $element = $this->Elements->patchEntity($element, $this->request->getData());
             if ($this->Elements->save($element)) {
@@ -110,7 +116,13 @@ class ElementsController extends AppController
     public function delete($collectionId, $elementId)
     {
         $this->request->allowMethod(['post', 'delete']);
-        $element = $this->Elements->get($elementId);
+
+        $element = $this->Elements->get($elementId, [
+            'contain' => ['Collections'],
+        ]);
+
+        $this->Authorization->authorize($element);
+
         if ($this->Elements->delete($element)) {
             $this->Flash->success(__('The element has been deleted.'));
         } else {
