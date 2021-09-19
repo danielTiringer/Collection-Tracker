@@ -59,6 +59,7 @@ class CollectionsTable extends Table
                 'path' => 'webroot{DS}img{DS}collection-img{DS}',
                 'nameCallback' => function ($table, $entity, $data, $field, $settings) {
                     $currentDateTime = (new Time('now'))->format('YmdHis');
+
                     return $currentDateTime . '_' . $data->getClientFileName();
                 },
                 'deleteCallback' => function ($path, $entity, $field, $settings) {
