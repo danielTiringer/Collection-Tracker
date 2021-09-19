@@ -87,6 +87,7 @@ class CollectionsController extends AppController
      * @param string|null $id Collection id.
      * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     * @throws \Authorization\Exception\ForbiddenException When not authorized to handle record
      */
     public function edit($id = null)
     {
@@ -124,6 +125,7 @@ class CollectionsController extends AppController
      * @param string|null $id Collection id.
      * @return \Cake\Http\Response|null|void Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     * @throws \Authorization\Exception\ForbiddenException When not authorized to handle record
      */
     public function delete($id = null)
     {
