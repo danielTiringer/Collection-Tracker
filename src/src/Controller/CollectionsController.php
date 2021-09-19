@@ -11,8 +11,6 @@ namespace App\Controller;
  */
 class CollectionsController extends AppController
 {
-    private const IMG_DIR = WWW_ROOT . 'img' . DS . 'collection-img' . DS;
-
     /**
      * Initializes the controller and loads custom components
      *
@@ -21,7 +19,6 @@ class CollectionsController extends AppController
     public function initialize(): void
     {
         parent::initialize();
-        $this->loadComponent('FileHandler');
     }
 
     /**
@@ -69,21 +66,7 @@ class CollectionsController extends AppController
         if ($this->request->is('post')) {
             $data = $this->request->getData();
 
-            $userId = $this->request->getAttribute('identity')->getIdentifier();
-            $collection->users_id = $userId;
-
-            $imageName = $data['image_file']->getClientFileName();
-
-            if ($imageName) {
-                $targetFileName = $this->FileHandler->addTimeStampToFileName($imageName);
-                $targetPath = self::IMG_DIR . $targetFileName;
-
-                $this->FileHandler->createFolderIfNotExists(self::IMG_DIR);
-
-                $data['image_file']->moveTo($targetPath);
-
-                $collection->image = $targetFileName;
-            }
+            $collection->users_id = $this->request->getAttribute('identity')->getIdentifier();
 
             $collection = $this->Collections->patchEntity($collection, $data);
 
@@ -116,28 +99,8 @@ class CollectionsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $data = $this->request->getData();
 
-            $imageName = $data['image_file']->getClientFileName();
-
-            if ($imageName) {
-                $previousImage = $collection->image;
-
-                if ($previousImage && !$this->FileHandler->deleteFile(self::IMG_DIR . $previousImage)) {
-                    $this->Flash->error(__('The previous image could not be deleted. Please, try again.'));
-
-                    return $this->redirect(['action' => 'index']);
-                }
-
-                $targetFileName = $this->FileHandler->addTimeStampToFileName($imageName);
-                $targetPath = self::IMG_DIR . $targetFileName;
-
-                $this->FileHandler->createFolderIfNotExists(self::IMG_DIR);
-
-                $data['image_file']->moveTo($targetPath);
-
-                $collection->image = $targetFileName;
-            }
-
             $collection = $this->Collections->patchEntity($collection, $data);
+
             if ($this->Collections->save($collection)) {
                 $this->Flash->success(__('The collection has been saved.'));
 
@@ -164,10 +127,7 @@ class CollectionsController extends AppController
 
         $this->Authorization->authorize($collection);
 
-        if (
-            $this->FileHandler->deleteFile(self::IMG_DIR . $collection->image)
-            && $this->Collections->delete($collection)
-        ) {
+        if ($this->Collections->delete($collection)) {
             $this->Flash->success(__('The collection has been deleted.'));
         } else {
             $this->Flash->error(__('The collection could not be deleted. Please, try again.'));

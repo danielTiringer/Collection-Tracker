@@ -3,9 +3,11 @@ declare(strict_types=1);
 
 namespace App\Model\Table;
 
+use Cake\I18n\Time;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Josegonzalez\Upload\Validation\DefaultValidation;
 
 /**
  * Collections Model
@@ -51,6 +53,20 @@ class CollectionsTable extends Table
         ]);
 
         $this->hasMany('Elements');
+
+        $this->addBehavior('Josegonzalez/Upload.Upload', [
+            'image' => [
+                'path' => 'webroot{DS}img{DS}collection-img{DS}',
+                'nameCallback' => function ($table, $entity, $data, $field, $settings) {
+                    $currentDateTime = (new Time('now'))->format('YmdHis');
+                    return $currentDateTime . '_' . $data->getClientFileName();
+                },
+                'deleteCallback' => function ($path, $entity, $field, $settings) {
+                    return [$path . $entity->{$field}];
+                },
+                'keepFilesOnDelete' => false,
+            ],
+        ]);
     }
 
     /**
@@ -61,6 +77,8 @@ class CollectionsTable extends Table
      */
     public function validationDefault(Validator $validator): Validator
     {
+        $validator->setProvider('upload', DefaultValidation::class);
+
         $validator
             ->integer('id')
             ->allowEmptyString('id', null, 'create');
@@ -86,9 +104,15 @@ class CollectionsTable extends Table
                     'rule' => ['mimeType', ['image/jpg', 'image/png', 'image/jpeg']],
                     'message' => 'Only jpg, jpeg and png files can be uploaded.',
                 ],
-                'filesize' => [
-                    'rule' => ['filesize', '<=', '10MB'],
+                'fileBelowMaxSize' => [
+                    'rule' => ['isBelowMaxSize', 10 * 1024 * 1024 * 1024],
                     'message' => 'Image file size must be less than 10MB.',
+                    'provider' => 'upload',
+                ],
+                'fileCompletedUpload' => [
+                    'rule' => 'isCompletedUpload',
+                    'message' => 'This file could not be uploaded completely',
+                    'provider' => 'upload',
                 ],
             ]);
 

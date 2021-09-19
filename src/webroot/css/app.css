@@ -6,6 +6,10 @@
     height: 200px;
 }
 
-.height-400 {
-    height: 400px;
+.height-fill {
+    max-height: 100%;
+}
+
+.width-fill {
+    max-width: 100%;
 }

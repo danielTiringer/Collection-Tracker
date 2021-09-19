@@ -21,7 +21,7 @@ $this->start('form-fields');
     echo $this->Form->control('goal', [
         'class' => 'form-control',
     ]);
-    echo $this->Form->control('image_file', [
+    echo $this->Form->control('image', [
         'type' => 'file',
         'class' => 'form-control',
     ]);

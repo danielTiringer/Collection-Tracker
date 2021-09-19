@@ -25,7 +25,7 @@ $this->start('form-fields');
         '/img/collection-img/' . $collection->image,
         ['class' => 'height-200 mt-2']
     );
-    echo $this->Form->control('image_file', [
+    echo $this->Form->control('image', [
         'type' => 'file',
         'class' => 'form-control',
     ]);
