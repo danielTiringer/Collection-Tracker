@@ -5,6 +5,8 @@ namespace App\Policy;
 
 use App\Model\Entity\Element;
 use App\Model\Entity\User;
+use Authorization\Policy\Result;
+use Authorization\Policy\ResultInterface;
 
 class ElementPolicy
 {
@@ -13,11 +15,11 @@ class ElementPolicy
      *
      * @param \App\Model\Entity\User $user the user in question
      * @param \App\Model\Entity\Element $element the element model
-     * @return bool
+     * @return \Authorization\Policy\ResultInterface
      */
-    public function canAdd(User $user, Element $element): bool
+    public function canAdd(User $user, Element $element): ResultInterface
     {
-        return true;
+        return new Result(true);
     }
 
     /**
@@ -25,9 +27,9 @@ class ElementPolicy
      *
      * @param \App\Model\Entity\User $user the user in question
      * @param \App\Model\Entity\Element $element the element model
-     * @return bool
+     * @return \Authorization\Policy\ResultInterface
      */
-    public function canEdit(User $user, Element $element): bool
+    public function canEdit(User $user, Element $element): ResultInterface
     {
         return $this->isAuthor($user, $element);
     }
@@ -37,9 +39,9 @@ class ElementPolicy
      *
      * @param \App\Model\Entity\User $user the user in question
      * @param \App\Model\Entity\Element $element the element model
-     * @return bool
+     * @return \Authorization\Policy\ResultInterface
      */
-    public function canDelete(User $user, Element $element): bool
+    public function canDelete(User $user, Element $element): ResultInterface
     {
         return $this->isAuthor($user, $element);
     }
@@ -49,10 +51,16 @@ class ElementPolicy
      *
      * @param \App\Model\Entity\User $user the user in question
      * @param \App\Model\Entity\Element $element the element model
-     * @return bool
+     * @return \Authorization\Policy\ResultInterface
      */
-    protected function isAuthor(User $user, Element $element): bool
+    protected function isAuthor(User $user, Element $element): ResultInterface
     {
-        return $element->collection->users_id == $user->getIdentifier();
+        $isAuthor = $element->collection->users_id == $user->getIdentifier();
+
+        if (!$isAuthor) {
+            return new Result(false, __('Only its author can manipulate this element.'));
+        }
+
+        return new Result(true);
     }
 }
