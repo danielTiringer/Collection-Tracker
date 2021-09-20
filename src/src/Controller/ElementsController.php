@@ -50,6 +50,8 @@ class ElementsController extends AppController
             'contain' => ['Collections'],
         ]);
 
+        $this->Authorization->authorize($element);
+
         $this->set(compact('element'));
     }
 
