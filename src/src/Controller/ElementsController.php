@@ -43,6 +43,7 @@ class ElementsController extends AppController
      * @param int $elementId Element id
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     * @throws \Authorization\Exception\ForbiddenException When not authorized to handle record
      */
     public function view($collectionId, $elementId)
     {
@@ -91,6 +92,7 @@ class ElementsController extends AppController
      * @param int $elementId Element id
      * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     * @throws \Authorization\Exception\ForbiddenException When not authorized to handle record
      */
     public function edit($collectionId, $elementId)
     {
@@ -133,6 +135,7 @@ class ElementsController extends AppController
      * @param int $elementId Element id
      * @return \Cake\Http\Response|null|void Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     * @throws \Authorization\Exception\ForbiddenException When not authorized to handle record
      */
     public function delete($collectionId, $elementId)
     {
