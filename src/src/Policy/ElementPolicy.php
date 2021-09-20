@@ -23,6 +23,18 @@ class ElementPolicy
     }
 
     /**
+     * Checks if the user can view a element
+     *
+     * @param \App\Model\Entity\User $user the user in question
+     * @param \App\Model\Entity\Element $element the element model
+     * @return \Authorization\Policy\ResultInterface
+     */
+    public function canView(User $user, Element $element): ResultInterface
+    {
+        return $this->isAuthor($user, $element);
+    }
+
+    /**
      * Checks if the user can add a element
      *
      * @param \App\Model\Entity\User $user the user in question
