@@ -63,11 +63,11 @@ return [
          * The test connection is used during the test suite.
          */
         'test' => [
-            'host' => 'localhost',
+            'host' => 'database',
             //'port' => 'non_standard_port_number',
-            'username' => 'my_app',
-            'password' => 'secret',
-            'database' => 'test_myapp',
+            'username' => env('MYSQL_USER', 'my_app'),
+            'password' => env('MYSQL_PASSWORD', 'secret'),
+            'database' => env('MYSQL_TEST_DATABASE', 'test_database'),
             //'schema' => 'myapp',
             'url' => env('DATABASE_TEST_URL', null),
         ],
