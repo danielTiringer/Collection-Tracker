@@ -15,7 +15,7 @@
             ) ?>
         </div>
         <div class="table-responsive">
-            <table class="table mt-2 table-striped table-hover">
+            <table class="table mt-2 table-hover">
                 <thead class="thead-dark">
                     <tr>
                         <th class="col-6"><?= __('Name') ?></th>
