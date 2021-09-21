@@ -25,54 +25,54 @@
                 </thead>
                 <tbody>
                     <?php foreach ($collections as $collection): ?>
-                    <tr>
-                        <td class="col-6">
-                            <?php if ($collection->image): ?>
-                                <?= $this->Html->image(
-                                    '/img/collection-img/' . $collection->image,
-                                    ['class' => 'height-40', 'alt' => '']
+                        <tr>
+                            <td class="col-6">
+                                <?php if ($collection->image): ?>
+                                    <?= $this->Html->image(
+                                        '/img/collection-img/' . $collection->image,
+                                        ['class' => 'height-40', 'alt' => '']
+                                    ) ?>
+                                <?php else: ?>
+                                    <i class="bi bi-image"></i>
+                                <?php endif; ?>
+                                <?= $this->Html->link(
+                                    $collection->name,
+                                    ['action' => 'view', $collection->id],
+                                    ['class' => 'text-danger']
                                 ) ?>
+                            </td class="col-3">
+                            <?php if ($collection->goal): ?>
+                                <td><?= h($collection->goal) ?></td>
                             <?php else: ?>
-                                <i class="bi bi-image"></i>
+                                <td><?= __('Not defined') ?></td>
                             <?php endif; ?>
-                            <?= $this->Html->link(
-                                $collection->name,
-                                ['action' => 'view', $collection->id],
-                                ['class' => 'text-danger']
-                            ) ?>
-                        </td class="col-3">
-                        <?php if ($collection->goal): ?>
-                            <td><?= h($collection->goal) ?></td>
-                        <?php else: ?>
-                            <td><?= __('Not defined') ?></td>
-                        <?php endif; ?>
-                        <td class="col-3">
-                            <div class="d-flex justify-content-between">
-                            <?= $this->Html->link(
-                                __('View'),
-                                ['action' => 'view', $collection->id],
-                                ['class' => 'btn btn-outline-danger']
-                            ) ?>
-                            <?= $this->Html->link(
-                                __('Edit'),
-                                ['action' => 'edit', $collection->id],
-                                ['class' => 'btn btn-outline-danger']
-                            ) ?>
-                            <?= $this->Form->create(
-                                $collection,
-                                [
-                                    'type' => 'delete',
-                                    'url' => ['action' => 'delete', $collection->id],
-                                ]
-                            ) ?>
-                            <?= $this->Form->button(
-                                __('Delete'),
-                                ['class' => 'btn btn-outline-danger deletion']
-                            ) ?>
-                            <?= $this->Form->end(); ?>
-                            </div>
-                        </td>
-                    </tr>
+                            <td class="col-3">
+                                <div class="d-flex justify-content-between">
+                                    <?= $this->Html->link(
+                                        __('View'),
+                                        ['action' => 'view', $collection->id],
+                                        ['class' => 'btn btn-outline-danger']
+                                    ) ?>
+                                    <?= $this->Html->link(
+                                        __('Edit'),
+                                        ['action' => 'edit', $collection->id],
+                                        ['class' => 'btn btn-outline-danger']
+                                    ) ?>
+                                    <?= $this->Form->create(
+                                        $collection,
+                                        [
+                                            'type' => 'delete',
+                                            'url' => ['action' => 'delete', $collection->id],
+                                        ]
+                                    ) ?>
+                                    <?= $this->Form->button(
+                                        __('Delete'),
+                                        ['class' => 'btn btn-outline-danger deletion']
+                                    ) ?>
+                                    <?= $this->Form->end(); ?>
+                                </div>
+                            </td>
+                        </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
