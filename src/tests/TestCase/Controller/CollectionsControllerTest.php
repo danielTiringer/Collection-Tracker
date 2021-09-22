@@ -26,13 +26,15 @@ class CollectionsControllerTest extends TestCase
     ];
 
     /**
-     * Test index method
+     * Test index method unauthenticated
      *
      * @return void
      */
-    public function testIndex(): void
+    public function testIndexUnauthenticatedFails(): void
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->get('/');
+        $this->assertResponseCode(302);
+        $this->assertRedirectEquals(['controller' => 'Users', 'action' => 'login']);
     }
 
     /**
