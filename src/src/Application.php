@@ -162,7 +162,6 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
                 'controller' => 'Users',
                 'action' => 'login',
             ]),
-            'queryParam' => 'redirect',
         ]);
 
         $fields = [
