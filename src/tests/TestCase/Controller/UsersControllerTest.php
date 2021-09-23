@@ -107,13 +107,15 @@ class UsersControllerTest extends TestCase
     }
 
     /**
-     * Test delete method
+     * Test delete method with non-existing user
      *
      * @return void
      */
-    public function testDelete(): void
+    public function testDeleteNonExistingUser(): void
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->delete('/users/delete/2');
+
+        $this->assertRedirectEquals(['controller' => 'Users', 'action' => 'login']);
     }
 
     /**
