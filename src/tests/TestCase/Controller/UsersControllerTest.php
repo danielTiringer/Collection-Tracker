@@ -53,6 +53,24 @@ class UsersControllerTest extends TestCase
     public function testAdd(): void
     {
         $this->markTestIncomplete('Not implemented yet.');
+
+    /**
+     * Test add method when user already exists
+     *
+     * @return void
+     */
+    public function testAddWhileUserExists(): void
+    {
+        $this->post('/register', [
+            'name' => 'Test Name',
+            'email' => 'test@example.com',
+            'password' => 'testpassword',
+            'password_confirm' => 'testpassword',
+        ]);
+
+        $this->assertFlashMessage(__('The user could not be saved. Please, try again.'));
+
+        $this->assertNoRedirect();
     }
 
     /**
