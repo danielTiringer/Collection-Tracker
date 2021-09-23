@@ -115,4 +115,18 @@ class UsersControllerTest extends TestCase
     {
         $this->markTestIncomplete('Not implemented yet.');
     }
+
+    /**
+     * Test delete method with existing user
+     *
+     * @return void
+     */
+    public function testDeleteExistingUser(): void
+    {
+        $this->delete('/users/delete/1');
+
+        $this->assertResponseSuccess();
+
+        $this->assertRedirectEquals(['controller' => 'Users', 'action' => 'login']);
+    }
 }
