@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Cake\Datasource\Exception\RecordNotFoundException;
+
 /**
  * Users Controller
  *
@@ -83,22 +85,30 @@ class UsersController extends AppController
      * Delete method
      *
      * @param string|null $id User id.
-     * @return \Cake\Http\Response|null|void Redirects to index.
+     * @return \Cake\Http\Response|null|void Redirects to login.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
-        $user = $this->Users->get($id);
-        if ($this->Users->delete($user)) {
-            $this->Flash->success(__('Your account has been deleted.'));
-        } else {
+
+        try {
+            $user = $this->Users->get($id);
+
+            if ($this->Users->delete($user)) {
+                $this->Flash->success(__('Your account has been deleted.'));
+
+                $this->Authentication->logout();
+
+                return $this->redirect(['controller' => 'Users', 'action' => 'login']);
+            } else {
+                $this->Flash->error(__('The user could not be deleted. Please, try again.'));
+            }
+        } catch (RecordNotFoundException $e) {
             $this->Flash->error(__('The user could not be deleted. Please, try again.'));
+
+            return $this->redirect(['controller' => 'Users', 'action' => 'login']);
         }
-
-        $this->Authentication->logout();
-
-        return $this->redirect(['controller' => 'Users', 'action' => 'login']);
     }
 
     /**
