@@ -38,13 +38,24 @@ class UsersControllerTest extends TestCase
     }
 
     /**
-     * Test view method
+     * Test add method
      *
      * @return void
      */
-    public function testView(): void
+    public function testAdd(): void
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->post('/register', [
+            'name' => 'Test Name',
+            'email' => 'user@example.com',
+            'password' => 'testpassword',
+            'password_confirm' => 'testpassword',
+        ]);
+
+        $this->assertResponseSuccess();
+
+        $this->assertFlashMessage(__('The user has been saved.'));
+
+        $this->assertRedirect(['controller' => 'Users', 'action' => 'login']);
     }
 
     /**
