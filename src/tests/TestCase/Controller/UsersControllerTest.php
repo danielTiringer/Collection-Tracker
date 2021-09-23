@@ -26,13 +26,15 @@ class UsersControllerTest extends TestCase
     ];
 
     /**
-     * Test index method
+     * Sets up the tests with common configuration
      *
      * @return void
      */
-    public function testIndex(): void
+    public function setUp(): void
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->enableCsrfToken();
+
+        $this->enableRetainFlashMessages();
     }
 
     /**
