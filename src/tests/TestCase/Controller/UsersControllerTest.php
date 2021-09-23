@@ -59,13 +59,23 @@ class UsersControllerTest extends TestCase
     }
 
     /**
-     * Test add method
+     * Test add method when passwords don't match
      *
      * @return void
      */
-    public function testAdd(): void
+    public function testAddWhenPasswordsDontMatch(): void
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->post('/register', [
+            'name' => 'Test Name',
+            'email' => 'user@example.com',
+            'password' => 'testpassword',
+            'password_confirm' => 'anotherpassword',
+        ]);
+
+        $this->assertFlashMessage(__('The passwords did not match. Please, try again.'));
+
+        $this->assertNoRedirect();
+    }
 
     /**
      * Test add method when user already exists
