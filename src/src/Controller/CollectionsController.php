@@ -31,7 +31,12 @@ class CollectionsController extends AppController
         $this->paginate = [
             'contain' => ['Users'],
         ];
-        $collections = $this->paginate($this->Collections);
+
+        $query = $this->Collections->find();
+
+        $this->Authorization->authorize($query);
+
+        $collections = $this->paginate($this->Authorization->applyScope($query));
 
         $this->set(compact('collections'));
     }
