@@ -50,6 +50,7 @@ class ApplicationTest extends IntegrationTestCase
         $this->assertSame('Migrations', $plugins->get('Migrations')->getName());
         $this->assertSame('Authentication', $plugins->get('Authentication')->getName());
         $this->assertSame('Authorization', $plugins->get('Authorization')->getName());
+        $this->assertSame('Josegonzalez/Upload', $plugins->get('Josegonzalez/Upload')->getName());
     }
 
     /**
