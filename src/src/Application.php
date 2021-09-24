@@ -47,8 +47,9 @@ use Psr\Http\Message\ServerRequestInterface;
  * This defines the bootstrapping logic and middleware layers you
  * want to use in your application.
  */
-// phpcs:ignore Generic.Files.LineLength
-class Application extends BaseApplication implements AuthenticationServiceProviderInterface, AuthorizationServiceProviderInterface
+class Application extends BaseApplication implements
+    AuthenticationServiceProviderInterface,
+    AuthorizationServiceProviderInterface
 {
     /**
      * Load all the application configuration and bootstrap logic.
