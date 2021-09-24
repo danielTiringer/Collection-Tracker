@@ -22,21 +22,6 @@ class ElementsController extends AppController
     }
 
     /**
-     * Index method
-     *
-     * @return \Cake\Http\Response|null|void Renders view
-     */
-    public function index()
-    {
-        $this->paginate = [
-            'contain' => ['Collections'],
-        ];
-        $elements = $this->paginate($this->Elements);
-
-        $this->set(compact('elements'));
-    }
-
-    /**
      * View method
      *
      * @param int $collectionId Collection id
