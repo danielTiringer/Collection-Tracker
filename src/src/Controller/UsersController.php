@@ -39,18 +39,20 @@ class UsersController extends AppController
 
         $user = $this->Users->newEmptyEntity();
         if ($this->request->is('post')) {
-            $data = $this->request->getData();
-            if ($data['password'] === $data['password_confirm']) {
-                $user = $this->Users->patchEntity($user, $data);
-                if ($this->Users->save($user)) {
-                    $this->Flash->success(__('The user has been saved.'));
+            $user = $this->Users->patchEntity($user, $this->request->getData(), [
+                'fields' => ['name', 'email', 'password'],
+                'validate' => 'register',
+            ]);
 
-                    return $this->redirect(['controller' => 'Users', 'action' => 'login']);
-                }
-                $this->Flash->error(__('The user could not be saved. Please, try again.'));
-            } else {
-                $this->Flash->error(__('The passwords did not match. Please, try again.'));
+            if ($this->Users->save($user)) {
+                $this->Authentication->setIdentity($user);
+
+                $this->Flash->success(__('Registration was successful.'));
+
+                return $this->redirect('/');
             }
+
+            $this->Flash->error(__('Registration was not successful. Please, try again.'));
         }
         $this->set(compact('user'));
     }
