@@ -10,7 +10,6 @@
         <?= $this->Form->create($user, ['type' => 'patch']) ?>
         <fieldset>
             <legend><?= __('Edit Profile') ?></legend>
-            <?= $this->fetch('form-fields') ?>
             <?= $this->Form->control('name', [
                 'class' => 'form-control',
             ]) ?>
@@ -20,7 +19,7 @@
         </fieldset>
         <div class="container">
             <div class="mt-2 row justify-content-center">
-                <?= $this->Form->button(__('Update profile'), [
+                <?= $this->Form->button(__('Update Profile'), [
                     'class' => 'btn btn-outline-danger',
                 ]) ?>
                 <?= $this->Form->end() ?>
@@ -37,6 +36,11 @@
                 <?= $this->Form->end() ?>
             </div>
             <div class="mt-2 row justify-content-center">
+                <?= $this->element('change_password', [
+                    'user' => $user,
+                ]) ?>
+            </div>
+            <div class="mt-2 row justify-content-center">
                 <?= $this->Html->link(
                     __('Back'),
                     ['controller' => 'collections', 'action' => 'index'],
@@ -47,3 +51,5 @@
     </div>
 </div>
 
+<?php
+?>

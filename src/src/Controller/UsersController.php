@@ -86,6 +86,36 @@ class UsersController extends AppController
     }
 
     /**
+     * Change Password method
+     *
+     * @param string|null $id User id.
+     * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function updatePassword($id = null)
+    {
+        $user = $this->Users->get($id, [
+            'contain' => [],
+        ]);
+
+        $this->Authorization->authorize($user);
+
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $data = $this->request->getData();
+            $user = $this->Users->patchEntity($user, $data);
+
+            if ($this->Users->save($user)) {
+                $this->Flash->success(__('The password has been updated.'));
+
+                return $this->redirect('/');
+            }
+
+            $this->Flash->error(__('The password could not be updated. Please, try again.'));
+        }
+        $this->set(compact('user'));
+    }
+
+    /**
      * Delete method
      *
      * @param string|null $id User id.

@@ -136,6 +136,12 @@ $routes->connect(
 )
 ->setPass(['id']);
 
+$routes->connect(
+    '/updatePassword/{id}',
+    ['controller' => 'Users', 'action' => 'updatePassword']
+)
+->setPass(['id']);
+
 /*
  * If you need a different set of middleware or none at all,
  * open new scope and define routes there.
