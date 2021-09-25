@@ -90,7 +90,7 @@ class UsersController extends AppController
     }
 
     /**
-     * Change Password method
+     * Update password method
      *
      * @param string|null $id User id.
      * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
@@ -104,19 +104,24 @@ class UsersController extends AppController
 
         $this->Authorization->authorize($user);
 
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $data = $this->request->getData();
-            $user = $this->Users->patchEntity($user, $data);
+        $allowedFields = ['password', 'current_password', 'confirm_password'];
 
-            if ($this->Users->save($user)) {
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $patchedUser = $this->Users->patchEntity($user, $this->request->getData(), [
+                'fields' => $allowedFields,
+                'validate' => 'updatePassword',
+            ]);
+
+            if ($this->Users->save($patchedUser)) {
                 $this->Flash->success(__('The password has been updated.'));
 
                 return $this->redirect('/');
             }
 
             $this->Flash->error(__('The password could not be updated. Please, try again.'));
+
+            return $this->redirect(['controller' => 'Users', 'action' => 'edit', $id]);
         }
-        $this->set(compact('user'));
     }
 
     /**
