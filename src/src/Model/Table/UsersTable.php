@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Model\Table;
 
-// use Cake\ORM\Query;
+use App\Model\Entity\User;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
@@ -53,10 +53,21 @@ class UsersTable extends Table
      */
     public function validationDefault(Validator $validator): Validator
     {
-        $validator
-            ->integer('id')
-            ->allowEmptyString('id', null, 'create');
+        $validator = $this->validationData($validator);
 
+        $validator = $this->validationPassword($validator);
+
+        return $validator;
+    }
+
+    /**
+     * Data validation rules.
+     *
+     * @param \Cake\Validation\Validator $validator Validator instance.
+     * @return \Cake\Validation\Validator
+     */
+    public function validationData(Validator $validator): Validator
+    {
         $validator
             ->scalar('name')
             ->maxLength('name', 255)
@@ -68,11 +79,68 @@ class UsersTable extends Table
             ->requirePresence('email', 'create')
             ->notEmptyString('email');
 
+        return $validator;
+    }
+
+    /**
+     * Registration validation rules.
+     *
+     * @param \Cake\Validation\Validator $validator Validator instance.
+     * @return \Cake\Validation\Validator
+     */
+    public function validationRegister(Validator $validator): Validator
+    {
+        $validator
+            ->scalar('name')
+            ->maxLength('name', 255)
+            ->requirePresence('name', 'create')
+            ->notEmptyString('name');
+
+        $validator
+            ->email('email')
+            ->requirePresence('email', 'create')
+            ->notEmptyString('email');
+
+        $validator = $this->validationPassword($validator);
+
+        return $validator;
+    }
+
+    /**
+     * Validation rules for password.
+     *
+     * @param \Cake\Validation\Validator $validator Validator instance.
+     * @return \Cake\Validation\Validator
+     */
+    public function validationPassword(Validator $validator): Validator
+    {
         $validator
             ->scalar('password')
-            ->maxLength('password', 255)
-            ->requirePresence('password', 'create')
-            ->notEmptyString('password');
+            ->minLength('password', 8, __('Passwords must be at least 8 characters long'))
+            ->maxLength('password', 255, __('Passwords cannot be longer than 255 characters.'))
+            ->requirePresence('password');
+
+        $validator
+            ->scalar('password_confirm')
+            ->equaltoField('password_confirm', 'password', __('Your passwords must match.'))
+            ->requirePresence('password_confirm');
+
+        return $validator;
+    }
+
+    /**
+     * Validation rules for password update.
+     *
+     * @param \Cake\Validation\Validator $validator Validator instance.
+     * @return \Cake\Validation\Validator
+     */
+    public function validationUpdatePassword(Validator $validator): Validator
+    {
+        $validator = $this->validationPassword($validator);
+
+        $validator
+            ->scalar('current_password')
+            ->requirePresence('current_password');
 
         return $validator;
     }
@@ -87,6 +155,21 @@ class UsersTable extends Table
     public function buildRules(RulesChecker $rules): RulesChecker
     {
         $rules->add($rules->isUnique(['email']), ['errorField' => 'email']);
+
+        $rules->addUpdate(function (User $entity) {
+            if (!($entity->isDirty('password') && $entity->isDirty('current_password'))) {
+                return true;
+            }
+            $hasher = $entity->passwordHasher();
+
+            return $hasher->check(
+                $entity->current_password,
+                $entity->getOriginal('password')
+            );
+        }, 'currentPasswordMatch', [
+            'errorField' => 'current_password',
+            'message' => __('Your current password is not correct.'),
+        ]);
 
         return $rules;
     }

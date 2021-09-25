@@ -12,5 +12,9 @@ parameters:
             message: '#Constant WWW_ROOT not found.#'
             path: src/
 
+        -
+            message: '#Access to an undefined property [a-zA-Z0-9\\_]+::\$current_password.#'
+            path: src/Model/Table/UsersTable.php
+
 includes:
     - vendor/cakedc/cakephp-phpstan/extension.neon
