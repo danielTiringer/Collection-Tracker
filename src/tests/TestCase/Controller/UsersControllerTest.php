@@ -97,7 +97,7 @@ class UsersControllerTest extends TestCase
      *
      * @return void
      */
-    public function testEdit(): void
+    public function testEditSuccess(): void
     {
         $this->markTestIncomplete('Not implemented yet.');
     }
@@ -132,7 +132,7 @@ class UsersControllerTest extends TestCase
      *
      * @return void
      */
-    public function testLogin(): void
+    public function testLoginSuccess(): void
     {
         $this->post('/login', [
             'email' => 'test@example.com',
