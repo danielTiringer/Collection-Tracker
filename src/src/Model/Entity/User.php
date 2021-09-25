@@ -9,6 +9,7 @@ use Authorization\AuthorizationServiceInterface;
 use Authorization\IdentityInterface as AuthorizationIdentity;
 use Authorization\Policy\ResultInterface;
 use Cake\ORM\Entity;
+use RuntimeException;
 
 /**
  * User Entity
@@ -61,9 +62,14 @@ class User extends Entity implements AuthenticationIdentity, AuthorizationIdenti
      * @param string $action The action/operation being performed.
      * @param mixed $resource The resource being operated on.
      * @return bool
+     * @throws \RuntimeException
      */
     public function can($action, $resource): bool
     {
+        if (!$this->authorization) {
+            throw new RuntimeException('Cannot check authorization. AuthorizationService has not been set.');
+        }
+
         return $this->authorization->can($this, $action, $resource);
     }
 
