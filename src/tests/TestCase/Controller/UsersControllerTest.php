@@ -3,7 +3,8 @@ declare(strict_types=1);
 
 namespace App\Test\TestCase\Controller;
 
-// use App\Controller\UsersController;
+use App\Test\TestCase\LoginTrait;
+use Cake\ORM\TableRegistry;
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
 
@@ -14,6 +15,7 @@ use Cake\TestSuite\TestCase;
  */
 class UsersControllerTest extends TestCase
 {
+    use LoginTrait;
     use IntegrationTestTrait;
 
     /**
@@ -35,6 +37,8 @@ class UsersControllerTest extends TestCase
         $this->enableCsrfToken();
 
         $this->enableRetainFlashMessages();
+
+        $this->Users = TableRegistry::get('Users');
     }
 
     /**
@@ -99,7 +103,20 @@ class UsersControllerTest extends TestCase
      */
     public function testEditSuccess(): void
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->login();
+
+        $this->post('/profile/1', [
+            'name' => 'Updated User',
+            'email' => 'updated@example.com',
+        ]);
+
+        $this->assertRedirect('/');
+        $this->assertFlashMessage(__('The user has been saved.'));
+
+        $user = $this->Users->get(1);
+
+        $this->assertEquals('Updated User', $user->name);
+        $this->assertEquals('updated@example.com', $user->email);
     }
 
     /**
