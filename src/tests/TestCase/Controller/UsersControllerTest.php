@@ -52,9 +52,7 @@ class UsersControllerTest extends TestCase
         ]);
 
         $this->assertResponseSuccess();
-
         $this->assertFlashMessage(__('The user has been saved.'));
-
         $this->assertRedirect(['controller' => 'Users', 'action' => 'login']);
     }
 
@@ -73,7 +71,6 @@ class UsersControllerTest extends TestCase
         ]);
 
         $this->assertFlashMessage(__('The passwords did not match. Please, try again.'));
-
         $this->assertNoRedirect();
     }
 
@@ -92,7 +89,6 @@ class UsersControllerTest extends TestCase
         ]);
 
         $this->assertFlashMessage(__('The user could not be saved. Please, try again.'));
-
         $this->assertNoRedirect();
     }
 
@@ -128,7 +124,54 @@ class UsersControllerTest extends TestCase
         $this->delete('/users/delete/1');
 
         $this->assertResponseSuccess();
-
         $this->assertRedirectEquals(['controller' => 'Users', 'action' => 'login']);
+    }
+
+    /**
+     * Test login method
+     *
+     * @return void
+     */
+    public function testLogin(): void
+    {
+        $this->post('/login', [
+            'email' => 'test@example.com',
+            'password' => 'password',
+        ]);
+
+        $this->assertRedirect('/');
+        $this->assertSession('test@example.com', 'Auth.email');
+    }
+
+    /**
+     * Test login method with invalid email address
+     *
+     * @return void
+     */
+    public function testLoginWithInvalidEmailAddress(): void
+    {
+        $this->post('/login', [
+            'email' => 'other@example.com',
+            'password' => 'somepassword',
+        ]);
+
+        $this->assertFlashMessage(__('Invalid email or password.'));
+        $this->assertNoRedirect();
+    }
+
+    /**
+     * Test login method with invalid password
+     *
+     * @return void
+     */
+    public function testLoginWithInvalidPassword(): void
+    {
+        $this->post('/login', [
+            'email' => 'test@example.com',
+            'password' => 'wrongpassword',
+        ]);
+
+        $this->assertFlashMessage(__('Invalid email or password.'));
+        $this->assertNoRedirect();
     }
 }
