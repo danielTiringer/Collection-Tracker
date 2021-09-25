@@ -46,4 +46,9 @@ $this->start('form-end');
         ['class' => 'btn btn-outline-danger deletion']
     );
     echo $this->Form->end();
+    echo $this->Html->link(
+        __('Back'),
+        ['controller' => 'collections', 'action' => 'index'],
+        ['class' => 'btn btn-outline-danger mx-2']
+    );
 $this->end();
