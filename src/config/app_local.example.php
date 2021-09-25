@@ -18,6 +18,13 @@ return [
     'debug' => filter_var(env('DEBUG', true), FILTER_VALIDATE_BOOLEAN),
 
     /*
+     * Turns off authorization for debugkit requests
+     */
+    'DebugKit' => [
+        'ignoreAuthorization' => true
+    ],
+
+    /*
      * Security and encryption configuration
      *
      * - salt - A random string used in security hashing methods.
