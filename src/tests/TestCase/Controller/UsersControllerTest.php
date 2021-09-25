@@ -103,6 +103,18 @@ class UsersControllerTest extends TestCase
     }
 
     /**
+     * Test edit method without login
+     *
+     * @return void
+     */
+    public function testEditWithoutLogin(): void
+    {
+        $this->get('/profile/1');
+
+        $this->assertRedirectContains('/login');
+    }
+
+    /**
      * Test delete method with non-existing user
      *
      * @return void
