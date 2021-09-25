@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Test\Fixture;
 
+use Cake\Auth\DefaultPasswordHasher;
 use Cake\TestSuite\Fixture\TestFixture;
 
 /**
@@ -39,12 +40,13 @@ class UsersFixture extends TestFixture
      */
     public function init(): void
     {
+        $hasher = new DefaultPasswordHasher();
         $this->records = [
             [
                 'id' => 1,
                 'name' => 'Test User',
                 'email' => 'test@example.com',
-                'password' => 'password',
+                'password' => $hasher->hash('password'),
                 'created' => '2021-05-02 10:39:39',
                 'modified' => '2021-05-02 10:39:39',
             ],
