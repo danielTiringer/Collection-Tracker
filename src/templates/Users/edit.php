@@ -3,52 +3,47 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\User $user
  */
+?>
+<?= $this->Flash->render() ?>
+<div class="card">
+    <div class="form-group d-flex justify-content-center card-body">
+        <?= $this->Form->create($user, ['type' => 'patch']) ?>
+        <fieldset>
+            <legend><?= __('Edit Profile') ?></legend>
+            <?= $this->fetch('form-fields') ?>
+            <?= $this->Form->control('name', [
+                'class' => 'form-control',
+            ]) ?>
+            <?= $this->Form->control('email', [
+                'class' => 'form-control',
+            ]) ?>
+        </fieldset>
+        <div class="container">
+            <div class="mt-2 row justify-content-center">
+                <?= $this->Form->button(__('Update profile'), [
+                    'class' => 'btn btn-outline-danger',
+                ]) ?>
+                <?= $this->Form->end() ?>
+            </div>
+            <div class="mt-2 row justify-content-center">
+                <?= $this->Form->create($user, [
+                    'type' => 'delete',
+                    'url' => ['action' => 'delete', $user->id],
+                ]) ?>
+                <?= $this->Form->button(
+                    __('Delete Profile'),
+                    ['class' => 'btn btn-outline-danger deletion mx-2']
+                ) ?>
+                <?= $this->Form->end() ?>
+            </div>
+            <div class="mt-2 row justify-content-center">
+                <?= $this->Html->link(
+                    __('Back'),
+                    ['controller' => 'collections', 'action' => 'index'],
+                    ['class' => 'btn btn-outline-danger mx-2']
+                ) ?>
+            </div>
+        </div>
+    </div>
+</div>
 
-$this->extend('../Common/form');
-$this->assign('title', __('Edit Profile'));
-
-$this->start('form-creation');
-    echo $this->Form->create($user);
-$this->end();
-
-$this->start('form-fields');
-    echo $this->Form->control('name', [
-        'class' => 'form-control',
-    ]);
-    echo $this->Form->control('email', [
-        'class' => 'form-control',
-    ]);
-    echo $this->Form->control('password', [
-        'value' => '',
-        'class' => 'form-control',
-    ]);
-    echo $this->Form->control('password_confirm', [
-        'type' => 'password',
-        'class' => 'form-control',
-    ]);
-$this->end();
-
-$this->start('form-end');
-    echo $this->Form->button(__('Submit'), [
-        'class' => 'btn btn-outline-danger mx-2',
-    ]);
-    echo $this->Form->end();
-
-    echo $this->Form->create(
-        $user,
-        [
-            'type' => 'delete',
-            'url' => ['action' => 'delete', $user->id],
-        ]
-    );
-    echo $this->Form->button(
-        __('Delete'),
-        ['class' => 'btn btn-outline-danger deletion']
-    );
-    echo $this->Form->end();
-    echo $this->Html->link(
-        __('Back'),
-        ['controller' => 'collections', 'action' => 'index'],
-        ['class' => 'btn btn-outline-danger mx-2']
-    );
-$this->end();

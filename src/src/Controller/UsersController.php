@@ -67,21 +67,20 @@ class UsersController extends AppController
         $user = $this->Users->get($id, [
             'contain' => [],
         ]);
+
         $this->Authorization->authorize($user);
 
         if ($this->request->is(['patch', 'post', 'put'])) {
             $data = $this->request->getData();
-            if ($data['password'] === $data['password_confirm']) {
-                $user = $this->Users->patchEntity($user, $data);
-                if ($this->Users->save($user)) {
-                    $this->Flash->success(__('The user has been saved.'));
+            $user = $this->Users->patchEntity($user, $data);
 
-                    return $this->redirect('/');
-                }
-                $this->Flash->error(__('The user could not be saved. Please, try again.'));
-            } else {
-                $this->Flash->error(__('The passwords did not match. Please, try again.'));
+            if ($this->Users->save($user)) {
+                $this->Flash->success(__('The user has been saved.'));
+
+                return $this->redirect('/');
             }
+
+            $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
         $this->set(compact('user'));
     }
