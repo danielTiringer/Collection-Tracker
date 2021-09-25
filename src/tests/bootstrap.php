@@ -32,6 +32,11 @@ $_SERVER['PHP_SELF'] = '/';
 
 Configure::write('App.fullBaseUrl', 'http://localhost');
 
+// Set test database connection
+ConnectionManager::setConfig('test', [
+    'url' => env('TEST_DATABASE_URL', 'sqlite://./tmp/tests.sqlite'),
+]);
+
 // DebugKit skips settings these connection config if PHP SAPI is CLI / PHPDBG.
 // But since PagesControllerTest is run with debug enabled and DebugKit is loaded
 // in application, without setting up these config DebugKit errors out.
