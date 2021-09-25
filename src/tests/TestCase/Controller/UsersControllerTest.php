@@ -56,8 +56,8 @@ class UsersControllerTest extends TestCase
         ]);
 
         $this->assertResponseSuccess();
-        $this->assertFlashMessage(__('The user has been saved.'));
-        $this->assertRedirect(['controller' => 'Users', 'action' => 'login']);
+        $this->assertFlashMessage(__('Registration was successful.'));
+        $this->assertRedirect('/');
     }
 
     /**
@@ -74,7 +74,7 @@ class UsersControllerTest extends TestCase
             'password_confirm' => 'anotherpassword',
         ]);
 
-        $this->assertFlashMessage(__('The passwords did not match. Please, try again.'));
+        $this->assertFlashMessage(__('Registration was not successful. Please, try again.'));
         $this->assertNoRedirect();
     }
 
@@ -92,7 +92,7 @@ class UsersControllerTest extends TestCase
             'password_confirm' => 'testpassword',
         ]);
 
-        $this->assertFlashMessage(__('The user could not be saved. Please, try again.'));
+        $this->assertFlashMessage(__('Registration was not successful. Please, try again.'));
         $this->assertNoRedirect();
     }
 
