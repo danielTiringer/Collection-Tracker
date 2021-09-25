@@ -134,6 +134,16 @@ class User extends Entity implements AuthenticationIdentity, AuthorizationIdenti
     }
 
     /**
+     * Creates an instance of DefaultPasswordHasher
+     *
+     * @return \Authentication\PasswordHasher\DefaultPasswordHasher
+     */
+    public function passwordHasher(): DefaultPasswordHasher
+    {
+        return new DefaultPasswordHasher();
+    }
+
+    /**
      * Automatically hash passwords when they are changed.
      *
      * @param string $password The new password
@@ -141,8 +151,6 @@ class User extends Entity implements AuthenticationIdentity, AuthorizationIdenti
      */
     protected function _setPassword(string $password)
     {
-        $hasher = new DefaultPasswordHasher();
-
-        return $hasher->hash($password);
+        return $this->passwordHasher()->hash($password);
     }
 }
