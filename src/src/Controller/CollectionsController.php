@@ -7,6 +7,7 @@ namespace App\Controller;
  * Collections Controller
  *
  * @property \App\Model\Table\CollectionsTable $Collections
+ * @property \Authorization\Controller\Component\AuthorizationComponent $Authorization
  * @method \App\Model\Entity\Collection[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class CollectionsController extends AppController

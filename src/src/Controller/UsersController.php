@@ -10,6 +10,7 @@ use Cake\Datasource\Exception\RecordNotFoundException;
  *
  * @property \App\Model\Table\UsersTable $Users
  * @property \Authentication\Controller\Component\AuthenticationComponent $Authentication
+ * @property \Authorization\Controller\Component\AuthorizationComponent $Authorization
  * @method \App\Model\Entity\User[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class UsersController extends AppController

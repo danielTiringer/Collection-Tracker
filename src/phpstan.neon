@@ -11,9 +11,6 @@ parameters:
         -
             message: '#Constant WWW_ROOT not found.#'
             path: src/
-        -
-            message: '#Access to an undefined property [a-zA-Z0-9\\_]+::\$Authorization.#'
-            path: src/Controller/
 
 includes:
     - vendor/cakedc/cakephp-phpstan/extension.neon

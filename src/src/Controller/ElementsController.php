@@ -7,6 +7,7 @@ namespace App\Controller;
  * Elements Controller
  *
  * @property \App\Model\Table\ElementsTable $Elements
+ * @property \Authorization\Controller\Component\AuthorizationComponent $Authorization
  * @method \App\Model\Entity\Element[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class ElementsController extends AppController
