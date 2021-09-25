@@ -67,6 +67,8 @@ class UsersController extends AppController
         $user = $this->Users->get($id, [
             'contain' => [],
         ]);
+        $this->Authorization->authorize($user);
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $data = $this->request->getData();
             if ($data['password'] === $data['password_confirm']) {
@@ -97,6 +99,8 @@ class UsersController extends AppController
 
         try {
             $user = $this->Users->get($id);
+
+            $this->Authorization->authorize($user);
 
             if ($this->Users->delete($user)) {
                 $this->Flash->success(__('Your account has been deleted.'));
