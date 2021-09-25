@@ -38,6 +38,7 @@ use Cake\Http\MiddlewareQueue;
 use Cake\ORM\Locator\TableLocator;
 use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
+use Cake\Routing\RouteBuilder;
 use Cake\Routing\Router;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -132,6 +133,19 @@ class Application extends BaseApplication implements
             ]));
 
         return $middlewareQueue;
+    }
+
+    /**
+     * Configure application-wide route rules.
+     *
+     * @param \Cake\Routing\RouteBuilder $routes The application's routes.
+     * @return void
+     */
+    public function routes(RouteBuilder $routes): void
+    {
+        $options = [];
+        $routes->registerMiddleware('csrf', new CsrfProtectionMiddleware($options));
+        parent::routes($routes);
     }
 
     /**
