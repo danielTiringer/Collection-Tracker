@@ -142,8 +142,43 @@ class CollectionsControllerTest extends TestCase
      *
      * @return void
      */
-    public function testDelete(): void
+    public function testDeleteSuccess(): void
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->login();
+
+        $this->post('/1/delete');
+
+        $this->assertRedirect('/');
+        $this->assertFalse($this->Collections->exists(['id' => 1]));
+    }
+
+    /**
+     * Test delete method unauthenticated
+     *
+     * @return void
+     */
+    public function testDeleteUnauthenticatedFails(): void
+    {
+        $this->post('/1/delete');
+
+        $this->assertResponseCode(302);
+        $this->assertRedirectEquals(['controller' => 'Users', 'action' => 'login']);
+        $this->assertTrue($this->Collections->exists(['id' => 1]));
+    }
+
+    /**
+     * Test delete method unauthorized
+     *
+     * @return void
+     */
+    public function testDeleteUnauthorizedFails(): void
+    {
+        $this->login();
+
+        $this->post('/3/delete');
+
+        $this->assertResponseCode(403);
+        $this->assertNoRedirect();
+        $this->assertTrue($this->Collections->exists(['id' => 3]));
     }
 }
