@@ -45,18 +45,6 @@ class CollectionsControllerTest extends TestCase
     }
 
     /**
-     * Test index method unauthenticated
-     *
-     * @return void
-     */
-    public function testIndexUnauthenticatedFails(): void
-    {
-        $this->get('/');
-        $this->assertResponseCode(302);
-        $this->assertRedirectEquals(['controller' => 'Users', 'action' => 'login']);
-    }
-
-    /**
      * Test index method authenticated
      *
      * @return void
@@ -69,6 +57,18 @@ class CollectionsControllerTest extends TestCase
 
         $this->assertResponseOk();
         $this->assertCount(2, $this->viewVariable('collections'));
+    }
+
+    /**
+     * Test index method unauthenticated
+     *
+     * @return void
+     */
+    public function testIndexUnauthenticatedFails(): void
+    {
+        $this->get('/');
+        $this->assertResponseCode(302);
+        $this->assertRedirectEquals(['controller' => 'Users', 'action' => 'login']);
     }
 
     /**
@@ -85,6 +85,20 @@ class CollectionsControllerTest extends TestCase
         $this->assertResponseOk();
         $this->assertSame(1, $this->viewVariable('collection')->id);
         $this->assertCount(1, $this->viewVariable('collection')->elements);
+    }
+
+    /**
+     * Test view method unauthenticated
+     *
+     * @return void
+     */
+    public function testViewUnauthenticatedFails(): void
+    {
+        $this->get('/1/view');
+
+        $this->assertResponseCode(302);
+        $this->assertRedirectEquals(['controller' => 'Users', 'action' => 'login']);
+        $this->assertTrue($this->Collections->exists(['id' => 1]));
     }
 
     /**
