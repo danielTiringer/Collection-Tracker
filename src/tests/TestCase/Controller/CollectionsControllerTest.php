@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Test\TestCase\Controller;
 
+use App\Test\TestCase\LoginTrait;
+use Cake\ORM\TableRegistry;
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
 
@@ -13,6 +15,7 @@ use Cake\TestSuite\TestCase;
  */
 class CollectionsControllerTest extends TestCase
 {
+    use LoginTrait;
     use IntegrationTestTrait;
 
     /**
@@ -26,6 +29,21 @@ class CollectionsControllerTest extends TestCase
     ];
 
     /**
+     * Sets up the tests with common configuration
+     *
+     * @return void
+     */
+    public function setUp(): void
+    {
+        $this->enableCsrfToken();
+
+        $this->enableRetainFlashMessages();
+
+        $this->Collections = TableRegistry::get('Collections');
+        $this->Users = TableRegistry::get('Users');
+    }
+
+    /**
      * Test index method unauthenticated
      *
      * @return void
@@ -35,6 +53,21 @@ class CollectionsControllerTest extends TestCase
         $this->get('/');
         $this->assertResponseCode(302);
         $this->assertRedirectEquals(['controller' => 'Users', 'action' => 'login']);
+    }
+
+    /**
+     * Test index method authenticated
+     *
+     * @return void
+     */
+    public function testIndexSuccess(): void
+    {
+        $this->login();
+
+        $this->get('/');
+
+        $this->assertResponseOk();
+        $this->assertCount(2, $this->viewVariable('collections'));
     }
 
     /**
