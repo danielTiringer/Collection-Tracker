@@ -118,8 +118,43 @@ class ElementsControllerTest extends TestCase
      *
      * @return void
      */
-    public function testDelete(): void
+    public function testDeleteSuccess(): void
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->login();
+
+        $this->post('/1/elements/1/delete');
+
+        $this->assertRedirect(['controller' => 'Collections', 'action' => 'view', 1]);
+        $this->assertFalse($this->Elements->exists(['id' => 1]));
+    }
+
+    /**
+     * Test delete method unauthenticated
+     *
+     * @return void
+     */
+    public function testDeleteUnauthenticatedFails(): void
+    {
+        $this->post('/1/elements/1/delete');
+
+        $this->assertResponseCode(302);
+        $this->assertRedirectEquals(['controller' => 'Users', 'action' => 'login']);
+        $this->assertTrue($this->Elements->exists(['id' => 1]));
+    }
+
+    /**
+     * Test delete method unauthorized
+     *
+     * @return void
+     */
+    public function testDeleteUnauthorizedFails(): void
+    {
+        $this->login();
+
+        $this->post('/3/elements/2/delete');
+
+        $this->assertResponseCode(403);
+        $this->assertNoRedirect();
+        $this->assertTrue($this->Elements->exists(['id' => 2]));
     }
 }
