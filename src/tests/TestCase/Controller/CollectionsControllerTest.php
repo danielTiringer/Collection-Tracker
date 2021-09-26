@@ -25,6 +25,7 @@ class CollectionsControllerTest extends TestCase
      */
     protected $fixtures = [
         'app.Collections',
+        'app.Elements',
         'app.Users',
     ];
 
@@ -77,7 +78,13 @@ class CollectionsControllerTest extends TestCase
      */
     public function testView(): void
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->login();
+
+        $this->get('/1/view');
+
+        $this->assertResponseOk();
+        $this->assertSame(1, $this->viewVariable('collection')->id);
+        $this->assertCount(1, $this->viewVariable('collection')->elements);
     }
 
     /**
