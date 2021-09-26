@@ -54,13 +54,13 @@ class ElementsController extends AppController
     {
         $collection = $this->Collections->find()->where(['id' => $collectionId])->firstOrFail();
 
-        $element = $this->Elements->newEmptyEntity();
-        $element->collection = $collection;
+        $this->Authorization->authorize($collection, 'addElement');
 
-        $this->Authorization->authorize($element);
+        $element = $this->Elements->newEmptyEntity();
 
         if ($this->request->is('post')) {
             $element = $this->Elements->patchEntity($element, $this->request->getData());
+
             if ($this->Elements->save($element)) {
                 $this->Flash->success(__('The element has been saved.'));
 

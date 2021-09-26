@@ -59,6 +59,18 @@ class CollectionPolicy
     }
 
     /**
+     * Checks if the user can add an element to a collection
+     *
+     * @param \App\Model\Entity\User $user the user in question
+     * @param \App\Model\Entity\Collection $collection the collection model
+     * @return \Authorization\Policy\ResultInterface
+     */
+    public function canAddElement(User $user, Collection $collection): ResultInterface
+    {
+        return $this->isAuthor($user, $collection);
+    }
+
+    /**
      * Checks if the user is the author of the collection
      *
      * @param \App\Model\Entity\User $user the user in question
