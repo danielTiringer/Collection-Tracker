@@ -75,7 +75,7 @@ class CollectionsController extends AppController
         if ($this->request->is('post')) {
             $data = $this->request->getData();
 
-            $collection->users_id = $this->request->getAttribute('identity')->getIdentifier();
+            $collection->user_id = $this->request->getAttribute('identity')->getIdentifier();
 
             $collection = $this->Collections->patchEntity($collection, $data);
 

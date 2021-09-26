@@ -32,7 +32,7 @@ class CollectionsTablePolicy
     public function scopeIndex(User $user, Query $query): Query
     {
         return $query->where([
-            'Collections.users_id' => $user->getIdentifier(),
+            'Collections.user_id' => $user->getIdentifier(),
         ]);
     }
 }

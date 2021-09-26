@@ -67,7 +67,7 @@ class ElementPolicy
      */
     protected function isAuthor(User $user, Element $element): ResultInterface
     {
-        $isAuthor = $element->collection->users_id == $user->getIdentifier();
+        $isAuthor = $element->collection->user_id == $user->getIdentifier();
 
         if (!$isAuthor) {
             return new Result(false, __('Only its author can manipulate this element.'));

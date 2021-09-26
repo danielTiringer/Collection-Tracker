@@ -100,7 +100,7 @@ class CollectionsControllerTest extends TestCase
         $this->assertFlashMessage(__('The collection has been saved.'));
         $this->assertRedirect('/');
 
-        $collections = $this->Collections->find()->where(['users_id' => 1])->all();
+        $collections = $this->Collections->find()->where(['user_id' => 1])->all();
 
         $this->assertEquals(3, count($collections));
     }

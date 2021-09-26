@@ -51,7 +51,7 @@ class CollectionsTable extends Table
         $this->addBehavior('Timestamp');
 
         $this->belongsTo('Users', [
-            'foreignKey' => 'users_id',
+            'foreignKey' => 'user_id',
             'joinType' => 'INNER',
         ]);
 
@@ -132,7 +132,7 @@ class CollectionsTable extends Table
      */
     public function buildRules(RulesChecker $rules): RulesChecker
     {
-        $rules->add($rules->existsIn(['users_id'], 'Users'), ['errorField' => 'users_id']);
+        $rules->add($rules->existsIn(['user_id'], 'Users'), ['errorField' => 'user_id']);
 
         return $rules;
     }

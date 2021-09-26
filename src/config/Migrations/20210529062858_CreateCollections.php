@@ -24,9 +24,9 @@ class CreateCollections extends AbstractMigration
             'default' => null,
             'null' => false,
         ]);
-        $table->addColumn('users_id', 'string', [
+        $table->addColumn('user_id', 'integer', [
             'default' => null,
-            'limit' => 255,
+            'limit' => 11,
             'null' => false,
         ]);
         $table->addColumn('created', 'datetime', [
@@ -37,6 +37,16 @@ class CreateCollections extends AbstractMigration
             'default' => null,
             'null' => false,
         ]);
+        $table->addForeignKey(
+            'user_id',
+            'users',
+            'id',
+            [
+                'delete' => 'CASCADE',
+                'update' => 'CASCADE',
+                'constraint' => 'collections_user_id',
+            ]
+        );
         $table->create();
     }
 }
