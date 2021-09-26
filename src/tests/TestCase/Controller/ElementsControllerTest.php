@@ -184,11 +184,10 @@ class ElementsControllerTest extends TestCase
             'collection_id' => 1,
         ]);
 
-        // $this->assertResponseSuccess();
         $this->assertFlashMessage(__('The element could not be saved. Please, try again.'));
         $this->assertNoRedirect();
 
-        $elements = $this->Elements->find()->where(['collection_id' => 1])->all();
+        $elements = $this->Elements->find()->where(['id' => 1])->all();
 
         $this->assertEquals(1, count($elements));
     }
@@ -198,9 +197,98 @@ class ElementsControllerTest extends TestCase
      *
      * @return void
      */
-    public function testEdit(): void
+    public function testEditSuccess(): void
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->login();
+
+        $this->post('/1/elements/1/edit', [
+            'name' => 'test name',
+            'description' => 'test description',
+            'source' => '',
+            'image' => '',
+            'collection_id' => 1,
+        ]);
+
+        $this->assertFlashMessage(__('The element has been saved.'));
+        $this->assertRedirect(['controller' => 'Collections', 'action' => 'view', 1]);
+
+        $element = $this->Elements->find()->where(['id' => 1])->first();
+
+        $this->assertEquals('test name', $element->name);
+        $this->assertEquals('test description', $element->description);
+    }
+
+    /**
+     * Test edit method unauthenticated
+     *
+     * @return void
+     */
+    public function testEditUnauthenticatedFails(): void
+    {
+        $this->post('/1/elements/1/edit', [
+            'name' => 'test name',
+            'description' => 'test description',
+            'source' => '',
+            'image' => '',
+            'collection_id' => 1,
+        ]);
+
+        $this->assertResponseCode(302);
+        $this->assertRedirectEquals(['controller' => 'Users', 'action' => 'login']);
+
+        $element = $this->Elements->find()->where(['id' => 1])->first();
+
+        $this->assertNotEquals('test name', $element->name);
+    }
+
+    /**
+     * Test edit method unauthorized
+     *
+     * @return void
+     */
+    public function testEditUnauthorizedFails(): void
+    {
+        $this->login();
+
+        $this->post('/3/elements/2/edit', [
+            'name' => 'test name',
+            'description' => 'test description',
+            'source' => '',
+            'image' => '',
+            'collection_id' => 3,
+        ]);
+
+        $this->assertResponseCode(403);
+        $this->assertNoRedirect();
+
+        $element = $this->Elements->find()->where(['id' => 2])->first();
+
+        $this->assertNotEquals('test name', $element->name);
+    }
+
+    /**
+     * Test edit method with validation error
+     *
+     * @return void
+     */
+    public function testEditValidationError(): void
+    {
+        $this->login();
+
+        $this->post('/1/elements/1/edit', [
+            'name' => '',
+            'description' => 'test description',
+            'source' => '',
+            'image' => '',
+            'collection_id' => 1,
+        ]);
+
+        $this->assertFlashMessage(__('The element could not be saved. Please, try again.'));
+        $this->assertNoRedirect();
+
+        $element = $this->Elements->find()->where(['id' => 1])->first();
+
+        $this->assertNotEquals('', $element->name);
     }
 
     /**
