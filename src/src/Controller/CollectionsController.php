@@ -111,7 +111,7 @@ class CollectionsController extends AppController
 
             $saveOptions = [];
 
-            if (!is_null($data['image']->getClientFilename())) {
+            if (!empty($data['image']) && !is_null($data['image']->getClientFilename())) {
                 $saveOptions['previousImageName'] = $collection->image;
             }
 
