@@ -81,13 +81,28 @@ class CollectionsControllerTest extends TestCase
     }
 
     /**
-     * Test add method
+     * Test add method successfully
      *
      * @return void
      */
-    public function testAdd(): void
+    public function testAddSuccess(): void
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->login();
+
+        $this->post('collections/add', [
+            'name' => 'test name',
+            'description' => 'test description',
+            'goal' => '20',
+            'image' => '',
+        ]);
+
+        $this->assertResponseSuccess();
+        $this->assertFlashMessage(__('The collection has been saved.'));
+        $this->assertRedirect('/');
+
+        $collections = $this->Collections->find()->where(['users_id' => 1])->all();
+
+        $this->assertEquals(3, count($collections));
     }
 
     /**
