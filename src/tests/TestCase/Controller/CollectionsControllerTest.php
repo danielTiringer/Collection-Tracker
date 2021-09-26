@@ -103,7 +103,7 @@ class CollectionsControllerTest extends TestCase
     }
 
     /**
-     * Test add method successfully
+     * Test add method
      *
      * @return void
      */
@@ -111,7 +111,7 @@ class CollectionsControllerTest extends TestCase
     {
         $this->login();
 
-        $this->post('collections/add', [
+        $this->post('/collections/add', [
             'name' => 'test name',
             'description' => 'test description',
             'goal' => '20',
@@ -123,6 +123,30 @@ class CollectionsControllerTest extends TestCase
         $this->assertRedirect('/');
 
         $collections = $this->Collections->find()->where(['user_id' => 1])->all();
+
+        $this->assertEquals(3, count($collections));
+    }
+
+    /**
+     * Test add method with validation error
+     *
+     * @return void
+     */
+    public function testAddValidationError(): void
+    {
+        $this->login();
+
+        $this->post('/collections/add', [
+            'name' => '',
+            'description' => 'test description',
+            'goal' => '10',
+            'image' => '',
+        ]);
+
+        $this->assertFlashMessage(__('The collection could not be saved. Please, try again.'));
+        $this->assertNoRedirect();
+
+        $collections = $this->Collections->find()->all();
 
         $this->assertEquals(3, count($collections));
     }
