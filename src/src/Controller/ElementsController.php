@@ -7,6 +7,7 @@ namespace App\Controller;
  * Elements Controller
  *
  * @property \App\Model\Table\ElementsTable $Elements
+ * @property \App\Model\Table\CollectionsTable $Collections
  * @property \Authorization\Controller\Component\AuthorizationComponent $Authorization
  * @method \App\Model\Entity\Element[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
@@ -20,6 +21,7 @@ class ElementsController extends AppController
     public function initialize(): void
     {
         parent::initialize();
+        $this->loadModel('Collections');
     }
 
     /**
@@ -50,7 +52,10 @@ class ElementsController extends AppController
      */
     public function add($collectionId)
     {
+        $collection = $this->Collections->find()->where(['id' => $collectionId])->firstOrFail();
+
         $element = $this->Elements->newEmptyEntity();
+        $element->collection = $collection;
 
         $this->Authorization->authorize($element);
 

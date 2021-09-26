@@ -98,9 +98,99 @@ class ElementsControllerTest extends TestCase
      *
      * @return void
      */
-    public function testAdd(): void
+    public function testAddSuccess(): void
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->login();
+
+        $this->post('/1/elements/add', [
+            'name' => 'test name',
+            'description' => 'test description',
+            'source' => '',
+            'image' => '',
+            'collection_id' => 1,
+        ]);
+
+        $this->assertResponseSuccess();
+        $this->assertFlashMessage(__('The element has been saved.'));
+        $this->assertRedirect('/1/view');
+
+        $elements = $this->Elements->find()->where(['collection_id' => 1])->all();
+
+        $this->assertEquals(2, count($elements));
+    }
+
+    /**
+     * Test add method unauthenticated
+     *
+     * @return void
+     */
+    public function testAddUnauthenticatedFails(): void
+    {
+        $this->post('/1/elements/add', [
+            'name' => 'test name',
+            'description' => 'test description',
+            'source' => '',
+            'image' => '',
+            'collection_id' => 1,
+        ]);
+
+        $this->assertResponseCode(302);
+        $this->assertRedirectEquals(['controller' => 'Users', 'action' => 'login']);
+
+        $elements = $this->Elements->find()->where(['collection_id' => 1])->all();
+
+        $this->assertEquals(1, count($elements));
+    }
+
+    /**
+     * Test add method unauthorized
+     *
+     * @return void
+     */
+    public function testAddUnauthorizedFails(): void
+    {
+        $this->login();
+
+        $this->post('/3/elements/add', [
+            'name' => 'test name',
+            'description' => 'test description',
+            'source' => '',
+            'image' => '',
+            'collection_id' => 3,
+        ]);
+
+        $this->assertResponseCode(403);
+        $this->assertNoRedirect();
+
+        $elements = $this->Elements->find()->where(['collection_id' => 1])->all();
+
+        $this->assertEquals(1, count($elements));
+    }
+
+    /**
+     * Test add method with validation error
+     *
+     * @return void
+     */
+    public function testAddValidationError(): void
+    {
+        $this->login();
+
+        $this->post('/1/elements/add', [
+            'name' => '',
+            'description' => 'test description',
+            'source' => '',
+            'image' => '',
+            'collection_id' => 1,
+        ]);
+
+        // $this->assertResponseSuccess();
+        $this->assertFlashMessage(__('The element could not be saved. Please, try again.'));
+        $this->assertNoRedirect();
+
+        $elements = $this->Elements->find()->where(['collection_id' => 1])->all();
+
+        $this->assertEquals(1, count($elements));
     }
 
     /**

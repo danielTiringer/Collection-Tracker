@@ -19,7 +19,7 @@ class ElementPolicy
      */
     public function canAdd(User $user, Element $element): ResultInterface
     {
-        return new Result(true);
+        return $this->isAuthor($user, $element);
     }
 
     /**
