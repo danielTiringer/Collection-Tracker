@@ -20,6 +20,8 @@ use RuntimeException;
  * @property string $password
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
+ *
+ * @property \App\Model\Entity\Collection[] $collections
  */
 class User extends Entity implements AuthenticationIdentity, AuthorizationIdentity
 {

@@ -18,6 +18,7 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\FrozenTime $modified
  *
  * @property \App\Model\Entity\User $user
+ * @proprtty \App\Model\Entity\Element[] $elements
  */
 class Collection extends Entity
 {

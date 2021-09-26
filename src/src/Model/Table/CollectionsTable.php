@@ -55,7 +55,9 @@ class CollectionsTable extends Table
             'joinType' => 'INNER',
         ]);
 
-        $this->hasMany('Elements');
+        $this->hasMany('Elements', [
+            'foreignKey' => 'collection_id',
+        ]);
 
         $this->addBehavior('Josegonzalez/Upload.Upload', [
             'image' => [
