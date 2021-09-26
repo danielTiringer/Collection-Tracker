@@ -76,7 +76,7 @@ class CollectionsControllerTest extends TestCase
      *
      * @return void
      */
-    public function testView(): void
+    public function testViewSuccess(): void
     {
         $this->login();
 
@@ -85,6 +85,21 @@ class CollectionsControllerTest extends TestCase
         $this->assertResponseOk();
         $this->assertSame(1, $this->viewVariable('collection')->id);
         $this->assertCount(1, $this->viewVariable('collection')->elements);
+    }
+
+    /**
+     * Test view method unauthorized fails
+     *
+     * @return void
+     */
+    public function testViewUnauthorizedFails(): void
+    {
+        $this->login();
+
+        $this->get('/3/view');
+
+        $this->assertResponseCode(403);
+        $this->assertTrue($this->Collections->exists(['id' => 3]));
     }
 
     /**
