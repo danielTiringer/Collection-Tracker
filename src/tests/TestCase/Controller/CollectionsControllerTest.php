@@ -128,6 +128,28 @@ class CollectionsControllerTest extends TestCase
     }
 
     /**
+     * Test add method unauthenticated
+     *
+     * @return void
+     */
+    public function testAddUnauthenticatedFails(): void
+    {
+        $this->post('/collections/add', [
+            'name' => 'test name',
+            'description' => 'test description',
+            'goal' => '20',
+            'image' => '',
+        ]);
+
+        $this->assertResponseCode(302);
+        $this->assertRedirectEquals(['controller' => 'Users', 'action' => 'login']);
+
+        $collections = $this->Collections->find()->all();
+
+        $this->assertEquals(3, count($collections));
+    }
+
+    /**
      * Test add method with validation error
      *
      * @return void
