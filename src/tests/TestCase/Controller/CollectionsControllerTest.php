@@ -178,9 +178,94 @@ class CollectionsControllerTest extends TestCase
      *
      * @return void
      */
-    public function testEdit(): void
+    public function testEditSuccess(): void
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->login();
+
+        $this->post('/1/edit', [
+            'name' => 'other name',
+            'description' => 'test description',
+            'goal' => '20',
+            'image' => '',
+        ]);
+
+        $this->assertResponseSuccess();
+        $this->assertFlashMessage(__('The collection has been saved.'));
+        $this->assertRedirect('/');
+
+        $collection = $this->Collections->find()->where(['id' => 1])->first();
+
+        $this->assertEquals('other name', $collection->name);
+    }
+
+    /**
+     * Test edit method unauthenticated
+     *
+     * @return void
+     */
+    public function testEditUnauthenticatedFails(): void
+    {
+        $this->post('/1/edit', [
+            'name' => 'other name',
+            'description' => 'test description',
+            'goal' => '20',
+            'image' => '',
+        ]);
+
+        $this->assertResponseCode(302);
+        $this->assertRedirectEquals(['controller' => 'Users', 'action' => 'login']);
+
+        $collection = $this->Collections->find()->where(['id' => 1])->first();
+
+        $this->assertNotEquals('other name', $collection->name);
+    }
+
+    /**
+     * Test edit method unauthorized
+     *
+     * @return void
+     */
+    public function testEditUnauthorizedFails(): void
+    {
+        $this->login();
+
+        $this->post('/3/edit', [
+            'name' => 'other name',
+            'description' => 'test description',
+            'goal' => '20',
+            'image' => '',
+        ]);
+
+        $this->assertResponseCode(403);
+        $this->assertNoRedirect();
+
+        $collection = $this->Collections->find()->where(['id' => 1])->first();
+
+        $this->assertNotEquals('other name', $collection->name);
+    }
+
+    /**
+     * Test edit method with validation error
+     *
+     * @return void
+     */
+    public function testEditValidationError(): void
+    {
+        $this->login();
+
+        $this->post('/1/edit', [
+            'name' => '',
+            'description' => 'test description',
+            'goal' => '10',
+            'image' => '',
+        ]);
+
+        $this->assertFlashMessage(__('The collection could not be saved. Please, try again.'));
+        $this->assertNoRedirect();
+
+        $collection = $this->Collections->find()->where(['id' => 1])->first();
+
+        $this->assertNotEquals('', $collection->name);
     }
 
     /**
