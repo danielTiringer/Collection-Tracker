@@ -120,6 +120,30 @@ class UsersControllerTest extends TestCase
     }
 
     /**
+     * Test edit method unauthorized
+     *
+     * @return void
+     */
+    public function testEditUnauthorizedFails(): void
+    {
+        $this->login();
+
+        $this->post('/profile/2', [
+            'name' => 'Updated User',
+            'email' => 'updated@example.com',
+        ]);
+
+
+        $this->assertResponseCode(403);
+        $this->assertNoRedirect();
+
+        $user = $this->Users->get(2);
+
+        $this->assertNotEquals('Updated User', $user->name);
+        $this->assertNotEquals('updated@example.com', $user->email);
+    }
+
+    /**
      * Test edit method without login
      *
      * @return void
