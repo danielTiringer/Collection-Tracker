@@ -203,4 +203,18 @@ class UsersControllerTest extends TestCase
         $this->assertFlashMessage(__('Invalid email or password.'));
         $this->assertNoRedirect();
     }
+
+    /**
+     * Test logout method
+     *
+     * @return void
+     */
+    public function testLogoutSuccess(): void
+    {
+        $this->get('/logout');
+
+        $this->assertResponseSuccess();
+        $this->assertRedirectEquals(['controller' => 'Users', 'action' => 'login']);
+        $this->assertSessionNotHasKey('Auth.email');
+    }
 }
