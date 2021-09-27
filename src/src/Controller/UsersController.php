@@ -104,7 +104,7 @@ class UsersController extends AppController
 
         $this->Authorization->authorize($user);
 
-        $allowedFields = ['password', 'current_password', 'confirm_password'];
+        $allowedFields = ['password', 'current_password', 'password_confirm'];
 
         if ($this->request->is(['patch', 'post', 'put'])) {
             $patchedUser = $this->Users->patchEntity($user, $this->request->getData(), [
