@@ -156,6 +156,81 @@ class UsersControllerTest extends TestCase
     }
 
     /**
+     * Test update password method
+     *
+     * @return void
+     */
+    public function testUpdatePasswordSuccess(): void
+    {
+        $this->login();
+
+        $this->post('/updatePassword/1', [
+            'current_password' => 'password',
+            'password' => 'newpassword',
+            'password_confirm' => 'newpassword',
+        ]);
+
+        $this->assertRedirect('/');
+        $this->assertFlashMessage(__('The password has been updated.'));
+    }
+
+    /**
+     * Test update password method unauthorized
+     *
+     * @return void
+     */
+    public function testUpdatePasswordUnauthorized(): void
+    {
+        $this->login();
+
+        $this->post('/updatePassword/2', [
+            'current_password' => 'password',
+            'password' => 'newpassword',
+            'password_confirm' => 'newpassword',
+        ]);
+
+        $this->assertResponseCode(403);
+        $this->assertNoRedirect();
+    }
+
+    /**
+     * Test update password method with current password missing
+     *
+     * @return void
+     */
+    public function testUpdatePasswordCurrentPasswordMissing(): void
+    {
+        $this->login();
+
+        $this->post('/updatePassword/1', [
+            'password' => 'newpassword',
+            'password_confirm' => 'newpassword',
+        ]);
+
+        $this->assertFlashMessage(__('The password could not be updated. Please, try again.'));
+        $this->assertRedirect(['controller' => 'Users', 'action' => 'edit', 1]);
+    }
+
+    /**
+     * Test update password method with passwords not matching
+     *
+     * @return void
+     */
+    public function testUpdatePasswordPasswordsDontMatch(): void
+    {
+        $this->login();
+
+        $this->post('/updatePassword/1', [
+            'current_password' => 'password',
+            'password' => 'newpassword',
+            'password_confirm' => 'wrongpassword',
+        ]);
+
+        $this->assertFlashMessage(__('The password could not be updated. Please, try again.'));
+        $this->assertRedirect(['controller' => 'Users', 'action' => 'edit', 1]);
+    }
+
+    /**
      * Test delete method with non-existing user
      *
      * @return void
