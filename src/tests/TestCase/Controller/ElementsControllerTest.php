@@ -49,7 +49,7 @@ class ElementsControllerTest extends TestCase
      *
      * @return void
      */
-    public function testViewSuccess(): void
+    public function testView(): void
     {
         $this->login();
 
@@ -65,7 +65,7 @@ class ElementsControllerTest extends TestCase
      *
      * @return void
      */
-    public function testViewUnauthenticatedFails(): void
+    public function testViewUnauthenticated(): void
     {
         $this->get('/1/elements/1');
 
@@ -79,7 +79,7 @@ class ElementsControllerTest extends TestCase
      *
      * @return void
      */
-    public function testViewUnauthorizedFails(): void
+    public function testViewUnauthorized(): void
     {
         $this->login();
 
@@ -98,7 +98,7 @@ class ElementsControllerTest extends TestCase
      *
      * @return void
      */
-    public function testAddSuccess(): void
+    public function testAdd(): void
     {
         $this->login();
 
@@ -124,7 +124,7 @@ class ElementsControllerTest extends TestCase
      *
      * @return void
      */
-    public function testAddUnauthenticatedFails(): void
+    public function testAddUnauthenticated(): void
     {
         $this->post('/1/elements/add', [
             'name' => 'test name',
@@ -147,7 +147,7 @@ class ElementsControllerTest extends TestCase
      *
      * @return void
      */
-    public function testAddUnauthorizedFails(): void
+    public function testAddUnauthorized(): void
     {
         $this->login();
 
@@ -197,7 +197,7 @@ class ElementsControllerTest extends TestCase
      *
      * @return void
      */
-    public function testEditSuccess(): void
+    public function testEdit(): void
     {
         $this->login();
 
@@ -223,7 +223,7 @@ class ElementsControllerTest extends TestCase
      *
      * @return void
      */
-    public function testEditUnauthenticatedFails(): void
+    public function testEditUnauthenticated(): void
     {
         $this->post('/1/elements/1/edit', [
             'name' => 'test name',
@@ -246,7 +246,7 @@ class ElementsControllerTest extends TestCase
      *
      * @return void
      */
-    public function testEditUnauthorizedFails(): void
+    public function testEditUnauthorized(): void
     {
         $this->login();
 
@@ -296,7 +296,7 @@ class ElementsControllerTest extends TestCase
      *
      * @return void
      */
-    public function testDeleteSuccess(): void
+    public function testDelete(): void
     {
         $this->login();
 
@@ -311,7 +311,7 @@ class ElementsControllerTest extends TestCase
      *
      * @return void
      */
-    public function testDeleteUnauthenticatedFails(): void
+    public function testDeleteUnauthenticated(): void
     {
         $this->post('/1/elements/1/delete');
 
@@ -325,7 +325,7 @@ class ElementsControllerTest extends TestCase
      *
      * @return void
      */
-    public function testDeleteUnauthorizedFails(): void
+    public function testDeleteUnauthorized(): void
     {
         $this->login();
 

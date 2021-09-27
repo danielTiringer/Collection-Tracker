@@ -133,7 +133,6 @@ class UsersControllerTest extends TestCase
             'email' => 'updated@example.com',
         ]);
 
-
         $this->assertResponseCode(403);
         $this->assertNoRedirect();
 

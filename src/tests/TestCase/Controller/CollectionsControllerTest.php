@@ -49,7 +49,7 @@ class CollectionsControllerTest extends TestCase
      *
      * @return void
      */
-    public function testIndexSuccess(): void
+    public function testIndex(): void
     {
         $this->login();
 
@@ -64,7 +64,7 @@ class CollectionsControllerTest extends TestCase
      *
      * @return void
      */
-    public function testIndexUnauthenticatedFails(): void
+    public function testIndexUnauthenticated(): void
     {
         $this->get('/');
         $this->assertResponseCode(302);
@@ -76,7 +76,7 @@ class CollectionsControllerTest extends TestCase
      *
      * @return void
      */
-    public function testViewSuccess(): void
+    public function testView(): void
     {
         $this->login();
 
@@ -92,7 +92,7 @@ class CollectionsControllerTest extends TestCase
      *
      * @return void
      */
-    public function testViewUnauthenticatedFails(): void
+    public function testViewUnauthenticated(): void
     {
         $this->get('/1/view');
 
@@ -106,7 +106,7 @@ class CollectionsControllerTest extends TestCase
      *
      * @return void
      */
-    public function testViewUnauthorizedFails(): void
+    public function testViewUnauthorized(): void
     {
         $this->login();
 
@@ -121,7 +121,7 @@ class CollectionsControllerTest extends TestCase
      *
      * @return void
      */
-    public function testAddSuccess(): void
+    public function testAdd(): void
     {
         $this->login();
 
@@ -146,7 +146,7 @@ class CollectionsControllerTest extends TestCase
      *
      * @return void
      */
-    public function testAddUnauthenticatedFails(): void
+    public function testAddUnauthenticated(): void
     {
         $this->post('/collections/add', [
             'name' => 'test name',
@@ -192,7 +192,7 @@ class CollectionsControllerTest extends TestCase
      *
      * @return void
      */
-    public function testEditSuccess(): void
+    public function testEdit(): void
     {
         $this->login();
 
@@ -217,7 +217,7 @@ class CollectionsControllerTest extends TestCase
      *
      * @return void
      */
-    public function testEditUnauthenticatedFails(): void
+    public function testEditUnauthenticated(): void
     {
         $this->post('/1/edit', [
             'name' => 'other name',
@@ -239,7 +239,7 @@ class CollectionsControllerTest extends TestCase
      *
      * @return void
      */
-    public function testEditUnauthorizedFails(): void
+    public function testEditUnauthorized(): void
     {
         $this->login();
 
@@ -287,7 +287,7 @@ class CollectionsControllerTest extends TestCase
      *
      * @return void
      */
-    public function testDeleteSuccess(): void
+    public function testDelete(): void
     {
         $this->login();
 
@@ -302,7 +302,7 @@ class CollectionsControllerTest extends TestCase
      *
      * @return void
      */
-    public function testDeleteUnauthenticatedFails(): void
+    public function testDeleteUnauthenticated(): void
     {
         $this->post('/1/delete');
 
@@ -316,7 +316,7 @@ class CollectionsControllerTest extends TestCase
      *
      * @return void
      */
-    public function testDeleteUnauthorizedFails(): void
+    public function testDeleteUnauthorized(): void
     {
         $this->login();
 
