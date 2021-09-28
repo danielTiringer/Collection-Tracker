@@ -42,7 +42,7 @@
                                 ) ?>
                             </td class="col-3">
                             <?php if ($collection->goal): ?>
-                                <td><?= h($collection->goal) ?></td>
+                                <td><?= count($collection->elements) ?> / <?= h($collection->goal) ?></td>
                             <?php else: ?>
                                 <td><?= __('Not defined') ?></td>
                             <?php endif; ?>

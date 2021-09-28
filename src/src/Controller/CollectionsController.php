@@ -30,7 +30,7 @@ class CollectionsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Users'],
+            'contain' => ['Users', 'Elements'],
         ];
 
         $query = $this->Collections->find();
