@@ -14,7 +14,7 @@
  * @var \App\View\AppView $this
  */
 
-$cakeDescription = 'Collection Tracker';
+$cakeDescription = __('Collection Tracker');
 ?>
 <!DOCTYPE html>
 <html>
@@ -48,9 +48,11 @@ $cakeDescription = 'Collection Tracker';
 </head>
 <body class="bg-light">
     <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand text-danger" href="<?= $this->Url->build('/') ?>">
-            <span>Collection</span> Tracker
-        </a>
+        <?= $this->Html->link(
+            $cakeDescription,
+            ['controller' => 'Collections', 'action' => 'index'],
+            ['class' => 'navbar-brand text-danger']
+        ) ?>
         <div class="nav justify-content-end">
             <?php if (!$this->Identity->isLoggedIn()): ?>
                 <a class="btn btn-outline-danger mx-2" href="<?= $this->Url->build('/login') ?>">Login</a>
