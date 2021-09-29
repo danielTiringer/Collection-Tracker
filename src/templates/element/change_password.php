@@ -9,8 +9,8 @@
     ['controller' => 'collections', 'action' => 'index'],
     [
         'class' => 'btn btn-outline-danger mx-2',
-        'data-toggle' => 'modal',
-        'data-target' => '#changePasswordModal',
+        'data-bs-toggle' => 'modal',
+        'data-bs-target' => '#changePasswordModal',
     ]
 ) ?>
 
@@ -52,7 +52,7 @@
                 ]) ?>
             </div>
             <div class="modal-footer justify-content-center">
-                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">
+                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
                     <?= __('Cancel') ?>
                 </button>
                 <?= $this->Form->button(__('Update Password'), [
