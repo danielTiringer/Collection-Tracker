@@ -55,13 +55,27 @@ $cakeDescription = __('Collection Tracker');
         ) ?>
         <div class="nav justify-content-end">
             <?php if (!$this->Identity->isLoggedIn()): ?>
-                <a class="btn btn-outline-danger mx-2" href="<?= $this->Url->build('/login') ?>">Login</a>
-                <a class="btn btn-outline-danger mx-2" href="<?= $this->Url->build('/register') ?>">Register</a>
+                <?= $this->Html->link(
+                    __('Login'),
+                    ['controller' => 'Users', 'action' => 'login'],
+                    ['class' => 'btn btn-outline-danger mx-2']
+                ) ?>
+                <?= $this->Html->link(
+                    __('Register'),
+                    ['controller' => 'Users', 'action' => 'add'],
+                    ['class' => 'btn btn-outline-danger mx-2']
+                ) ?>
             <?php else: ?>
-                <a class="btn btn-outline-danger mx-2" href="<?= $this->Url->build('/logout') ?>">Logout</a>
-                <a class="btn btn-outline-danger mx-2" href="<?= $this->Url->build('/profile/' . $this->Identity->get('id')) ?>">
-                    Profile (<?= $this->Identity->get('name') ?>)
-                </a>
+                <?= $this->Html->link(
+                    __('Logout'),
+                    ['controller' => 'Users', 'action' => 'logout'],
+                    ['class' => 'btn btn-outline-danger mx-2']
+                ) ?>
+                <?= $this->Html->link(
+                    __('Profile ({name})', ['name' => $this->Identity->get('name')]),
+                    ['controller' => 'Users', 'action' => 'edit', $this->Identity->get('id')],
+                    ['class' => 'btn btn-outline-danger mx-2']
+                ) ?>
             <?php endif; ?>
         </div>
     </nav>
