@@ -24,17 +24,17 @@
                 ]) ?>
                 <?= $this->Form->end() ?>
             </div>
+            <?= $this->Form->create($user, [
+                'type' => 'delete',
+                'url' => ['action' => 'delete', $user->id],
+            ]) ?>
             <div class="mt-2 row justify-content-center">
-                <?= $this->Form->create($user, [
-                    'type' => 'delete',
-                    'url' => ['action' => 'delete', $user->id],
-                ]) ?>
                 <?= $this->Form->button(
                     __('Delete Profile'),
-                    ['class' => 'btn btn-outline-danger deletion mx-2']
+                    ['class' => 'btn btn-outline-danger deletion']
                 ) ?>
-                <?= $this->Form->end() ?>
-            </div>
+                </div>
+            <?= $this->Form->end() ?>
             <div class="mt-2 row justify-content-center">
                 <?= $this->element('change_password', [
                     'user' => $user,
