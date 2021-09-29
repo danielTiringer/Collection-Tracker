@@ -11,7 +11,7 @@
             <div class="col-md-6 col-sm-12">
                 <?= $this->Html->image(
                     '/img/collection-img/' . $collection->image,
-                    ['class' => 'height-fill width-fill', 'alt' => 'No image uploaded.']
+                    ['class' => 'height-fill width-fill img-thumbnail', 'alt' => 'No image uploaded.']
                 ) ?>
             </div>
             <div class="col-md-6 col-sm-12">
