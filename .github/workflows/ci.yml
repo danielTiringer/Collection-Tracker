@@ -10,7 +10,8 @@ on:
 
 jobs:
   test-suite:
-    runs-on: ubuntu-18.04
+    name: Test Suite
+    runs-on: ubuntu-20.04
     defaults:
       run:
         working-directory: ./src
@@ -33,7 +34,7 @@ jobs:
 
   coding-standard:
     name: Coding Standard
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     defaults:
       run:
         working-directory: ./src
@@ -58,7 +59,7 @@ jobs:
 
   static-analysis:
     name: Static Analysis
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     defaults:
       run:
         working-directory: ./src
