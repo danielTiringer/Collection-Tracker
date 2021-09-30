@@ -88,13 +88,12 @@ $routes->scope('/', function (RouteBuilder $routes) {
             'elementId' => '[0-9]+',
         ]);
 
-    $routes->connect('/{collectionId}/elements/{elementId}/edit', [
+    $routes->connect('/elements/{elementId}/edit', [
         'controller' => 'Elements',
         'action' => 'edit',
     ])
-        ->setPass(['collectionId', 'elementId'])
+        ->setPass(['elementId'])
         ->setPatterns([
-            'collectionId' => '[0-9]+',
             'elementId' => '[0-9]+',
         ]);
 

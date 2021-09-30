@@ -78,13 +78,12 @@ class ElementsController extends AppController
     /**
      * Edit method
      *
-     * @param int $collectionId Collection id
      * @param int $elementId Element id
      * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      * @throws \Authorization\Exception\ForbiddenException When not authorized to handle record
      */
-    public function edit($collectionId, $elementId)
+    public function edit($elementId)
     {
         $element = $this->Elements->get($elementId, [
             'contain' => ['Collections'],
@@ -109,12 +108,12 @@ class ElementsController extends AppController
                 return $this->redirect([
                     'controller' => 'Collections',
                     'action' => 'view',
-                    $collectionId,
+                    $element->collection_id,
                 ]);
             }
             $this->Flash->error(__('The element could not be saved. Please, try again.'));
         }
-        $collection = $this->Elements->Collections->get($collectionId);
+        $collection = $this->Elements->Collections->get($element->collection_id);
         $this->set(compact('element', 'collection'));
     }
 
