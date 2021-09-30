@@ -53,7 +53,7 @@ class ElementsControllerTest extends TestCase
     {
         $this->login();
 
-        $this->get('/1/elements/1');
+        $this->get('/elements/1');
 
         $this->assertResponseOk();
         $this->assertSame(1, $this->viewVariable('element')->id);
@@ -67,7 +67,7 @@ class ElementsControllerTest extends TestCase
      */
     public function testViewUnauthenticated(): void
     {
-        $this->get('/1/elements/1');
+        $this->get('/elements/1');
 
         $this->assertResponseCode(302);
         $this->assertRedirectEquals(['controller' => 'Users', 'action' => 'login']);
@@ -83,7 +83,7 @@ class ElementsControllerTest extends TestCase
     {
         $this->login();
 
-        $this->get('/3/elements/2');
+        $this->get('/elements/2');
 
         $this->assertResponseCode(403);
         $this->assertTrue($this->Elements->exists(['id' => 2]));
@@ -201,7 +201,7 @@ class ElementsControllerTest extends TestCase
     {
         $this->login();
 
-        $this->post('/1/elements/1/edit', [
+        $this->post('/elements/1/edit', [
             'name' => 'test name',
             'description' => 'test description',
             'source' => '',
@@ -225,7 +225,7 @@ class ElementsControllerTest extends TestCase
      */
     public function testEditUnauthenticated(): void
     {
-        $this->post('/1/elements/1/edit', [
+        $this->post('/elements/1/edit', [
             'name' => 'test name',
             'description' => 'test description',
             'source' => '',
@@ -250,7 +250,7 @@ class ElementsControllerTest extends TestCase
     {
         $this->login();
 
-        $this->post('/3/elements/2/edit', [
+        $this->post('/elements/2/edit', [
             'name' => 'test name',
             'description' => 'test description',
             'source' => '',
@@ -275,7 +275,7 @@ class ElementsControllerTest extends TestCase
     {
         $this->login();
 
-        $this->post('/1/elements/1/edit', [
+        $this->post('/elements/1/edit', [
             'name' => '',
             'description' => 'test description',
             'source' => '',
@@ -300,7 +300,7 @@ class ElementsControllerTest extends TestCase
     {
         $this->login();
 
-        $this->post('/1/elements/1/delete');
+        $this->post('/elements/1/delete');
 
         $this->assertRedirect(['controller' => 'Collections', 'action' => 'view', 1]);
         $this->assertFalse($this->Elements->exists(['id' => 1]));
@@ -313,7 +313,7 @@ class ElementsControllerTest extends TestCase
      */
     public function testDeleteUnauthenticated(): void
     {
-        $this->post('/1/elements/1/delete');
+        $this->post('/elements/1/delete');
 
         $this->assertResponseCode(302);
         $this->assertRedirectEquals(['controller' => 'Users', 'action' => 'login']);
@@ -329,7 +329,7 @@ class ElementsControllerTest extends TestCase
     {
         $this->login();
 
-        $this->post('/3/elements/2/delete');
+        $this->post('/elements/2/delete');
 
         $this->assertResponseCode(403);
         $this->assertNoRedirect();
