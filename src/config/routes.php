@@ -97,13 +97,12 @@ $routes->scope('/', function (RouteBuilder $routes) {
             'elementId' => '[0-9]+',
         ]);
 
-    $routes->connect('/{collectionId}/elements/{elementId}/delete', [
+    $routes->connect('/elements/{elementId}/delete', [
         'controller' => 'Elements',
         'action' => 'delete',
     ])
-        ->setPass(['collectionId', 'elementId'])
+        ->setPass(['elementId'])
         ->setPatterns([
-            'collectionId' => '[0-9]+',
             'elementId' => '[0-9]+',
         ]);
 

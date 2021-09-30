@@ -120,13 +120,12 @@ class ElementsController extends AppController
     /**
      * Delete method
      *
-     * @param int $collectionId Collection id
      * @param int $elementId Element id
      * @return \Cake\Http\Response|null|void Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      * @throws \Authorization\Exception\ForbiddenException When not authorized to handle record
      */
-    public function delete($collectionId, $elementId)
+    public function delete($elementId)
     {
         $this->request->allowMethod(['post', 'delete']);
 
@@ -145,7 +144,7 @@ class ElementsController extends AppController
         return $this->redirect([
             'controller' => 'Collections',
             'action' => 'view',
-            $collectionId,
+            $element->collection_id,
         ]);
     }
 }
