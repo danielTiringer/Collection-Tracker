@@ -26,7 +26,7 @@ $this->start('form-end');
     echo $this->Form->end();
     echo $this->Html->link(
         "Don't have an account yet?",
-        'register',
+        ['action' => 'add'],
         ['class' => 'btn btn-outline-danger mx-2']
     );
 $this->end();

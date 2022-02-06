@@ -34,7 +34,7 @@ $this->start('form-end');
     echo $this->Form->end();
     echo $this->Html->link(
         "Got an account already?",
-        'login',
+        ['action' => 'login'],
         ['class' => 'btn btn-outline-danger mx-2']
     );
 $this->end();

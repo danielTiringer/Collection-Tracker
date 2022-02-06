@@ -112,41 +112,43 @@ $routes->scope('/', function (RouteBuilder $routes) {
         ]);
 });
 
-$routes->connect(
-    '/login',
-    ['controller' => 'Users', 'action' => 'login'],
-    ['_name' => 'login']
-);
+$routes->scope('/users', function (RouteBuilder $routes) {
+    $routes->connect(
+        '/register',
+        ['controller' => 'Users', 'action' => 'add'],
+        ['_name' => 'register']
+    );
 
-$routes->connect(
-    '/logout',
-    ['controller' => 'Users', 'action' => 'logout'],
-    ['_name' => 'logout']
-);
+    $routes->connect(
+        '/login',
+        ['controller' => 'Users', 'action' => 'login'],
+        ['_name' => 'login']
+    );
 
-$routes->connect(
-    '/register',
-    ['controller' => 'Users', 'action' => 'add'],
-    ['_name' => 'register']
-);
+    $routes->connect(
+        '/logout',
+        ['controller' => 'Users', 'action' => 'logout'],
+        ['_name' => 'logout']
+    );
 
-$routes->connect(
-    '/profile/{id}/edit',
-    ['controller' => 'Users', 'action' => 'edit']
-)
-->setPass(['id']);
+    $routes->connect(
+        '/{id}/edit',
+        ['controller' => 'Users', 'action' => 'edit']
+    )
+        ->setPass(['id']);
 
-$routes->connect(
-    '/profile/{id}/delete',
-    ['controller' => 'Users', 'action' => 'delete']
-)
-->setPass(['id']);
+    $routes->connect(
+        '/{id}/delete',
+        ['controller' => 'Users', 'action' => 'delete']
+    )
+        ->setPass(['id']);
 
-$routes->connect(
-    '/updatePassword/{id}',
-    ['controller' => 'Users', 'action' => 'updatePassword']
-)
-->setPass(['id']);
+    $routes->connect(
+        '/{id}/password',
+        ['controller' => 'Users', 'action' => 'updatePassword']
+    )
+        ->setPass(['id']);
+});
 
 /*
  * If you need a different set of middleware or none at all,
