@@ -14,6 +14,7 @@ RUN apk add --no-cache \
     php8-intl \
     php8-mbstring \
     php8-pdo_pgsql \
+    php8-pdo_sqlite \
     php8-phar \
     php8-openssl \
     php8-session \
