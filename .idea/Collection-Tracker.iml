@@ -72,7 +72,6 @@
       <excludeFolder url="file://$MODULE_DIR$/src/vendor/sebastian/exporter" />
       <excludeFolder url="file://$MODULE_DIR$/src/vendor/symfony/finder" />
       <excludeFolder url="file://$MODULE_DIR$/src/vendor/sebastian/object-reflector" />
-      <excludeFolder url="file://$MODULE_DIR$/src/vendor/symfony/polyfill-php80" />
       <excludeFolder url="file://$MODULE_DIR$/src/vendor/sebastian/environment" />
       <excludeFolder url="file://$MODULE_DIR$/src/vendor/symfony/var-dumper" />
       <excludeFolder url="file://$MODULE_DIR$/src/vendor/sebastian/comparator" />
@@ -92,7 +91,6 @@
       <excludeFolder url="file://$MODULE_DIR$/src/vendor/sebastian/diff" />
       <excludeFolder url="file://$MODULE_DIR$/src/vendor/symfony/console" />
       <excludeFolder url="file://$MODULE_DIR$/src/vendor/dealerdirect/phpcodesniffer-composer-installer" />
-      <excludeFolder url="file://$MODULE_DIR$/src/vendor/symfony/polyfill-php73" />
       <excludeFolder url="file://$MODULE_DIR$/src/vendor/webmozart/assert" />
       <excludeFolder url="file://$MODULE_DIR$/src/vendor/josegonzalez/dotenv" />
       <excludeFolder url="file://$MODULE_DIR$/src/vendor/theseer/tokenizer" />
