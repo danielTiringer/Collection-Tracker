@@ -51,6 +51,11 @@ $routes->scope('/', function (RouteBuilder $routes) {
         'action' => 'index',
     ]);
 
+    $routes->connect('/add', [
+        'controller' => 'Collections',
+        'action' => 'add',
+    ]);
+
     $routes->connect('/{id}/view', [
         'controller' => 'Collections',
         'action' => 'view',
@@ -105,8 +110,6 @@ $routes->scope('/', function (RouteBuilder $routes) {
         ->setPatterns([
             'elementId' => '[0-9]+',
         ]);
-
-    $routes->connect('/:controller/:action/*', []);
 });
 
 $routes->connect(
@@ -128,8 +131,14 @@ $routes->connect(
 );
 
 $routes->connect(
-    '/profile/{id}',
+    '/profile/{id}/edit',
     ['controller' => 'Users', 'action' => 'edit']
+)
+->setPass(['id']);
+
+$routes->connect(
+    '/profiles/{id}/delete',
+    ['controller' => 'Users', 'action' => 'delete']
 )
 ->setPass(['id']);
 
