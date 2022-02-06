@@ -137,7 +137,7 @@ $routes->connect(
 ->setPass(['id']);
 
 $routes->connect(
-    '/profiles/{id}/delete',
+    '/profile/{id}/delete',
     ['controller' => 'Users', 'action' => 'delete']
 )
 ->setPass(['id']);
