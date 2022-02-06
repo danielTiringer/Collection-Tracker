@@ -9,6 +9,7 @@ RUN apk add --no-cache \
     icu-dev \
     postgresql-dev \
     php8 \
+    php8-curl \
     php8-fileinfo \
     php8-fpm \
     php8-intl \
