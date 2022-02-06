@@ -9,13 +9,19 @@ RUN apk add --no-cache \
     icu-dev \
     postgresql-dev \
     php8 \
+    php8-fileinfo \
     php8-fpm \
     php8-intl \
     php8-mbstring \
     php8-pdo_pgsql \
+    php8-phar \
+    php8-openssl \
     php8-session \
+    php8-simplexml \
+    php8-tokenizer \
     php8-xml \
     php8-xmlreader \
+    php8-xmlwriter \
     supervisor \
     && adduser -D -u 1000 -g 'www' www
 
