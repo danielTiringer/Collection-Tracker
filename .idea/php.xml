@@ -67,7 +67,6 @@
       <path value="$PROJECT_DIR$/src/vendor/sebastian/exporter" />
       <path value="$PROJECT_DIR$/src/vendor/symfony/finder" />
       <path value="$PROJECT_DIR$/src/vendor/sebastian/object-reflector" />
-      <path value="$PROJECT_DIR$/src/vendor/symfony/polyfill-php80" />
       <path value="$PROJECT_DIR$/src/vendor/sebastian/environment" />
       <path value="$PROJECT_DIR$/src/vendor/symfony/var-dumper" />
       <path value="$PROJECT_DIR$/src/vendor/sebastian/comparator" />
@@ -87,7 +86,6 @@
       <path value="$PROJECT_DIR$/src/vendor/sebastian/diff" />
       <path value="$PROJECT_DIR$/src/vendor/symfony/console" />
       <path value="$PROJECT_DIR$/src/vendor/dealerdirect/phpcodesniffer-composer-installer" />
-      <path value="$PROJECT_DIR$/src/vendor/symfony/polyfill-php73" />
       <path value="$PROJECT_DIR$/src/vendor/webmozart/assert" />
       <path value="$PROJECT_DIR$/src/vendor/josegonzalez/dotenv" />
       <path value="$PROJECT_DIR$/src/vendor/theseer/tokenizer" />

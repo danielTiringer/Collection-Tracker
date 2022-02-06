@@ -29,6 +29,7 @@
         </whitelist>
     </filter>
 
+    <!-- Setup the extension for fixtures -->
     <extensions>
         <extension class="\Cake\TestSuite\Fixture\PHPUnitExtension" />
     </extensions>
