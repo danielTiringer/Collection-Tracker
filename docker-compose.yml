@@ -8,7 +8,7 @@ services:
       args:
         PHP_VERSION: ${PHP_VERSION}
       target: dev
-    container_name: collection-tracker-application
+    container_name: ${PROJECT_NAME}-application
     environment:
       - WEB_DOCUMENT_ROOT=/var/www/html/webroot
     env_file:
@@ -16,41 +16,23 @@ services:
     volumes:
       - ./src:/var/www/html
     ports:
-      - '4000:80'
+      - "${WEBSERVER_PORT}:8080"
     depends_on:
-      - database
+      - postgres
     links:
-      - database
+      - postgres
     networks:
       - collection-tracker
 
-  database:
-    image: mysql:8
-    container_name: collection-tracker-database
+  postgres:
+    image: postgres:${POSTGRES_VERSION}-alpine
+    container_name: ${PROJECT_NAME}-postgresql
     env_file:
       - .env
-    environment:
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-    command: --default-authentication-plugin=mysql_native_password
     volumes:
-      - collection-data:/var/lib/mysql
-    networks:
-      - collection-tracker
-
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    container_name: collection-tracker-admin
-    depends_on:
-      - database
-    environment:
-      PMA_HOST: database
+      - collection-data:/var/lib/postgresql/data
     ports:
-      - '4010:80'
-    links:
-      - database
+      - "${POSTGRES_PORT}:5432"
     networks:
       - collection-tracker
 

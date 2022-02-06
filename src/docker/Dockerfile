@@ -1,29 +1,56 @@
-ARG PHP_VERSION
-FROM php:${PHP_VERSION}-apache as base
-
-RUN apt-get update && apt-get install -y git libicu-dev libzip-dev unzip \
-    && docker-php-ext-install intl pdo_mysql \
-    && docker-php-ext-configure intl \
-    && rm -rf /var/lib/apt/lists/*
-
-RUN a2enmod rewrite
-RUN a2enmod actions
-RUN service apache2 restart
+ARG ALPINE_VERSION=3.14
+FROM alpine:${ALPINE_VERSION} as base
 
 WORKDIR /var/www/html
 
+RUN apk add --no-cache \
+    curl  \
+    nginx \
+    icu-dev \
+    postgresql-dev \
+    php8 \
+    php8-fpm \
+    php8-intl \
+    php8-mbstring \
+    php8-pdo_pgsql \
+    php8-session \
+    php8-xml \
+    php8-xmlreader \
+    supervisor \
+    && adduser -D -u 1000 -g 'www' www
+
+RUN ln -s /usr/bin/php8 /usr/bin/php
+
+COPY config/nginx.conf /etc/nginx/nginx.conf
+
+COPY config/fpm-pool.conf /etc/php8/php-fpm.d/www.conf
+COPY config/php.ini /etc/php8/conf.d/custom.ini
+
+COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+RUN chown -R www.www /run /var/lib/nginx /var/log/nginx
+
+# Switch to use a non-root user from here on
+USER www
+
+# Expose the port nginx is reachable on
+EXPOSE 8080
+
+# Let supervisord start nginx & php-fpm
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+
+# Configure a healthcheck to validate that everything is up&running
+HEALTHCHECK --timeout=10s CMD curl --silent --fail http://127.0.0.1:8080/fpm-ping
+
 FROM base as builder
 
-RUN curl --fail --silent --show-error --location https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
-COPY composer.json composer.json
-COPY composer.lock composer.lock
-RUN composer install --no-dev
+COPY --from=composer /usr/bin/composer /usr/bin/composer
+RUN composer install --no-dev --optimize-autoloader --no-interaction --no-progress
 
 FROM base as prod
 
 COPY --from=builder /var/www/html/vendor /var/www/html/vendor
-EXPOSE 80
 
 FROM base as dev
 
-RUN curl --fail --silent --show-error --location https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
+COPY --from=composer /usr/bin/composer /usr/bin/composer
