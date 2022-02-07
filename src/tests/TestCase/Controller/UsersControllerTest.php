@@ -5,6 +5,8 @@ namespace App\Test\TestCase\Controller;
 
 use App\Test\TestCase\LoginTrait;
 use Cake\ORM\TableRegistry;
+use Cake\TestSuite\Fixture\FixtureStrategyInterface;
+use Cake\TestSuite\Fixture\TransactionStrategy;
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
 
@@ -28,6 +30,15 @@ class UsersControllerTest extends TestCase
     ];
 
     /**
+     * Create the fixtures strategy used for this test case.
+     * You can use a base class/trait to change multiple classes.
+     */
+    protected function getFixtureStrategy(): FixtureStrategyInterface
+    {
+        return new TransactionStrategy();
+    }
+
+    /**
      * Sets up the tests with common configuration
      *
      * @return void
@@ -48,7 +59,7 @@ class UsersControllerTest extends TestCase
      */
     public function testAdd(): void
     {
-        $this->post('/register', [
+        $this->post('/users/register', [
             'name' => 'Test Name',
             'email' => 'user@example.com',
             'password' => 'testpassword',
@@ -67,7 +78,7 @@ class UsersControllerTest extends TestCase
      */
     public function testAddWhenPasswordsDontMatch(): void
     {
-        $this->post('/register', [
+        $this->post('/users/register', [
             'name' => 'Test Name',
             'email' => 'user@example.com',
             'password' => 'testpassword',
@@ -85,8 +96,8 @@ class UsersControllerTest extends TestCase
      */
     public function testAddWhileUserExists(): void
     {
-        $this->post('/register', [
-            'name' => 'Test Name',
+        $this->post('/users/register', [
+            'name' => 'Existing User',
             'email' => 'test@example.com',
             'password' => 'testpassword',
             'password_confirm' => 'testpassword',
@@ -105,7 +116,7 @@ class UsersControllerTest extends TestCase
     {
         $this->login();
 
-        $this->post('/profile/1', [
+        $this->post('/users/1/edit', [
             'name' => 'Updated User',
             'email' => 'updated@example.com',
         ]);
@@ -128,7 +139,7 @@ class UsersControllerTest extends TestCase
     {
         $this->login();
 
-        $this->post('/profile/2', [
+        $this->post('/users/2/edit', [
             'name' => 'Updated User',
             'email' => 'updated@example.com',
         ]);
@@ -149,9 +160,9 @@ class UsersControllerTest extends TestCase
      */
     public function testEditWithoutLogin(): void
     {
-        $this->get('/profile/1');
+        $this->get('/users/1/edit');
 
-        $this->assertRedirectContains('/login');
+        $this->assertRedirectContains('/users/login');
     }
 
     /**
@@ -163,7 +174,7 @@ class UsersControllerTest extends TestCase
     {
         $this->login();
 
-        $this->post('/updatePassword/1', [
+        $this->post('/users/1/password', [
             'current_password' => 'password',
             'password' => 'newpassword',
             'password_confirm' => 'newpassword',
@@ -182,7 +193,7 @@ class UsersControllerTest extends TestCase
     {
         $this->login();
 
-        $this->post('/updatePassword/2', [
+        $this->post('/users/2/password', [
             'current_password' => 'password',
             'password' => 'newpassword',
             'password_confirm' => 'newpassword',
@@ -201,7 +212,7 @@ class UsersControllerTest extends TestCase
     {
         $this->login();
 
-        $this->post('/updatePassword/1', [
+        $this->post('/users/1/password', [
             'password' => 'newpassword',
             'password_confirm' => 'newpassword',
         ]);
@@ -219,7 +230,7 @@ class UsersControllerTest extends TestCase
     {
         $this->login();
 
-        $this->post('/updatePassword/1', [
+        $this->post('/users/1/password', [
             'current_password' => 'password',
             'password' => 'newpassword',
             'password_confirm' => 'wrongpassword',
@@ -234,9 +245,9 @@ class UsersControllerTest extends TestCase
      *
      * @return void
      */
-    public function testDeleteNonExistingUser(): void
+    public function testDeleteUserUnauthorized(): void
     {
-        $this->delete('/users/delete/2');
+        $this->delete('/users/2/delete');
 
         $this->assertRedirectEquals(['controller' => 'Users', 'action' => 'login']);
     }
@@ -248,10 +259,12 @@ class UsersControllerTest extends TestCase
      */
     public function testDeleteExistingUser(): void
     {
-        $this->delete('/users/delete/1');
+        $this->login();
+
+        $this->delete('/users/1/delete');
 
         $this->assertResponseSuccess();
-        $this->assertRedirectEquals(['controller' => 'Users', 'action' => 'login']);
+        $this->assertRedirect(['controller' => 'Users', 'action' => 'login']);
     }
 
     /**
@@ -261,7 +274,7 @@ class UsersControllerTest extends TestCase
      */
     public function testLoginSuccess(): void
     {
-        $this->post('/login', [
+        $this->post('/users/login', [
             'email' => 'test@example.com',
             'password' => 'password',
         ]);
@@ -277,8 +290,8 @@ class UsersControllerTest extends TestCase
      */
     public function testLoginWithInvalidEmailAddress(): void
     {
-        $this->post('/login', [
-            'email' => 'other@example.com',
+        $this->post('/users/login', [
+            'email' => 'nonexistent@example.com',
             'password' => 'somepassword',
         ]);
 
@@ -293,7 +306,7 @@ class UsersControllerTest extends TestCase
      */
     public function testLoginWithInvalidPassword(): void
     {
-        $this->post('/login', [
+        $this->post('/users/login', [
             'email' => 'test@example.com',
             'password' => 'wrongpassword',
         ]);
@@ -309,7 +322,7 @@ class UsersControllerTest extends TestCase
      */
     public function testLogoutSuccess(): void
     {
-        $this->get('/logout');
+        $this->get('/users/logout');
 
         $this->assertResponseSuccess();
         $this->assertRedirectEquals(['controller' => 'Users', 'action' => 'login']);

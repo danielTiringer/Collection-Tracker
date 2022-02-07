@@ -11,6 +11,8 @@ use Cake\TestSuite\Fixture\TestFixture;
  */
 class UsersFixture extends TestFixture
 {
+    public $connection = 'test';
+
     /**
      * Init method
      *
