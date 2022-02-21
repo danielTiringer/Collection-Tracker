@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d9690b29818342b2fa2d34d0fab08bae",
+    "content-hash": "00b375c9c7d4c92a705fbe9e3a20702c",
     "packages": [
         {
             "name": "cakephp/authentication",
@@ -719,6 +719,57 @@
                 }
             ],
             "time": "2021-12-21T14:34:37+00:00"
+        },
+        {
+            "name": "lazzard/php-ftp-client",
+            "version": "v1.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lazzard/php-ftp-client.git",
+                "reference": "5c33751793e83d42e112740d3638ad1a2b692730"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lazzard/php-ftp-client/zipball/5c33751793e83d42e112740d3638ad1a2b692730",
+                "reference": "5c33751793e83d42e112740d3638ad1a2b692730",
+                "shasum": ""
+            },
+            "require": {
+                "ext-ftp": "*",
+                "php": "^7.4 | 8.0.*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Lazzard\\FtpClient\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "El Amrani Chakir",
+                    "email": "elamrani.sv.laza@gmail.com",
+                    "homepage": "https://github.com/AmraniCh"
+                }
+            ],
+            "description": "This library provides helper classes and methods to manage your FTP files in an OOP way.",
+            "keywords": [
+                "ftp-client",
+                "ftp-library",
+                "php",
+                "php-ftp-client"
+            ],
+            "support": {
+                "issues": "https://github.com/lazzard/php-ftp-client/issues",
+                "source": "https://github.com/lazzard/php-ftp-client/tree/v1.6.0"
+            },
+            "time": "2022-01-31T16:57:05+00:00"
         },
         {
             "name": "league/container",
