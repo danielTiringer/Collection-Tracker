@@ -53,21 +53,6 @@ class ElementsTable extends Table
             'foreignKey' => 'collection_id',
             'joinType' => 'INNER',
         ]);
-
-        $this->addBehavior('Josegonzalez/Upload.Upload', [
-            'image' => [
-                'path' => 'webroot{DS}img{DS}element-img{DS}',
-                'nameCallback' => function ($table, $entity, $data, $field, $settings) {
-                    $currentDateTime = (new Time('now'))->format('YmdHis');
-
-                    return $currentDateTime . '_' . $data->getClientFileName();
-                },
-                'deleteCallback' => function ($path, $entity, $field, $settings) {
-                    return [$path . $entity->{$field}];
-                },
-                'keepFilesOnDelete' => false,
-            ],
-        ]);
     }
 
     /**

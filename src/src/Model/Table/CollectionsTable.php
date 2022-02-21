@@ -58,21 +58,6 @@ class CollectionsTable extends Table
         $this->hasMany('Elements', [
             'foreignKey' => 'collection_id',
         ]);
-
-        $this->addBehavior('Josegonzalez/Upload.Upload', [
-            'image' => [
-                'path' => 'webroot{DS}img{DS}collection-img{DS}',
-                'nameCallback' => function ($table, $entity, $data, $field, $settings) {
-                    $currentDateTime = (new Time('now'))->format('YmdHis');
-
-                    return $currentDateTime . '_' . $data->getClientFileName();
-                },
-                'deleteCallback' => function ($path, $entity, $field, $settings) {
-                    return [$path . $entity->{$field}];
-                },
-                'keepFilesOnDelete' => false,
-            ],
-        ]);
     }
 
     /**

@@ -82,7 +82,6 @@ class Application extends BaseApplication implements
         // Load more plugins here
         $this->addPlugin('Authentication');
         $this->addPlugin('Authorization');
-        $this->addPlugin('Josegonzalez/Upload');
     }
 
     /**
