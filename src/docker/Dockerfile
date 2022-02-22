@@ -12,7 +12,6 @@ RUN apk add --no-cache \
     php8-curl \
     php8-fileinfo \
     php8-fpm \
-    php8-ftp \
     php8-intl \
     php8-mbstring \
     php8-pdo_pgsql \
