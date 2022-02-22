@@ -12,7 +12,7 @@ use Cake\ORM\Entity;
  * @property string $name
  * @property string $description
  * @property int $goal
- * @property string $image_file
+ * @property string $image
  * @property string $user_id
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
@@ -35,7 +35,7 @@ class Collection extends Entity
         'name' => true,
         'description' => true,
         'goal' => true,
-        'image_file' => true,
+        'image' => true,
         'user_id' => true,
         'created' => true,
         'modified' => true,

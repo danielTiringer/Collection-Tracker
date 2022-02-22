@@ -13,7 +13,7 @@ use Cake\ORM\Entity;
  * @property string $description
  * @property int $collection_id
  * @property string|null $source
- * @property string|null $image_file
+ * @property string|null $image
  * @property string|null $metadata
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
@@ -36,7 +36,7 @@ class Element extends Entity
         'description' => true,
         'collection_id' => true,
         'source' => true,
-        'image_file' => true,
+        'image' => true,
         'metadata' => true,
         'created' => true,
         'modified' => true,

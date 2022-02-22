@@ -3,14 +3,9 @@ declare(strict_types=1);
 
 namespace App\Model\Table;
 
-use ArrayObject;
-use Cake\Datasource\EntityInterface;
-use Cake\Event\Event;
-use Cake\I18n\Time;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-use Josegonzalez\Upload\Validation\DefaultValidation;
 
 /**
  * Elements Model
@@ -63,8 +58,6 @@ class ElementsTable extends Table
      */
     public function validationDefault(Validator $validator): Validator
     {
-        $validator->setProvider('upload', DefaultValidation::class);
-
         $validator
             ->integer('id')
             ->allowEmptyString('id', null, 'create');
@@ -92,16 +85,6 @@ class ElementsTable extends Table
                     'rule' => ['mimeType', ['image/jpg', 'image/png', 'image/jpeg']],
                     'message' => 'Only jpg, jpeg and png files can be uploaded.',
                 ],
-                'fileBelowMaxSize' => [
-                    'rule' => ['isBelowMaxSize', 10 * 1024 * 1024 * 1024],
-                    'message' => 'Image file size must be less than 10MB.',
-                    'provider' => 'upload',
-                ],
-                'fileCompletedUpload' => [
-                    'rule' => 'isCompletedUpload',
-                    'message' => 'This file could not be uploaded completely',
-                    'provider' => 'upload',
-                ],
             ]);
 
         $validator
@@ -124,24 +107,5 @@ class ElementsTable extends Table
         $rules->add($rules->existsIn(['collection_id'], 'Collections'), ['errorField' => 'collection_id']);
 
         return $rules;
-    }
-
-    /**
-     * Lifecycle callback after saving an entity
-     *
-     * @param \Cake\Event\Event $event The event
-     * @param \Cake\Datasource\EntityInterface $entity The entity
-     * @param \ArrayObject $options Custom options
-     * @return void
-     */
-    public function afterSave(Event $event, EntityInterface $entity, ArrayObject $options): void
-    {
-        if (isset($options['previousImageName'])) {
-            $previousImage = WWW_ROOT . 'img' . DS . 'element-img' . DS . $options['previousImageName'];
-
-            if (is_file($previousImage)) {
-                unlink($previousImage);
-            }
-        }
     }
 }

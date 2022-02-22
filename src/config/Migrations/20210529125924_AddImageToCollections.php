@@ -15,7 +15,7 @@ class AddImageToCollections extends AbstractMigration
     public function change()
     {
         $table = $this->table('collections');
-        $table->addColumn('image_file', 'string', [
+        $table->addColumn('image', 'string', [
             'default' => null,
             'limit' => 255,
             'null' => true,
