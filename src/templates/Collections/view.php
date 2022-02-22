@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-md-6 col-sm-12">
                 <?= $this->Html->image(
-                    '/img/collection-img/' . $collection->image,
+                    '/img/collection-img/' . $collection->image_file,
                     ['class' => 'height-fill width-fill img-thumbnail', 'alt' => 'No image uploaded.']
                 ) ?>
             </div>

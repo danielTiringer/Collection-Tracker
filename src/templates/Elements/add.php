@@ -22,7 +22,7 @@ $this->start('form-fields');
     echo $this->Form->control('source', [
         'class' => 'form-control',
     ]);
-    echo $this->Form->control('image', [
+    echo $this->Form->control('image_file', [
         'type' => 'file',
         'class' => 'form-control',
     ]);

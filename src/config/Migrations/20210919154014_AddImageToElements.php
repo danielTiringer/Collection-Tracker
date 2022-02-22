@@ -15,7 +15,7 @@ class AddImageToElements extends AbstractMigration
     public function change()
     {
         $table = $this->table('elements');
-        $table->addColumn('image', 'string', [
+        $table->addColumn('image_file', 'string', [
             'default' => null,
             'limit' => 255,
             'null' => true,

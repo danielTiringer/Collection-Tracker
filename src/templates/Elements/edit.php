@@ -23,10 +23,10 @@ $this->start('form-fields');
         'class' => 'form-control',
     ]);
     echo $this->Html->image(
-        '/img/element-img/' . $element->image,
+        '/img/element-img/' . $element->image_file,
         ['class' => 'height-200 mt-2']
     );
-    echo $this->Form->control('image', [
+    echo $this->Form->control('image_file', [
         'type' => 'file',
         'class' => 'form-control',
     ]);

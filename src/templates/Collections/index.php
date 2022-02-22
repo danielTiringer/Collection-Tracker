@@ -27,9 +27,9 @@
                     <?php foreach ($collections as $collection): ?>
                         <tr>
                             <td class="col-6">
-                                <?php if ($collection->image): ?>
+                                <?php if ($collection->image_file): ?>
                                     <?= $this->Html->image(
-                                        '/img/collection-img/' . $collection->image,
+                                        '/img/collection-img/' . $collection->image_file,
                                         ['class' => 'height-40', 'alt' => '']
                                     ) ?>
                                 <?php else: ?>
