@@ -1,0 +1,6 @@
+ARG NODE_VERSION=18
+FROM node:${NODE_VERSION}-alpine
+
+USER node
+
+EXPOSE 8080

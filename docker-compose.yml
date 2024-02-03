@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: ./
+      dockerfile: ./docker/php/Dockerfile
+      target: dev
+    user: "${UID}:${GID}"
+    container_name: ${PROJECT_NAME}-application
+    environment:
+      - WEB_DOCUMENT_ROOT=/var/www/html
+    env_file:
+      - .env
+    volumes:
+      - ./api:/var/www/html
+    ports:
+      - ${API_PORT}:8080
+    depends_on:
+      - database
+    links:
+      - database
+    networks:
+      - collection-tracker
+
+  client:
+    build:
+      context: ./
+      dockerfile: ./docker/node/Dockerfile
+    container_name: ${PROJECT_NAME}-client
+    working_dir: /app
+    command: yarn dev
+    env_file:
+      - .env
+    volumes:
+      - ./client:/app
+    ports:
+      - ${CLIENT_PORT}:8080
+    networks:
+      - collection-tracker
+
+  database:
+    image: mysql:${MYSQL_VERSION}-debian
+    container_name: ${PROJECT_NAME}-database
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+    env_file:
+      - .env
+    volumes:
+      - collections-data:/var/lib/mysql
+    ports:
+      - ${DB_PORT}:3306
+    networks:
+      - collection-tracker
+
+networks:
+  collection-tracker:
+
+volumes:
+  collections-data:
